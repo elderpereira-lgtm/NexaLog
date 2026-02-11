@@ -1,65 +1,131 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaLog | Gestão Logística inteligente</title>
+    <title>3 Irmãos - NexaLog</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <div class="logo">Nexa<span>Log</span></div>
-        <nav class="nav">
-            <a href="#sobre">Sobre</a>
-            <a href="#funcionalidades">Funcionalidades</a>
-            <a href="#contato">Contato</a>
-            <a href="#" class="btn">Acessar sistema</a>
-        </nav>
-    </header>
 
-    <section class="hero">
-        <h1>Gestão logística inteligente para o seu negócio</h1>
-        <p>Controle de estoque, alertas autômaticos e apoio à tomada de decisão em um único sistema.</p>
-        <a href="#" class="btn">Começar agora</a>
-    </section>
+<!-- MENU LATERAL -->
+<div class="sidebar">
+    <h3>Menu</h3>
+    <button onclick="showScreen('dashboard')">Dashboard</button>
+    <button onclick="showScreen('estoque')">Estoque</button>
+    <button onclick="showScreen('relatorios')">Relatórios</button>
+    <button onclick="showScreen('cadastroProdutos')">Cadastro de Produtos</button>
+</div>
 
-    <section id="sobre" class="section">
-        <h2>Sobre o NexaLog</h2>
-        <p>
-            O NexaLog é uma solução tecnológica voltada para a gestão de estoque e processos logísticos,
-             oferecendo controle, organização e eficiência para empresas de pequeno e médio porte.
-        </p>
-    </section>
+<div class="content">
 
-    <section id="funcionalidades" class="section gray">
-        <h2>Funcionalidades</h2>
-        <div class="cards">
-            <div class="card">
-                <h3>Controle de Estoque</h3>
-                <p>Registro e monitoramento d eentradas e saídas em tempo real.</p>
+<!-- LOGIN -->
+<section id="login" class="screen active">
+    <div class="card center">
+        <h1>Login</h1>
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Senha">
+        <button class="btn-blue" onclick="showScreen('dashboard')">Entrar</button>
+        <button class="btn-green" onclick="showScreen('cadastro')">Cadastrar</button>
+    </div>
+</section>
+
+<!-- CADASTRO -->
+<section id="cadastro" class="screen">
+    <div class="card center">
+        <h1>Cadastro</h1>
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Senha">
+        <input type="password" placeholder="Confirmar senha">
+        <button class="btn-green" onclick="showScreen('verificacao')">Verificar</button>
+    </div>
+</section>
+
+<!-- VERIFICAÇÃO -->
+<section id="verificacao" class="screen">
+    <div class="card center">
+        <h2>Estamos quase lá!</h2>
+        <div class="codigo">
+            <input maxlength="1">
+            <input maxlength="1">
+            <input maxlength="1">
+            <input maxlength="1">
+            <input maxlength="1">
+            <input maxlength="1">
+        </div>
+        <button class="btn-green" onclick="showScreen('sucesso')">Verificar</button>
+    </div>
+</section>
+
+<!-- SUCESSO -->
+<section id="sucesso" class="screen">
+    <div class="card center">
+        <h2>Seu gmail foi verificado com sucesso!</h2>
+        <button class="btn-green" onclick="showScreen('login')">Continuar</button>
+    </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="screen">
+    <div class="card">
+        <h2>DASHBOARD</h2>
+        <ul>
+            <li>10/02/2026 - Entrada de produto</li>
+            <li>11/02/2026 - Saída para produção</li>
+            <li>12/02/2026 - Alerta de validade</li>
+            <li>13/02/2026 - Reposição aprovada</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ESTOQUE -->
+<section id="estoque" class="screen">
+    <div class="card">
+        <h2>Estoque</h2>
+        <div class="grid">
+            <div class="produto">
+                <h4>Farinha de trigo</h4>
+                <p>Quantidade: 50kg</p>
+                <p>Status: OK</p>
             </div>
-            <div class="card">
-                <h3>Alertas Inteligentes</h3>
-                <p>Notificações automàticas de estoque mínimo e validade.</p>
-            </div>
-            <div class="card">
-                <h3>Relatórios Gerenciais</h3>
-                <p>Indicadores claros para apoio à tomada de decisão.</p>
+            <div class="produto">
+                <h4>Leite em pó</h4>
+                <p>Quantidade: 15kg</p>
+                <p>Status: BLOQUEADO</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="contato" class="section">
-        <h2>Contato</h2>
-        <form class="form">
-            <input type="text" placeholder="Nome">
-            <input type="email" placeholder="E-mail">
-            <textarea placeholder="Mensagem"></textarea>
-            <button type="submit" class="btn">Enviar</button>
-        </form>
-    </section>
+<!-- RELATÓRIOS -->
+<section id="relatorios" class="screen">
+    <div class="card">
+        <h2>Relatórios</h2>
+        <p>Total de produtos cadastrados: 3</p>
+        <p>Total em estoque: 30</p>
+    </div>
+</section>
 
-    <footer class="footer">
-        <p>© 2026 NexaLog - Projeto acadêmico</p>
-    </footer>
-</body></html>
+<!-- CADASTRO PRODUTOS -->
+<section id="cadastroProdutos" class="screen">
+    <div class="card">
+        <h2>Cadastro de Produtos</h2>
+        <div class="grid">
+            <div class="produto">
+                <h4>Sal</h4>
+                <p>Quantidade: 15kg</p>
+                <button class="btn-green">Cadastrar</button>
+            </div>
+            <div class="produto">
+                <h4>Fermento biológico</h4>
+                <p>Quantidade: 10kg</p>
+                <button class="btn-green">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
