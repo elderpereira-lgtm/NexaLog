@@ -161,7 +161,7 @@ nav {
   color: white;
 }
 
-/* FORM */
+
 .form-card input {
   width: 100%;
   padding: 10px;
@@ -185,9 +185,9 @@ nav {
   background: #16215c;
 }
 
-/* RESPONSIVO */
+
 @media(max-width: 900px) {
   .sidebar {
     display: none;
   }
-}
+}  
