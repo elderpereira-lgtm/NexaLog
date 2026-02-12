@@ -1,128 +1,110 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>3 Irmãos - NexaLog</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexaLog - 3 Irmãos</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- menu lateral -->
-<div class="sidebar">
-    <h3>Menu</h3>
-    <button onclick="showScreen('dashboard')">Dashboard</button>
-    <button onclick="showScreen('estoque')">Estoque</button>
-    <button onclick="showScreen('relatorios')">Relatórios</button>
-    <button onclick="showScreen('cadastroProdutos')">Cadastro de Produtos</button>
-</div>
+<div class="layout">
 
-<div class="content">
-
-<!-- login -->
-<section id="login" class="screen active">
-    <div class="card center">
-        <h1>Login</h1>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Senha">
-        <button class="btn-blue" onclick="showScreen('dashboard')">Entrar</button>
-        <button class="btn-green" onclick="showScreen('cadastro')">Cadastrar</button>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>NexaLog</h2>
+      <span>3 Irmãos</span>
     </div>
-</section>
 
-<!-- cadastro -->
-<section id="cadastro" class="screen">
-    <div class="card center">
-        <h1>Cadastro</h1>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Senha">
-        <input type="password" placeholder="Confirmar senha">
-        <button class="btn-green" onclick="showScreen('verificacao')">Verificar</button>
-    </div>
-</section>
+    <nav>
+      <button onclick="navigate('dashboard')" class="nav-item active">Dashboard</button>
+      <button onclick="navigate('estoque')" class="nav-item">Estoque</button>
+      <button onclick="navigate('relatorios')" class="nav-item">Relatórios</button>
+      <button onclick="navigate('cadastro')" class="nav-item">Cadastro</button>
+    </nav>
+  </aside>
 
-<!-- verificação -->
-<section id="verificacao" class="screen">
-    <div class="card center">
-        <h2>Estamos quase lá!</h2>
-        <div class="codigo">
-            <input maxlength="1">
-            <input maxlength="1">
-            <input maxlength="1">
-            <input maxlength="1">
-            <input maxlength="1">
-            <input maxlength="1">
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <input type="text" placeholder="Pesquisar...">
+      <div class="user">Elder</div>
+    </header>
+
+    <!-- CONTEÚDO DINÂMICO -->
+    <section id="dashboard" class="page active">
+      <h1>Dashboard</h1>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Total de Produtos</h3>
+          <p class="number">30</p>
         </div>
-        <button class="btn-green" onclick="showScreen('sucesso')">Verificar</button>
-    </div>
-</section>
 
-<!-- sucesso -->
-<section id="sucesso" class="screen">
-    <div class="card center">
-        <h2>Seu gmail foi verificado com sucesso!</h2>
-        <button class="btn-green" onclick="showScreen('login')">Continuar</button>
-    </div>
-</section>
+        <div class="card">
+          <h3>Produtos Bloqueados</h3>
+          <p class="number red">1</p>
+        </div>
 
-<!-- dashboard -->
-<section id="dashboard" class="screen">
-    <div class="card">
-        <h2>DASHBOARD</h2>
-        <ul>
-            <li>10/02/2026 - Entrada de produto</li>
-            <li>11/02/2026 - Saída para produção</li>
-            <li>12/02/2026 - Alerta de validade</li>
-            <li>13/02/2026 - Reposição aprovada</li>
+        <div class="card">
+          <h3>Próximos do Vencimento</h3>
+          <p class="number orange">3</p>
+        </div>
+      </div>
+
+      <div class="card large">
+        <h3>Histórico de Movimentações</h3>
+        <ul class="list">
+          <li>Entrada - Farinha de trigo (50kg)</li>
+          <li>Saída - Fermento biológico (10kg)</li>
+          <li>Alerta - Leite em pó próximo do vencimento</li>
         </ul>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- estoque -->
-<section id="estoque" class="screen">
-    <div class="card">
-        <h2>Estoque</h2>
-        <div class="grid">
-            <div class="produto">
-                <h4>Farinha de trigo</h4>
-                <p>Quantidade: 50kg</p>
-                <p>Status: OK</p>
-            </div>
-            <div class="produto">
-                <h4>Leite em pó</h4>
-                <p>Quantidade: 15kg</p>
-                <p>Status: BLOQUEADO</p>
-            </div>
+    <section id="estoque" class="page">
+      <h1>Estoque</h1>
+
+      <div class="cards">
+        <div class="product-card">
+          <h3>Farinha de Trigo</h3>
+          <p>Quantidade: 50kg</p>
+          <span class="status ok">OK</span>
         </div>
-    </div>
-</section>
 
-<!-- relatórios -->
-<section id="relatorios" class="screen">
-    <div class="card">
-        <h2>Relatórios</h2>
-        <p>Total de produtos cadastrados: 3</p>
+        <div class="product-card">
+          <h3>Leite em Pó</h3>
+          <p>Quantidade: 15kg</p>
+          <span class="status blocked">Bloqueado</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="relatorios" class="page">
+      <h1>Relatórios</h1>
+
+      <div class="card large">
+        <h3>Situação Atual do Estoque</h3>
+        <p>Total cadastrados: 3</p>
         <p>Total em estoque: 30</p>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- cadastro produtos -->
-<section id="cadastroProdutos" class="screen">
-    <div class="card">
-        <h2>Cadastro de Produtos</h2>
-        <div class="grid">
-            <div class="produto">
-                <h4>Sal</h4>
-                <p>Quantidade: 15kg</p>
-                <button class="btn-green">Cadastrar</button>
-            </div>
-            <div class="produto">
-                <h4>Fermento biológico</h4>
-                <p>Quantidade: 10kg</p>
-                <button class="btn-green">Cadastrar</button>
-            </div>
-        </div>
-    </div>
-</section>
+    <section id="cadastro" class="page">
+      <h1>Cadastro de Produto</h1>
+
+      <div class="card form-card">
+        <input type="text" placeholder="Nome do produto">
+        <input type="number" placeholder="Quantidade">
+        <input type="date">
+        <button class="btn-primary">Cadastrar</button>
+      </div>
+    </section>
+
+  </main>
 
 </div>
 
