@@ -8,99 +8,76 @@
 </head>
 <body>
 
+<!-- LOADING -->
+<div id="loading-screen">
+  <div class="spinner"></div>
+  <p>Carregando...</p>
+</div>
+
 <div class="layout">
 
-  <!-- barra do menu -->
-  <aside class="sidebar">
-    <div class="logo">
-      <h2>NexaLog</h2>
-      <span>3 Irmãos</span>
-    </div>
-
-    <nav>
-      <button onclick="navigate('dashboard')" class="nav-item active">Dashboard</button>
-      <button onclick="navigate('estoque')" class="nav-item">Estoque</button>
-      <button onclick="navigate('relatorios')" class="nav-item">Relatórios</button>
-      <button onclick="navigate('cadastro')" class="nav-item">Cadastro</button>
-    </nav>
+  <!-- MENU LATERAL (oculto inicialmente) -->
+  <aside id="sidebar" class="sidebar">
+    <h3>Menu</h3>
+    <button onclick="navigate('dashboard')">Dashboard</button>
+    <button onclick="navigate('estoque')">Estoque</button>
+    <button onclick="navigate('relatorios')">Relatórios</button>
+    <button onclick="navigate('cadastro')">Cadastro de Produtos</button>
   </aside>
 
-  <!-- principal -->
+  <!-- CONTEÚDO -->
   <main class="main">
 
-    <!-- barra de cima -->
-    <header class="topbar">
-      <input type="text" placeholder="Pesquisar...">
-      <div class="user">Elder</div>
-    </header>
+    <!-- TOPO -->
+    <div class="topbar">
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+      <input type="text" placeholder="Buscar...">
+    </div>
 
-    <!-- conteúdo dinâmico -->
+    <!-- DASHBOARD -->
     <section id="dashboard" class="page active">
-      <h1>Dashboard</h1>
+      <div class="title">DASHBOARD</div>
 
-      <div class="cards">
-        <div class="card">
-          <h3>Total de Produtos</h3>
-          <p class="number">30</p>
-        </div>
-
-        <div class="card">
-          <h3>Produtos Bloqueados</h3>
-          <p class="number red">1</p>
-        </div>
-
-        <div class="card">
-          <h3>Próximos do Vencimento</h3>
-          <p class="number orange">3</p>
-        </div>
-      </div>
-
-      <div class="card large">
-        <h3>Histórico de Movimentações</h3>
-        <ul class="list">
+      <div class="card">
+        <h3>Histórico de movimentações:</h3>
+        <ul>
           <li>Entrada - Farinha de trigo (50kg)</li>
           <li>Saída - Fermento biológico (10kg)</li>
-          <li>Alerta - Leite em pó próximo do vencimento</li>
+          <li>Alerta - Produto próximo do vencimento</li>
         </ul>
       </div>
     </section>
 
+    <!-- ESTOQUE -->
     <section id="estoque" class="page">
-      <h1>Estoque</h1>
+      <div class="title">ESTOQUE</div>
 
-      <div class="cards">
-        <div class="product-card">
-          <h3>Farinha de Trigo</h3>
-          <p>Quantidade: 50kg</p>
-          <span class="status ok">OK</span>
-        </div>
-
-        <div class="product-card">
-          <h3>Leite em Pó</h3>
-          <p>Quantidade: 15kg</p>
-          <span class="status blocked">Bloqueado</span>
-        </div>
+      <div class="card">
+        <h3>Lista de produtos:</h3>
+        <p>Farinha de trigo - 50kg - Status: OK</p>
+        <p>Leite em pó - 15kg - Status: BLOQUEADO</p>
       </div>
     </section>
 
+    <!-- RELATÓRIOS -->
     <section id="relatorios" class="page">
-      <h1>Relatórios</h1>
+      <div class="title">RELATÓRIOS</div>
 
-      <div class="card large">
-        <h3>Situação Atual do Estoque</h3>
+      <div class="card">
         <p>Total cadastrados: 3</p>
         <p>Total em estoque: 30</p>
       </div>
     </section>
 
+    <!-- CADASTRO -->
     <section id="cadastro" class="page">
-      <h1>Cadastro de Produto</h1>
+      <div class="title">CADASTRO DE PRODUTOS</div>
 
       <div class="card form-card">
         <input type="text" placeholder="Nome do produto">
         <input type="number" placeholder="Quantidade">
         <input type="date">
-        <button class="btn-primary">Cadastrar</button>
+        <button>Cadastrar</button>
       </div>
     </section>
 
