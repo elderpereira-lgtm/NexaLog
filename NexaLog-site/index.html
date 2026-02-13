@@ -1,89 +1,107 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexaLog - 3 Irmãos</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaLog - 3 Irmãos</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- LOGIN -->
+<section id="loginPage" class="auth-page active">
+  <div class="auth-container">
+    <div class="auth-image">
+      <img src="3irmaos.png">
+    </div>
+
+    <div class="auth-card">
+      <h1>Login</h1>
+      <input type="email" id="loginEmail" placeholder="Email">
+      <input type="password" id="loginSenha" placeholder="Senha">
+      <button class="btn blue" onclick="login()">Entrar</button>
+      <button class="btn green" onclick="showCadastro()">Cadastrar</button>
+    </div>
+  </div>
+</section>
+
+<!-- CADASTRO -->
+<section id="cadastroPage" class="auth-page">
+  <div class="auth-container">
+    <div class="auth-image">
+      <img src="3irmaos.png">
+    </div>
+
+    <div class="auth-card">
+      <h1>Cadastro</h1>
+      <input type="email" id="cadEmail" placeholder="Email">
+      <input type="password" id="cadSenha" placeholder="Senha">
+      <input type="password" placeholder="Confirmar senha">
+      <button class="btn green" onclick="verificacao()">Cadastrar</button>
+      <button class="btn blue" onclick="voltarLogin()">Já tenho conta</button>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFICAÇÃO -->
+<section id="verificacaoPage" class="auth-page">
+  <div class="auth-card">
+    <h2>Verificação</h2>
+    <p>Confirme o cadastro</p>
+    <button class="btn green" onclick="confirmarVerificacao()">Confirmar</button>
+  </div>
+</section>
+
 <!-- LOADING -->
-<div id="loading-screen">
-  <div class="spinner"></div>
+<section id="loadingPage" class="loading-page">
+  <div class="loader"></div>
   <p>Carregando...</p>
-</div>
+</section>
 
-<div class="layout">
+<!-- APP -->
+<section id="appPage" class="app-page">
 
-  <!-- MENU LATERAL (oculto inicialmente) -->
+  <div class="topbar">
+    <input type="text" placeholder="Buscar...">
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </div>
+
   <aside id="sidebar" class="sidebar">
     <h3>Menu</h3>
     <button onclick="navigate('dashboard')">Dashboard</button>
     <button onclick="navigate('estoque')">Estoque</button>
-    <button onclick="navigate('relatorios')">Relatórios</button>
-    <button onclick="navigate('cadastro')">Cadastro de Produtos</button>
+    <button onclick="navigate('cadastroProdutos')">Cadastro</button>
   </aside>
 
-  <!-- CONTEÚDO -->
-  <main class="main">
+  <main class="main-content">
 
-    <!-- TOPO -->
-    <div class="topbar">
-      <button class="menu-btn" onclick="toggleMenu()">☰</button>
-      <input type="text" placeholder="Buscar...">
-    </div>
-
-    <!-- DASHBOARD -->
-    <section id="dashboard" class="page active">
-      <div class="title">DASHBOARD</div>
-
+    <div id="dashboard" class="page active">
+      <h2 class="title">DASHBOARD</h2>
       <div class="card">
         <h3>Histórico de movimentações:</h3>
-        <ul>
-          <li>Entrada - Farinha de trigo (50kg)</li>
-          <li>Saída - Fermento biológico (10kg)</li>
-          <li>Alerta - Produto próximo do vencimento</li>
-        </ul>
+        <ul id="historicoLista"></ul>
       </div>
-    </section>
+    </div>
 
-    <!-- ESTOQUE -->
-    <section id="estoque" class="page">
-      <div class="title">ESTOQUE</div>
-
+    <div id="estoque" class="page">
+      <h2 class="title">ESTOQUE</h2>
       <div class="card">
-        <h3>Lista de produtos:</h3>
-        <p>Farinha de trigo - 50kg - Status: OK</p>
-        <p>Leite em pó - 15kg - Status: BLOQUEADO</p>
+        <div id="estoqueLista" class="produto-grid"></div>
       </div>
-    </section>
+    </div>
 
-    <!-- RELATÓRIOS -->
-    <section id="relatorios" class="page">
-      <div class="title">RELATÓRIOS</div>
-
+    <div id="cadastroProdutos" class="page">
+      <h2 class="title">Cadastro de Produtos</h2>
       <div class="card">
-        <p>Total cadastrados: 3</p>
-        <p>Total em estoque: 30</p>
+        <input type="text" id="nomeProduto" placeholder="Nome">
+        <input type="number" id="quantidadeProduto" placeholder="Quantidade">
+        <input type="date" id="validadeProduto">
+        <button class="btn green" onclick="adicionarProduto()">Cadastrar</button>
       </div>
-    </section>
-
-    <!-- CADASTRO -->
-    <section id="cadastro" class="page">
-      <div class="title">CADASTRO DE PRODUTOS</div>
-
-      <div class="card form-card">
-        <input type="text" placeholder="Nome do produto">
-        <input type="number" placeholder="Quantidade">
-        <input type="date">
-        <button>Cadastrar</button>
-      </div>
-    </section>
+    </div>
 
   </main>
-
-</div>
+</section>
 
 <script src="script.js"></script>
 </body>
