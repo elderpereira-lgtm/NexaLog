@@ -8,105 +8,93 @@
 </head>
 <body>
 
-<div class="layout">
+<!-- LOGIN -->
+<section id="loginPage" class="auth-page active">
+  <div class="auth-card">
+    <h1>Login</h1>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginSenha" placeholder="Senha">
+    <button class="btn blue" onclick="login()">Entrar</button>
+    <button class="btn green" onclick="showCadastro()">Cadastrar</button>
+  </div>
+</section>
 
-  <!-- barra do menu -->
-  <aside class="sidebar">
-    <div class="logo">
-      <h2>NexaLog</h2>
-      <span>3 Irmãos</span>
+<!-- CADASTRO -->
+<section id="cadastroPage" class="auth-page">
+  <div class="auth-card">
+    <h1>Cadastro</h1>
+    <input type="email" id="cadEmail" placeholder="Email">
+    <input type="password" id="cadSenha" placeholder="Senha">
+    <input type="password" placeholder="Confirmar senha">
+    <button class="btn green" onclick="verificacao()">Cadastrar</button>
+    <button class="btn blue" onclick="voltarLogin()">Já tenho conta</button>
+  </div>
+</section>
+
+<!-- VERIFICAÇÃO -->
+<section id="verificacaoPage" class="auth-page">
+  <div class="auth-card">
+    <h2>Estamos quase lá!</h2>
+    <p>Digite o código enviado para seu email</p>
+    <div class="codigo">
+      <input maxlength="1">
+      <input maxlength="1">
+      <input maxlength="1">
+      <input maxlength="1">
+      <input maxlength="1">
+      <input maxlength="1">
+    </div>
+    <button class="btn green" onclick="confirmarVerificacao()">Verificar</button>
+  </div>
+</section>
+
+<!-- LOADING -->
+<section id="loadingPage" class="loading-page">
+  <div class="spinner"></div>
+  <p>Carregando...</p>
+</section>
+
+<!-- APP -->
+<section id="appPage" class="app">
+
+  <!-- MENU DESLIZANTE -->
+  <div id="sidebar" class="sidebar">
+    <h3>Menu</h3>
+    <button onclick="navigate('dashboard')">Dashboard</button>
+    <button onclick="navigate('estoque')">Estoque</button>
+    <button onclick="navigate('relatorios')">Relatórios</button>
+    <button onclick="navigate('cadastroProdutos')">Cadastro de Produtos</button>
+  </div>
+
+  <header class="topbar">
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <input type="text" placeholder="Buscar...">
+  </header>
+
+  <main class="content">
+    <div id="dashboard" class="page active">
+      <h2 class="title">DASHBOARD</h2>
+      <div class="card">
+        <p>Histórico de movimentações...</p>
+      </div>
     </div>
 
-    <nav>
-      <button onclick="navigate('dashboard')" class="nav-item active">Dashboard</button>
-      <button onclick="navigate('estoque')" class="nav-item">Estoque</button>
-      <button onclick="navigate('relatorios')" class="nav-item">Relatórios</button>
-      <button onclick="navigate('cadastro')" class="nav-item">Cadastro</button>
-    </nav>
-  </aside>
+    <div id="estoque" class="page">
+      <h2 class="title">ESTOQUE</h2>
+      <div class="card">Lista de produtos...</div>
+    </div>
 
-  <!-- principal -->
-  <main class="main">
+    <div id="relatorios" class="page">
+      <h2 class="title">RELATÓRIOS</h2>
+      <div class="card">Relatórios...</div>
+    </div>
 
-    <!-- barra de cima -->
-    <header class="topbar">
-      <input type="text" placeholder="Pesquisar...">
-      <div class="user">Elder</div>
-    </header>
-
-    <!-- conteúdo dinâmico -->
-    <section id="dashboard" class="page active">
-      <h1>Dashboard</h1>
-
-      <div class="cards">
-        <div class="card">
-          <h3>Total de Produtos</h3>
-          <p class="number">30</p>
-        </div>
-
-        <div class="card">
-          <h3>Produtos Bloqueados</h3>
-          <p class="number red">1</p>
-        </div>
-
-        <div class="card">
-          <h3>Próximos do Vencimento</h3>
-          <p class="number orange">3</p>
-        </div>
-      </div>
-
-      <div class="card large">
-        <h3>Histórico de Movimentações</h3>
-        <ul class="list">
-          <li>Entrada - Farinha de trigo (50kg)</li>
-          <li>Saída - Fermento biológico (10kg)</li>
-          <li>Alerta - Leite em pó próximo do vencimento</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="estoque" class="page">
-      <h1>Estoque</h1>
-
-      <div class="cards">
-        <div class="product-card">
-          <h3>Farinha de Trigo</h3>
-          <p>Quantidade: 50kg</p>
-          <span class="status ok">OK</span>
-        </div>
-
-        <div class="product-card">
-          <h3>Leite em Pó</h3>
-          <p>Quantidade: 15kg</p>
-          <span class="status blocked">Bloqueado</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="relatorios" class="page">
-      <h1>Relatórios</h1>
-
-      <div class="card large">
-        <h3>Situação Atual do Estoque</h3>
-        <p>Total cadastrados: 3</p>
-        <p>Total em estoque: 30</p>
-      </div>
-    </section>
-
-    <section id="cadastro" class="page">
-      <h1>Cadastro de Produto</h1>
-
-      <div class="card form-card">
-        <input type="text" placeholder="Nome do produto">
-        <input type="number" placeholder="Quantidade">
-        <input type="date">
-        <button class="btn-primary">Cadastrar</button>
-      </div>
-    </section>
-
+    <div id="cadastroProdutos" class="page">
+      <h2 class="title">Cadastro de Produtos</h2>
+      <div class="card">Cadastrar produtos...</div>
+    </div>
   </main>
-
-</div>
+</section>
 
 <script src="script.js"></script>
 </body>
