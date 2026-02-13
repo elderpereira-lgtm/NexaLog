@@ -1,171 +1,137 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial;
-}
-
 body{
-  background: linear-gradient(to bottom,#f5e6a6,#e3b44b);
-  height:100vh;
+margin:0;
+font-family:Arial;
+background:linear-gradient(#f4e7a1,#e3b44b);
 }
 
-/* AUTH */
-.auth-page{
-  display:none;
-  height:100vh;
-  justify-content:center;
-  align-items:center;
+.auth-page,.loading-page{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
 }
 
-.auth-page.active{
-  display:flex;
+.active{display:flex;}
+
+.auth-container{
+display:flex;
+gap:50px;
+align-items:center;
+}
+
+.auth-image img{
+width:350px;
 }
 
 .auth-card{
-  background:rgba(255,255,255,0.4);
-  padding:40px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-  text-align:center;
-  width:350px;
+background:rgba(255,255,255,0.5);
+padding:30px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+display:flex;
+flex-direction:column;
+gap:10px;
 }
 
-.auth-card input{
-  width:100%;
-  padding:8px;
-  margin:8px 0;
-  border:1px solid #999;
-  border-radius:4px;
+input{
+padding:8px;
+border-radius:6px;
+border:1px solid #ccc;
 }
 
 .btn{
-  width:100%;
-  padding:10px;
-  margin-top:10px;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-  color:white;
+padding:8px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+color:white;
 }
 
-.blue{ background:#1f2f7a; }
-.green{ background:#2e7d32; }
+.blue{background:#1f2f7a;}
+.green{background:#2e7d32;}
 
-/* VERIFICAÇÃO */
-.codigo{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin:20px 0;
-}
-
-.codigo input{
-  width:40px;
-  height:40px;
-  text-align:center;
-  font-size:18px;
-}
-
-/* LOADING */
 .loading-page{
-  display:none;
-  height:100vh;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+flex-direction:column;
 }
 
-.spinner{
-  width:70px;
-  height:70px;
-  border:8px solid rgba(255,255,255,0.3);
-  border-top:8px solid white;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
+.loader{
+width:60px;
+height:60px;
+border:6px solid #fff;
+border-top:6px solid transparent;
+border-radius:50%;
+animation:spin 1s linear infinite;
 }
 
 @keyframes spin{
-  100%{ transform:rotate(360deg);}
+to{transform:rotate(360deg);}
 }
 
 /* APP */
-.app{
-  display:none;
-  height:100vh;
-}
 
-/* SIDEBAR */
-.sidebar{
-  position:fixed;
-  left:-220px;
-  top:0;
-  width:200px;
-  height:100%;
-  background:#e2b546;
-  padding:20px;
-  transition:0.3s;
-}
+.app-page{display:none;}
 
-.sidebar.active{
-  left:0;
-}
-
-.sidebar button{
-  display:block;
-  width:100%;
-  margin:10px 0;
-  padding:8px;
-  border:none;
-  background:rgba(255,255,255,0.3);
-  cursor:pointer;
-  border-radius:5px;
-}
-
-/* TOPBAR */
 .topbar{
-  padding:10px 20px;
-  display:flex;
-  gap:20px;
-  align-items:center;
+display:flex;
+justify-content:space-between;
+padding:10px 20px;
 }
 
 .menu-btn{
-  font-size:22px;
-  background:none;
-  border:none;
-  cursor:pointer;
+font-size:22px;
+background:none;
+border:none;
+cursor:pointer;
+z-index:2000;
 }
 
-.topbar input{
-  flex:1;
-  padding:6px;
+.sidebar{
+position:fixed;
+top:0;
+left:-250px;
+width:250px;
+height:100%;
+background:#e3b44b;
+padding:20px;
+transition:0.3s;
+z-index:1000;
 }
 
-/* CONTENT */
-.content{
-  padding:20px;
+.sidebar.active{left:0;}
+
+.sidebar button{
+display:block;
+margin:10px 0;
+width:100%;
+padding:8px;
+border:none;
+cursor:pointer;
 }
 
-.title{
-  background:rgba(255,255,255,0.5);
-  display:inline-block;
-  padding:5px 15px;
-  border-radius:10px;
-  margin-bottom:20px;
+.main-content{
+margin-left:20px;
+padding:20px;
 }
+
+.page{display:none;}
+.page.active{display:block;}
 
 .card{
-  background:rgba(255,255,255,0.4);
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+background:rgba(255,255,255,0.6);
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
 
-.page{
-  display:none;
+.produto-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:15px;
 }
 
-.page.active{
-  display:block;
+.produto-card{
+background:white;
+padding:10px;
+border-radius:10px;
+box-shadow:0 3px 6px rgba(0,0,0,0.2);
 }
