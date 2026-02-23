@@ -4,8 +4,37 @@ JSON.parse(localStorage.getItem("produtos")) || [];
 /* ==== Login ====*/
 function showCadastro() {trocarTela("cadastroPage");}
 function voltarLogin() {trocarTela("loginPage");}
-function verificacao() {trocarTela("verificacaoPage");}
+function login(){
+  const senha = document.getElementById("loginSenha").value;
 
+  if(!senha || senha.length < 8){
+    alert("A senha deve ter no mínimo 8 caracteres");
+    return;
+  }
+
+  entrarSistema();
+}
+
+function verificacao(){
+
+  const senha = document.getElementById("cadSenha").value;
+
+  const confirmar = document.querySelector(
+    "#cadastroPage input[placeholder='Confirmar senha']"
+  ).value;
+
+  if(!senha || senha.length < 8){
+    alert("A senha deve ter no mínimo 8 caracteres");
+    return;
+  }
+
+  if(senha !== confirmar){
+    alert("As senhas não coincidem");
+    return;
+  }
+
+  trocarTela("verificacaoPage");
+}
 function confirmarVerificacao() {entrarSistema()};
 function login() {entrarSistema()};
 
