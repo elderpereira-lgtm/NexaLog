@@ -5,8 +5,17 @@ JSON.parse(localStorage.getItem("produtos")) || [];
 function showCadastro() {trocarTela("cadastroPage");}
 function voltarLogin() {trocarTela("loginPage");}
 function login(){
+
+  const email = document.getElementById("loginEmail").value.trim();
   const senha = document.getElementById("loginSenha").value;
 
+  // ✔ Validação de email
+  if(!email || !email.includes("@")){
+    alert("Digite um e‑mail válido");
+    return;
+  }
+
+  // ✔ Validação de senha
   if(!senha || senha.length < 8){
     alert("A senha deve ter no mínimo 8 caracteres");
     return;
