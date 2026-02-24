@@ -36,7 +36,7 @@ function verificacao(){
   trocarTela("verificacaoPage");
 }
 function confirmarVerificacao() {entrarSistema()};
-function login() {entrarSistema()};
+
 
 function entrarSistema(){
   trocarTela("loadingPage");
