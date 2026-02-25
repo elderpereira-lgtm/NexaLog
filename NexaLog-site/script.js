@@ -176,6 +176,15 @@ function salvar(){
   localStorage.setItem("produtos",JSON.stringify(produtos));
 }
 
+// Alertas
+if(produto.quantidade < produto.minimo){
+  const previsao = await
+  gerarPrevisao(produto.historicoConsumo);
+  if(previsao > produto.quantidade){
+    mostrarAlerta("Reposiçao recomendada: " + previsao);
+  }
+}
+
 // Atualizações
 
 function atualizarTudo(){
