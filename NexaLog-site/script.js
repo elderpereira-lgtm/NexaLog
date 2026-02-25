@@ -249,3 +249,20 @@ function showToast(msg){
 // Init
 
 window.onload = atualizarTudo;
+
+// IA Integrada
+
+async function gerarPrevisao(dadosHistoricos) {
+  const response = await
+  fetch("http://localhost:3001/previsao", {
+    method:"POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      historico: dadosHistoricos
+    })
+  });
+  const data = await response.json();
+  return data.previsao;
+}
