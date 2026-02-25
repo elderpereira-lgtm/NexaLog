@@ -37,7 +37,7 @@
       <h1>Cadastro</h1>
       <input type="email" id="cadEmail" placeholder="Email">
       <input type="password" id="cadSenha" placeholder="Senha">
-      <input type="password" placeholder="Confirmar senha">
+    <input type="password" id="cadConfirmarSenha" placeholder="Confirmar senha">
       <button class="btn green" onclick="verificacao()">Cadastrar</button>
       <button class="btn blue" onclick="voltarLogin()">Já tenho conta</button>
     </div>
@@ -54,11 +54,19 @@
     <div class="auth-card">
       <h2>Verificação</h2>
       <p>Digite o código enviado ao email</p>
+
       <div class="codigo">
         <input maxlength="1"><input maxlength="1"><input maxlength="1">
         <input maxlength="1"><input maxlength="1"><input maxlength="1">
       </div>
+
       <button class="btn green" onclick="confirmarVerificacao()">Verificar</button>
+
+      <!-- 🔴 BOTÃO NOVO -->
+      <button class="btn blue" onclick="voltarCadastro()">
+        Não recebi o código / Voltar
+      </button>
+
     </div>
   </div>
 </section>
@@ -148,8 +156,16 @@
 </div>
 
 <div id="toast" class="toast"></div>
+
+// Id Email
+
 <input id="loginEmail" type="email" placeholder="Email">
 <input id="loginSenha" type="password" placeholder="Senha">
+
+// id Cadastro
+
+
+
 <script src="script.js"></script>
 </body>
 </html>

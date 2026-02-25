@@ -26,17 +26,26 @@ function login(){
 
 function verificacao(){
 
+  const email = document.getElementById("cadEmail").value.trim();
   const senha = document.getElementById("cadSenha").value;
 
   const confirmar = document.querySelector(
     "#cadastroPage input[placeholder='Confirmar senha']"
   ).value;
 
+  // ✔ Validação de email
+  if(!email || !email.includes("@")){
+    alert("Digite um e‑mail válido");
+    return;
+  }
+
+  // ✔ Validação de senha
   if(!senha || senha.length < 8){
     alert("A senha deve ter no mínimo 8 caracteres");
     return;
   }
 
+  // ✔ Confirmação de senha
   if(senha !== confirmar){
     alert("As senhas não coincidem");
     return;
@@ -204,3 +213,9 @@ function showToast(msg){
 // Init
 
 window.onload = atualizarTudo;
+
+// Botão voltar verificação 
+
+function voltarCadastro(){
+  trocarTela("cadastroPage"); 
+}
