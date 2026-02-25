@@ -9,8 +9,7 @@
 
 <body>
 
-<!-- Login -->
-
+<!-- ==== Login ==== -->
 <section id="loginPage" class="auth-page active">
   <div class="auth-container">
     <div class="auth-image">
@@ -26,8 +25,7 @@
   </div>
 </section>
 
-<!-- Cadastro -->
-
+<!-- ==== Cadastro ==== -->
 <section id="cadastroPage" class="auth-page">
   <div class="auth-container">
     <div class="auth-image">
@@ -37,15 +35,14 @@
       <h1>Cadastro</h1>
       <input type="email" id="cadEmail" placeholder="Email">
       <input type="password" id="cadSenha" placeholder="Senha">
-    <input type="password" id="cadConfirmarSenha" placeholder="Confirmar senha">
+      <input type="password" id="cadConfirmarSenha" placeholder="Confirmar senha">
       <button class="btn green" onclick="verificacao()">Cadastrar</button>
       <button class="btn blue" onclick="voltarLogin()">Já tenho conta</button>
     </div>
   </div>
 </section>
 
-<!-- Verificação -->
-
+<!-- ==== Verificação ==== -->
 <section id="verificacaoPage" class="auth-page">
   <div class="auth-container">
     <div class="auth-image">
@@ -56,31 +53,28 @@
       <p>Digite o código enviado ao email</p>
 
       <div class="codigo">
-        <input maxlength="1"><input maxlength="1"><input maxlength="1">
-        <input maxlength="1"><input maxlength="1"><input maxlength="1">
+        <input maxlength="1">
+        <input maxlength="1">
+        <input maxlength="1">
+        <input maxlength="1">
+        <input maxlength="1">
+        <input maxlength="1">
       </div>
 
       <button class="btn green" onclick="confirmarVerificacao()">Verificar</button>
-
-      <button class="btn blue" onclick="voltarCadastro()">
-        Não recebi o código / Voltar
-      </button>
-
+      <button class="btn blue" onclick="voltarCadastro()">Não recebi o código / Voltar</button>
     </div>
   </div>
 </section>
 
-<!-- Carregando -->
-
+<!-- ==== Carregando ==== -->
 <section id="loadingPage" class="loading-page">
   <div class="loader"></div>
   <p>Carregando sistema...</p>
 </section>
 
-<!-- Sistema -->
-
+<!-- ==== Sistema ==== -->
 <div id="appPage" class="layout" style="display:none;">
-
   <aside id="sidebar" class="sidebar">
     <div class="logo">
       <h2>NexaLog</h2>
@@ -96,14 +90,12 @@
   </aside>
 
   <main class="main">
-
     <header class="topbar">
       <button class="menu-btn" onclick="toggleMenu()">☰</button>
       <input type="text" placeholder="Pesquisar...">
       <div class="user">Admin</div>
     </header>
 
-    <!-- Dashboard -->
     <section id="dashboard" class="page active">
       <h1>Dashboard</h1>
 
@@ -125,13 +117,11 @@
       </div>
     </section>
 
-    <!-- Estoque -->
     <section id="estoque" class="page">
       <h1>Estoque</h1>
       <div id="estoqueLista"></div>
     </section>
 
-    <!-- Relatórios -->
     <section id="relatorios" class="page">
       <h1>Relatórios</h1>
       <div class="card large">
@@ -140,30 +130,19 @@
       </div>
     </section>
 
-    <!-- Cadastro -->
     <section id="cadastro" class="page">
       <h1>Cadastro de Produto</h1>
       <div class="card form-card">
-       <input type="text" id="nomeProduto" placeholder="Nome do Produto">
-       <input type="number" id="quantidadeProduto" placeholder="Quantidade">
-       <input type="date" id="validadeProduto">
-       <button class="btn-primary" onclick="adicionarProduto()">Cadastrar</button>
+        <input type="text" id="nomeProduto" placeholder="Nome do Produto">
+        <input type="number" id="quantidadeProduto" placeholder="Quantidade">
+        <input type="date" id="validadeProduto">
+        <button class="btn-primary" onclick="adicionarProduto()">Cadastrar</button>
       </div>
     </section>
-
   </main>
 </div>
 
 <div id="toast" class="toast"></div>
-
-// Id Email
-
-<input id="loginEmail" type="email" placeholder="Email">
-<input id="loginSenha" type="password" placeholder="Senha">
-
-// id Cadastro
-
-
 
 <script src="script.js"></script>
 </body>
