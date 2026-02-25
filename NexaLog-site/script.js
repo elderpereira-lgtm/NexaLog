@@ -1,7 +1,7 @@
 let produtos = 
 JSON.parse(localStorage.getItem("produtos")) || [];
 
-/* ==== Login ====*/
+// Login
 function showCadastro() {trocarTela("cadastroPage");}
 function voltarLogin() {trocarTela("loginPage");}
 function login(){
@@ -9,13 +9,13 @@ function login(){
   const email = document.getElementById("loginEmail").value.trim();
   const senha = document.getElementById("loginSenha").value;
 
-  // ✔ Validação de email
+  // Validação de email
   if(!email || !email.includes("@")){
     alert("Digite um e‑mail válido");
     return;
   }
 
-  // ✔ Validação de senha
+  // Validação de senha
   if(!senha || senha.length < 8){
     alert("A senha deve ter no mínimo 8 caracteres");
     return;
@@ -63,7 +63,7 @@ function trocarTela(id){
   if(tela) tela.style.display="flex";
 }
 
-/* ==== Menu ====*/
+// Menu
 function navigate(id, btn){
 
   document.querySelectorAll(".page").forEach(p=>{
@@ -88,7 +88,7 @@ function toggleMenu(){
   document.getElementById("sidebar").classList.toggle("active");
 }
 
-/* ================= PRODUTOS ================= */
+// Produtos
 
 function adicionarProduto(){
 
@@ -131,7 +131,7 @@ function salvar(){
   localStorage.setItem("produtos",JSON.stringify(produtos));
 }
 
-/* ================= ATUALIZAÇÕES ================= */
+// Atualizações
 
 function atualizarTudo(){
   atualizarEstoque();
@@ -192,7 +192,7 @@ function diasRestantes(data){
   return Math.ceil((v-hoje)/(1000*60*60*24));
 }
 
-/* ================= TOAST ================= */
+// Toast
 
 function showToast(msg){
   const toast = document.getElementById("toast");
@@ -201,6 +201,6 @@ function showToast(msg){
   setTimeout(()=>toast.classList.remove("show"),3000);
 }
 
-/* ================= INIT ================= */
+// Init
 
 window.onload = atualizarTudo;
