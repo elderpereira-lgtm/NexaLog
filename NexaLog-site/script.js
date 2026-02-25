@@ -24,6 +24,25 @@ function login(){
   entrarSistema();
 }
 
+// Passa de um espaço númerico para outro na verificação
+
+document.querySelectorAll("#verificacaoPage .codigo input")
+.forEach((input, index, arr) => {
+
+  input.addEventListener("input", () => {
+    if (input.value.length === 1 && index < arr.length - 1) {
+      arr[index + 1].focus();
+    }
+  });
+
+});
+
+// Botão voltar verificação 
+
+function voltarCadastro(){
+  trocarTela("cadastroPage"); 
+}
+
 function verificacao(){
 
   const email = document.getElementById("cadEmail").value.trim();
@@ -53,8 +72,25 @@ function verificacao(){
 
   trocarTela("verificacaoPage");
 }
-function confirmarVerificacao() {entrarSistema()};
+function confirmarVerificacao() {
 
+  const inputs = document.querySelectorAll("#verificacaoPage .codigo input");
+
+  let codigo = "";
+
+  inputs.forEach(input => {
+    codigo += input.value.trim();
+  });
+
+  // ✔ Verifica se digitou os 6 dígitos
+  if (codigo.length !== 6 || !/^\d{6}$/.test(codigo)) {
+    alert("Digite o código completo de 6 dígitos");
+    return;
+  }
+
+  // ✔ Código válido (simulação)
+  entrarSistema();
+}
 
 function entrarSistema(){
   trocarTela("loadingPage");
@@ -213,9 +249,3 @@ function showToast(msg){
 /* ================= INIT ================= */
 
 window.onload = atualizarTudo;
-
-// Botão voltar verificação 
-
-function voltarCadastro(){
-  trocarTela("cadastroPage"); 
-}
