@@ -213,3 +213,9 @@ function showToast(msg){
 /* ================= INIT ================= */
 
 window.onload = atualizarTudo;
+
+// Botão voltar verificação 
+
+function voltarCadastro(){
+  trocarTela("cadastroPage"); 
+}
