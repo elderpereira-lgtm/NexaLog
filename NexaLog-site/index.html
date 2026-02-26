@@ -19,6 +19,16 @@
       <h1>Login</h1>
       <input type="email" id="loginEmail" placeholder="Email">
       <input type="password" id="loginSenha" placeholder="Senha">
+
+      <label for="cargoLogin" style="font-weight:600; margin-top:5px;">
+      Selecione seu cargo
+      </label>
+
+      <select id="cargoLogin">
+      <option value="">Selecione...</option>
+      <option value="gestor">Gestor</option>
+      <option value="operador">Operador de Estoque</option>
+      </select>
       <button class="btn blue" onclick="login()">Entrar</button>
       <button class="btn green" onclick="showCadastro()">Cadastrar</button>
     </div>
