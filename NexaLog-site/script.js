@@ -52,19 +52,19 @@ function verificacao(){
     "#cadastroPage input[placeholder='Confirmar senha']"
   ).value;
 
-  // ✔ Validação de email
+  // Validação de email
   if(!email || !email.includes("@")){
     alert("Digite um e‑mail válido");
     return;
   }
 
-  // ✔ Validação de senha
+  // Validação de senha
   if(!senha || senha.length < 8){
     alert("A senha deve ter no mínimo 8 caracteres");
     return;
   }
 
-  // ✔ Confirmação de senha
+  // Confirmação de senha
   if(senha !== confirmar){
     alert("As senhas não coincidem");
     return;
@@ -82,13 +82,13 @@ function confirmarVerificacao() {
     codigo += input.value.trim();
   });
 
-  // ✔ Verifica se digitou os 6 dígitos
+  // Verifica se digitou os 6 dígitos
   if (codigo.length !== 6 || !/^\d{6}$/.test(codigo)) {
     alert("Digite o código completo de 6 dígitos");
     return;
   }
 
-  // ✔ Código válido (simulação)
+  // Código válido (simulação)
   entrarSistema();
 }
 
@@ -150,8 +150,7 @@ function adicionarProduto(){
     id: Date.now(),
     nome,
     quantidade: Number(quantidade),
-    validade,
-    data: new Date().toLocaleDateString()
+    validade: new Date().toLocaleDateString()
   };
 
   produtos.push(produto);
