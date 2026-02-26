@@ -447,3 +447,30 @@ h1{
 .btn-danger:hover{
   background:#8e0000;
 }
+.controle-quantidade{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:8px;
+}
+
+.controle-quantidade button{
+  width:30px;
+  height:30px;
+  border:none;
+  border-radius:6px;
+  background:#1f2f7a;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.controle-quantidade button:hover{
+  opacity:0.8;
+}
+
+.controle-quantidade span{
+  min-width:25px;
+  text-align:center;
+  font-weight:bold;
+}
