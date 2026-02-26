@@ -175,6 +175,48 @@ function salvar(){
   localStorage.setItem("produtos",JSON.stringify(produtos));
 }
 
+function aumentar(id, estoqueMax){
+  const span = document.getElementById(`qtd-${id}`);
+  let valor = Number(span.textContent);
+
+  if(valor < estoqueMax){
+    span.textContent = valor + 1;
+  }
+}
+
+function diminuir(id){
+  const span = document.getElementById(`qtd-${id}`);
+  let valor = Number(span.textContent);
+
+  if(valor > 0){
+    span.textContent = valor - 1;
+  }
+}
+
+function removerQuantidade(id){
+
+  const produto = produtos.find(p => p.id === id);
+  const span = document.getElementById(`qtd-${id}`);
+  const quantidadeRemover = Number(span.textContent);
+
+  if(quantidadeRemover <= 0){
+    showToast("Selecione uma quantidade para remover");
+    return;
+  }
+
+  produto.quantidade -= quantidadeRemover;
+
+  if(produto.quantidade <= 0){
+    produtos = produtos.filter(p => p.id !== id);
+    showToast("Produto removido completamente");
+  } else {
+    showToast("Quantidade removida com sucesso");
+  }
+
+  salvar();
+  atualizarTudo();
+}
+
 // Atualizações
 
 function atualizarTudo(){
@@ -196,13 +238,11 @@ function atualizarEstoque(){
         <p>Qtd em estoque: ${p.quantidade}</p>
         <p>Validade: ${p.validade}</p>
 
-        <input 
-          type="number" 
-          min="1" 
-          max="${p.quantidade}" 
-          placeholder="Quantidade para remover"
-          id="remover-${p.id}"
-        >
+        <div class="controle-quantidade">
+          <button onclick="diminuir(${p.id})">-</button>
+          <span id="qtd-${p.id}">0</span>
+          <button onclick="aumentar(${p.id}, ${p.quantidade})">+</button>
+        </div>
 
         <button onclick="removerQuantidade(${p.id})" class="btn-danger">
           Remover
@@ -211,7 +251,6 @@ function atualizarEstoque(){
     `;
   }).join("");
 }
-
 
 function atualizarDashboard(){
 
