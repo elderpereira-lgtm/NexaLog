@@ -189,16 +189,29 @@ function atualizarEstoque(){
 
   lista.innerHTML = produtos.map(p=>{
     const vencendo = diasRestantes(p.validade) <= 7;
+
     return `
       <div class="product-card ${vencendo?'warning':''}">
         <h3>${p.nome}</h3>
-        <p>Qtd: ${p.quantidade}</p>
+        <p>Qtd em estoque: ${p.quantidade}</p>
         <p>Validade: ${p.validade}</p>
-        <button onclick="removerProduto(${p.id})" class="btn-danger">Remover</button>
+
+        <input 
+          type="number" 
+          min="1" 
+          max="${p.quantidade}" 
+          placeholder="Quantidade para remover"
+          id="remover-${p.id}"
+        >
+
+        <button onclick="removerQuantidade(${p.id})" class="btn-danger">
+          Remover
+        </button>
       </div>
     `;
   }).join("");
 }
+
 
 function atualizarDashboard(){
 
