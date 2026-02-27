@@ -9,17 +9,26 @@ function login(){
   const email = document.getElementById("loginEmail").value.trim();
   const senha = document.getElementById("loginSenha").value;
 
-  // Validação de email
   if(!email || !email.includes("@")){
     alert("Digite um e‑mail válido");
     return;
   }
 
-  // Validação de senha
   if(!senha || senha.length < 8){
     alert("A senha deve ter no mínimo 8 caracteres");
     return;
   }
+
+  let cargo = "Admin"; // padrão
+
+  if(email.endsWith("@gestor.3irmaos.br")){
+    cargo = "Gestor";
+  }
+  else if(email.endsWith("@operador.3irmaos.br")){
+    cargo = "Operador de Estq.";
+  }
+
+  localStorage.setItem("cargoUsuario", cargo);
 
   entrarSistema();
 }
@@ -94,11 +103,31 @@ function confirmarVerificacao() {
 
 function entrarSistema(){
   trocarTela("loadingPage");
+
   setTimeout(()=>{
+
     document.getElementById("loadingPage").style.display="none";
     document.getElementById("appPage").style.display="flex";
+
+    atualizarUsuario();
+
     atualizarTudo();
+
   },1500);
+}
+
+function atualizarUsuario(){
+
+  const cargo = localStorage.getItem("cargoUsuario");
+  const userDiv = document.getElementById("userCargo");
+
+  if(!userDiv) return;
+
+  if(cargo){
+    userDiv.textContent = cargo;
+  } else {
+    userDiv.textContent = "Admin";
+  }
 }
 function trocarTela(id){
   document.querySelectorAll("section.auth-page, section.loading-page")
@@ -150,7 +179,8 @@ function adicionarProduto(){
     id: Date.now(),
     nome,
     quantidade: Number(quantidade),
-    validade: new Date().toLocaleDateString()
+    validade,
+    data: new Date().toLocaleDateString()
   };
 
   produtos.push(produto);
