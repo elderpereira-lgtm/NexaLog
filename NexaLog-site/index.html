@@ -86,26 +86,25 @@
       <button onclick="navigate('estoque',this)" class="nav-item">Estoque</button>
       <button onclick="navigate('relatorios',this)" class="nav-item">Relatórios</button>
       <button onclick="navigate('cadastro',this)" class="nav-item">Cadastro</button>
-      <button onclick="navigate('assistente',this)" class="nav-item">Assistente IA</button>
     </nav>
   </aside>
 
   <main class="main">
     <header class="topbar">
-      <button class="menu-btn" onclick="toggleMenu()"></button>
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
       <input type="text" placeholder="Pesquisar...">
       <div class="user" id="userCargo" onclick="irParaConta()" style="cursor:pointer;">Admin</div>
     </header>
-    <section id="conta" class="page">
-      <h1>Minha Conta</h1>
+  <section id="conta" class="page">
+  <h1>Minha Conta</h1>
 
-      <div class="card large">
-        <p><strong>Email:</strong><span id="infoEmail"></span></p>
-        <p><strong>Cargo:</strong><span id="infoCargo"></span></p>
+  <div class="card large">
+    <p><strong>Email:</strong> <span id="infoEmail"></span></p>
+    <p><strong>Cargo:</strong> <span id="infoCargo"></span></p>
 
-        <button class="btn-danger" onclick="logout()">Logout</button>
-      </div>
-    </section>
+    <button class="btn-danger" onclick="logout()">Logout</button>
+  </div>
+  </section>
     <section id="dashboard" class="page active">
       <h1>Dashboard</h1>
 
@@ -126,7 +125,7 @@
         <ul id="historicoLista" class="list"></ul>
       </div>
     </section>
-     
+
     <section id="estoque" class="page">
       <h1>Estoque</h1>
       <div id="estoqueLista"></div>
@@ -134,13 +133,10 @@
 
     <section id="relatorios" class="page">
       <h1>Relatórios</h1>
-
       <div class="card large">
-        <h3>Resumo Geral</h3>
         <p>Total cadastrados: <span id="relTotalCad">0</span></p>
         <p>Total em estoque: <span id="relTotalEstoque">0</span></p>
       </div>
-      <div id="relatorioCards" class="relatorio-cards"></div>
     </section>
 
     <section id="cadastro" class="page">
@@ -153,22 +149,9 @@
         <label for="validadeProduto"
         style="font-weight: 600; margin-top: 5px;">Data de Validade</label>
         <input type="date" id="validadeProduto">
-        <textarea id="descricaoProduto" placeholder="Descrição do Produto"></textarea>
         <button class="btn-primary" onclick="adicionarProduto()">Cadastrar</button>
       </div>
     </section>
-    <section id="assistente" class="page">
-      <h1>Assistente Inteligente</h1>
-      <div class="card large">
-       <div id="chatBox" class="chat-box"></div>
-
-        <div class="chat-input">
-         <input type="text" id="perguntaIA" placeholder="Pergunte algo sobre o estoque...">
-         <button class="btn-primary" onclick="responderIA()">Enviar</button>
-        </div>
-      </div>
-</section>
-
   </main>
 </div>
 
