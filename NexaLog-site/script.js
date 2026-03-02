@@ -307,29 +307,34 @@ function atualizarDashboard(){
 
 function atualizarRelatorios(){
 
-  const relatorio = document.getElementById("relatorios");
+  const cad = document.getElementById("relTotalCad");
+  const est = document.getElementById("relTotalEstoque");
+  const container = document.getElementById("relatorioCards");
 
-  if(!relatorio) return;
+  if(cad) cad.textContent = produtos.length;
 
-  const container = relatorio.querySelector(".card");
+  if(est){
+    est.textContent = produtos.reduce((s,p)=>s+p.quantidade,0);
+  }
 
-  container.innerHTML = `
-    <h3>Resumo Geral</h3>
-    <p>Total cadastrados: ${produtos.length}</p>
-    <p>Total em estoque: ${produtos.reduce((s,p)=>s+p.quantidade,0)}</p>
-    <hr>
-    <div class="relatorio-cards">
-      ${produtos.map(p=>`
-        <div class="rel-card">
-          <h4>${p.nome}</h4>
-          <p><strong>Quantidade:</strong> ${p.quantidade}</p>
-          <p><strong>Validade:</strong> ${p.validade}</p>
-          <p><strong>Data de entrada:</strong> ${p.data}</p>
-          <p><strong>Descrição:</strong> ${p.descricao}</p>
-        </div>
-      `).join("")}
-    </div>
-  `;
+  if(!container) return;
+
+  container.innerHTML = produtos.map(p=>{
+
+    const dias = diasRestantes(p.validade);
+    const vencido = dias < 0;
+
+    return `
+      <div class="rel-card ${vencido ? 'vencido' : ''}">
+        <h3>${p.nome}</h3>
+        <p><strong>Quantidade:</strong> ${p.quantidade}</p>
+        <p><strong>Validade:</strong> ${p.validade}</p>
+        <p><strong>Entrada:</strong> ${p.data}</p>
+        <p><strong>Descrição:</strong> ${p.descricao || "Sem descrição"}</p>
+      </div>
+    `;
+
+  }).join("");
 }
 
 function diasRestantes(data){
