@@ -19,7 +19,7 @@ function login(){
     return;
   }
 
-  let cargo = "Admin"; // padrão
+  let cargo = "Admin"; // Cargo padrão
 
   if(email.endsWith("@gestor.3irmaos.br")){
     cargo = "Gestor";
@@ -29,7 +29,7 @@ function login(){
   }
 
   localStorage.setItem("cargoUsuario", cargo);
-
+  localStorage.setItem("loginEmail", email);
   entrarSistema();
 }
 
@@ -330,3 +330,22 @@ function showToast(msg){
 // Init
 
 window.onload = atualizarTudo;
+
+//Página da conta
+function irParaConta(){
+
+  const email = document.getElementById("loginEmail").value;
+  const cargo = localStorage.getItem("cargoUsuario");
+  document.getElementById("infoEmail").textContent = email;
+  document.getElementById("infoCargo").textContent = cargo;
+
+  navigate("conta");
+}
+
+function logout(){
+  localStorage.removeItem("cargoUsuario");
+
+  document.getElementById("appPage").style.display = "none";
+  document.getElementById("loginPage").style.display = "flex";
+
+}
