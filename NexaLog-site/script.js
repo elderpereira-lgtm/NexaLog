@@ -169,7 +169,11 @@ function adicionarProduto(){
   const nome = document.getElementById("nomeProduto").value.trim();
   const quantidade = document.getElementById("quantidadeProduto").value;
   const validade = document.getElementById("validadeProduto").value;
-  const descricao = document.getElementById("descricaoProduto").value.trim();
+  let descricao = document.getElementById("descricaoProduto").value.trim();
+
+if(!descricao){
+  descricao = gerarDescricaoAutomatica(nome);
+}
 
   if(!nome || !quantidade || !validade){
     showToast("Preencha todos os campos obrigatórios");
@@ -351,7 +355,95 @@ function showToast(msg){
   toast.classList.add("show");
   setTimeout(()=>toast.classList.remove("show"),3000);
 }
+// Assistente Inteligente SIMULADA
 
+function responderIA(){
+
+  const input = document.getElementById("perguntaIA");
+  const perguntaOriginal = input.value.trim();
+  const pergunta = perguntaOriginal.toLowerCase();
+
+  if(!pergunta) return;
+
+  adicionarMensagem(perguntaOriginal, "user-msg");
+
+  let resposta = gerarRespostaIA(pergunta);
+
+  adicionarMensagem(resposta, "ia-msg");
+
+  input.value = "";
+}
+
+function gerarRespostaIA(pergunta){
+
+  if(produtos.length === 0){
+    return "Ainda não há produtos cadastrados.";
+  }
+
+  if(pergunta.includes("quantos") || pergunta.includes("total")){
+    return `Existem atualmente ${produtos.length} produtos cadastrados.`;
+  }
+
+  if(pergunta.includes("vencido") || pergunta.includes("vencendo")){
+    const vencidos = produtos.filter(p => diasRestantes(p.validade) < 0);
+    if(vencidos.length === 0){
+      return "Nenhum produto está vencido.";
+    }
+    return "Produtos vencidos: " + vencidos.map(p => p.nome).join(", ");
+  }
+
+  if(pergunta.includes("baixo") || pergunta.includes("acabando")){
+    const baixos = produtos.filter(p => p.quantidade <= 5);
+    if(baixos.length === 0){
+      return "Nenhum produto está com estoque baixo.";
+    }
+    return "Estoque baixo: " + baixos.map(p => p.nome + " (" + p.quantidade + ")").join(", ");
+  }
+
+  return "Posso informar sobre total de produtos, estoque baixo ou vencimentos.";
+}
+
+function adicionarMensagem(texto, classe){
+
+  const chat = document.getElementById("chatBox");
+
+  const div = document.createElement("div");
+  div.className = `msg ${classe}`;
+  div.textContent = texto;
+
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+//Assistente Inteligente gerando descrições dos produtos castrados, SIMULAÇÂO
+
+function gerarDescricaoAutomatica(nome){
+
+  nome = nome.toLowerCase();
+
+  // Alimentos
+  if(nome.includes("arroz") || nome.includes("feijão") || nome.includes("macarrão")){
+    return "Produto alimentício utilizado no preparo de refeições. Conservar em local seco e arejado.";
+  }
+
+  // Bebidas
+  if(nome.includes("suco") || nome.includes("refrigerante") || nome.includes("água")){
+    return "Bebida destinada ao consumo humano. Manter refrigerado após aberto.";
+  }
+
+  // Produtos de limpeza
+  if(nome.includes("detergente") || nome.includes("sabão") || nome.includes("desinfetante")){
+    return "Produto de limpeza doméstica. Manter fora do alcance de crianças.";
+  }
+
+  // Medicamentos
+  if(nome.includes("dipirona") || nome.includes("paracetamol")){
+    return "Medicamento destinado ao tratamento sintomático. Utilizar conforme orientação médica.";
+  }
+
+  // Padrão inteligente
+  return `Produto ${nome} destinado ao uso comercial. Verifique validade e condições de armazenamento.`;
+}
 // Init
 
 window.onload = atualizarTudo;
