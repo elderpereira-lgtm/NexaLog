@@ -169,9 +169,10 @@ function adicionarProduto(){
   const nome = document.getElementById("nomeProduto").value.trim();
   const quantidade = document.getElementById("quantidadeProduto").value;
   const validade = document.getElementById("validadeProduto").value;
+  const descricao = document.getElementById("descricaoProduto").value.trim();
 
   if(!nome || !quantidade || !validade){
-    showToast("Preencha todos os campos");
+    showToast("Preencha todos os campos obrigatórios");
     return;
   }
 
@@ -180,6 +181,7 @@ function adicionarProduto(){
     nome,
     quantidade: Number(quantidade),
     validade,
+    descricao: descricao || "Sem descrição",
     data: new Date().toLocaleDateString()
   };
 
@@ -190,9 +192,11 @@ function adicionarProduto(){
   document.getElementById("nomeProduto").value="";
   document.getElementById("quantidadeProduto").value="";
   document.getElementById("validadeProduto").value="";
+  document.getElementById("descricaoProduto").value="";
 
-  showToast("Produto cadastrado com sucesso");
+  showToast("Produto cadastrado com sucesso.");
 }
+
 
 function removerProduto(id){
   produtos = produtos.filter(p=>p.id!==id);
@@ -302,14 +306,30 @@ function atualizarDashboard(){
 }
 
 function atualizarRelatorios(){
-  const cad = document.getElementById("relTotalCad");
-  const est = document.getElementById("relTotalEstoque");
 
-  if(cad) cad.textContent = produtos.length;
+  const relatorio = document.getElementById("relatorios");
 
-  if(est){
-    est.textContent = produtos.reduce((s,p)=>s+p.quantidade,0);
-  }
+  if(!relatorio) return;
+
+  const container = relatorio.querySelector(".card");
+
+  container.innerHTML = `
+    <h3>Resumo Geral</h3>
+    <p>Total cadastrados: ${produtos.length}</p>
+    <p>Total em estoque: ${produtos.reduce((s,p)=>s+p.quantidade,0)}</p>
+    <hr>
+    <div class="relatorio-cards">
+      ${produtos.map(p=>`
+        <div class="rel-card">
+          <h4>${p.nome}</h4>
+          <p><strong>Quantidade:</strong> ${p.quantidade}</p>
+          <p><strong>Validade:</strong> ${p.validade}</p>
+          <p><strong>Data de entrada:</strong> ${p.data}</p>
+          <p><strong>Descrição:</strong> ${p.descricao}</p>
+        </div>
+      `).join("")}
+    </div>
+  `;
 }
 
 function diasRestantes(data){
