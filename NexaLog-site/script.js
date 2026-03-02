@@ -421,27 +421,11 @@ function gerarDescricaoAutomatica(nome){
 
   nome = nome.toLowerCase();
 
-  // Alimentos
-  if(nome.includes("arroz") || nome.includes("feijão") || nome.includes("macarrão")){
+  // Produtos alimentícios
+  if(nome.includes("farinha") || nome.includes("açucar") || nome.includes("sal") || nome.includes("fermento") || nome.includes("leite") || nome.includes("ovos")){
     return "Produto alimentício utilizado no preparo de refeições. Conservar em local seco e arejado.";
   }
-
-  // Bebidas
-  if(nome.includes("suco") || nome.includes("refrigerante") || nome.includes("água")){
-    return "Bebida destinada ao consumo humano. Manter refrigerado após aberto.";
-  }
-
-  // Produtos de limpeza
-  if(nome.includes("detergente") || nome.includes("sabão") || nome.includes("desinfetante")){
-    return "Produto de limpeza doméstica. Manter fora do alcance de crianças.";
-  }
-
-  // Medicamentos
-  if(nome.includes("dipirona") || nome.includes("paracetamol")){
-    return "Medicamento destinado ao tratamento sintomático. Utilizar conforme orientação médica.";
-  }
-
-  // Padrão inteligente
+  // Mensagem padronizada
   return `Produto ${nome} destinado ao uso comercial. Verifique validade e condições de armazenamento.`;
 }
 // Init
