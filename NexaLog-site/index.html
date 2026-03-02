@@ -105,7 +105,16 @@
       <input type="text" placeholder="Pesquisar...">
       <div class="user" id="userCargo" onclick="irParaConta()" style="cursor:pointer;">Admin</div>
     </header>
+    <section id="conta" class="page">
+      <h1>Minha Conta</h1>
 
+      <div class="card large">
+        <p><strong>Email:</strong><span id="infoEmail"></span></p>
+        <p><strong>Cargo:</strong><span id="infoCargo"></span></p>
+
+        <button class="btn-danger" onclick="logout()">Logout</button>
+      </div>
+    </section>
     <section id="dashboard" class="page active">
       <h1>Dashboard</h1>
 
