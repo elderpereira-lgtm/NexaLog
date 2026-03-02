@@ -171,7 +171,7 @@ function adicionarProduto(){
   const validade = document.getElementById("validadeProduto").value;
   let descricao = document.getElementById("descricaoProduto").value.trim();
 
-if(!descricao){
+  if(!descricao){
   descricao = gerarDescricaoAutomatica(nome);
 }
 
