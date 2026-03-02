@@ -1,4 +1,4 @@
-/* RESET */
+/* Reset */
 *{
   margin:0;
   padding:0;
@@ -12,7 +12,7 @@ body{
   color:#1f1f1f;
 }
 
-/* ================= (LOGIN / CADASTRO / VERIFICAÇÃO) ================= */
+/* === (Login / Cadastro / Verificação) === */
 
 .auth-page{
   display:none;
@@ -27,13 +27,13 @@ body{
 
 .auth-container{
   display:flex;
-  flex-direction:column;   /* 👈 AGORA FICA UM EMBAIXO DO OUTRO */
+  flex-direction:column;   
   align-items:center;
   justify-content:center;
   gap:30px;
 }
 
-/* IMAGEM CENTRALIZADA */
+/* Logo da NexaLog e 3irmãos */
 .auth-image{
   display:flex;
   justify-content:center;
@@ -80,7 +80,7 @@ body{
   box-shadow:0 0 0 2px rgba(31,47,122,0.2);
 }
 
-/* BOTÕES */
+/* botões */
 
 .btn{
   padding:12px;
@@ -105,7 +105,7 @@ body{
   opacity:0.9;
 }
 
-/* VERIFICAÇÃO */
+/* Verificação */
 
 .codigo{
   display:flex;
@@ -122,7 +122,7 @@ body{
   font-weight:bold;
 }
 
-/* ================= LOADING ================= */
+/* === Loading === */
 
 .loading-page{
   display:none;
@@ -151,18 +151,18 @@ body{
   font-size:16px;
 }
 
-/* ================= LAYOUT PRINCIPAL ================= */
+/* === Layout principal === */
 
 .layout{
   display:flex;
   min-height:100vh;
 }
 
-/* SIDEBAR */
+/* Barra do lado */
 
 .sidebar{
   width:240px;
-  background:#ffffff;
+  background:#ffdb7c;
   box-shadow:4px 0 20px rgba(0,0,0,0.08);
   padding:30px 20px;
   display:flex;
@@ -171,7 +171,7 @@ body{
 }
 
 .logo h2{
-  color:#1f2f7a;
+  color:#000000;
 }
 
 .logo span{
@@ -196,18 +196,18 @@ body{
 }
 
 .nav-item.active{
-  background:#1f2f7a;
+  background:#000000;
   color:white;
 }
 
-/* MAIN */
+/* Princiapl */
 
 .main{
   flex:1;
   padding:30px 40px;
 }
 
-/* TOPBAR */
+/* Barra do topo */
 
 .topbar{
   display:flex;
@@ -231,7 +231,7 @@ body{
   font-size:14px;
 }
 
-/* PÁGINAS */
+/* Páginas */
 
 .page{
   display:none;
@@ -241,13 +241,13 @@ body{
   display:block;
 }
 
-/* TÍTULOS */
+/* Títulos */
 
 h1{
   margin-bottom:20px;
 }
 
-/* CARDS DASHBOARD */
+/* Cards do dashboard */
 
 .cards{
   display:grid;
@@ -276,7 +276,7 @@ h1{
 .number.red{ color:#c62828; }
 .number.orange{ color:#ef6c00; }
 
-/* HISTÓRICO */
+/* Hístorico */
 
 .list{
   margin-top:10px;
@@ -289,7 +289,7 @@ h1{
   font-size:14px;
 }
 
-/* ESTOQUE */
+/* Estoque */
 
 .product-card{
   background:white;
@@ -319,7 +319,7 @@ h1{
   color:#c62828;
 }
 
-/* FORM */
+/* Form */
 
 .form-card{
   max-width:400px;
@@ -350,7 +350,7 @@ h1{
   opacity:0.9;
 }
 
-/* RESPONSIVO */
+/* Responsivo */
 
 @media(max-width:900px){
 
