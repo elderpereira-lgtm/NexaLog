@@ -380,7 +380,7 @@ function gerarRespostaIA(pergunta){
     return "Ainda não há produtos cadastrados.";
   }
 
-  if(pergunta.includes("quantos") || pergunta.includes("total")){
+  if(pergunta.includes("quantidade") || pergunta.includes("total")){
     return `Existem atualmente ${produtos.length} produtos cadastrados.`;
   }
 
