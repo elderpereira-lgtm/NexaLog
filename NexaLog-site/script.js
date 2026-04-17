@@ -422,7 +422,7 @@ function gerarDescricaoAutomatica(nome){
   nome = nome.toLowerCase();
 
   // Produtos alimentícios
-  if(nome.includes("farinha") || nome.includes("açucar") || nome.includes("sal") || nome.includes("fermento") || nome.includes("leite") || nome.includes("ovos")){
+  if(nome.includes("farinha") || nome.includes("açúcar") || nome.includes("sal") || nome.includes("fermento") || nome.includes("leite") || nome.includes("ovos")){
     return "Produto alimentício utilizado no preparo de refeições. Conservar em local seco e arejado.";
   }
   // Mensagem padronizada
