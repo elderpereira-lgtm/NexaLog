@@ -297,17 +297,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "NexaLog_Backend.Models.Usuario",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "NexaLog_Backend.Controllers.UsuarioController",
@@ -323,6 +313,26 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NexaLog_Backend.Controllers.UsuarioController",
+    "Method": "Logout",
+    "RelativePath": "api/Usuario/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NexaLog_Backend.Controllers.UsuarioController",
+    "Method": "VerificarSessao",
+    "RelativePath": "api/Usuario/sessao",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

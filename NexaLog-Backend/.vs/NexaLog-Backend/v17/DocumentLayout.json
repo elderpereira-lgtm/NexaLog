@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|e:\\nexalog\\nexalog\\nexalog-backend\\nexalog-backend\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|e:\\nexalog\\nexalog\\nexalog-backend\\nexalog-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|e:\\nexalog\\nexalog\\nexalog-backend\\nexalog-backend\\controllers\\movimentacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\controllers\\movimentacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|e:\\nexalog\\nexalog\\nexalog-backend\\nexalog-backend\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|e:\\nexalog\\nexalog\\nexalog-backend\\nexalog-backend\\data\\nexalogcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,20 +50,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "NexaLogContext.cs",
-              "DocumentMoniker": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Data\\NexaLogContext.cs",
-              "RelativeDocumentMoniker": "NexaLog-Backend\\Data\\NexaLogContext.cs",
-              "ToolTip": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Data\\NexaLogContext.cs",
-              "RelativeToolTip": "NexaLog-Backend\\Data\\NexaLogContext.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T16:47:03.363Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MovimentacaoController.cs",
               "DocumentMoniker": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\MovimentacaoController.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\MovimentacaoController.cs",
@@ -76,7 +63,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ProdutoController.cs",
               "DocumentMoniker": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\ProdutoController.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\ProdutoController.cs",
@@ -89,28 +76,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Program.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Program.cs",
               "ToolTip": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Program.cs",
               "RelativeToolTip": "NexaLog-Backend\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-10T17:13:05.222Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "UsuarioController.cs",
               "DocumentMoniker": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\UsuarioController.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\UsuarioController.cs",
               "ToolTip": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\UsuarioController.cs",
               "RelativeToolTip": "NexaLog-Backend\\Controllers\\UsuarioController.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAkwD0AAAAtAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-10T17:48:10.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NexaLogContext.cs",
+              "DocumentMoniker": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Data\\NexaLogContext.cs",
+              "RelativeDocumentMoniker": "NexaLog-Backend\\Data\\NexaLogContext.cs",
+              "ToolTip": "E:\\NexaLog\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Data\\NexaLogContext.cs",
+              "RelativeToolTip": "NexaLog-Backend\\Data\\NexaLogContext.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-02T16:47:03.363Z",
               "EditorCaption": ""
             },
             {
