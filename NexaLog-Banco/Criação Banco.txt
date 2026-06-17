@@ -1,0 +1,62 @@
+CREATE DATABASE NexaLog;
+GO
+USE NexaLog;
+GO
+
+CREATE TABLE Usuario (
+    id_usuario INTEGER IDENTITY PRIMARY KEY,
+    email VARCHAR(100),
+    nome VARCHAR(100),
+    senha VARCHAR(255),
+    tipo_usuario VARCHAR(20)
+);
+
+CREATE TABLE Produto (
+    id_produto INTEGER IDENTITY PRIMARY KEY,
+    nome VARCHAR(100),
+    data_cadastro DATE,
+    quantidade INTEGER,
+    descricao VARCHAR(255)
+);
+
+CREATE TABLE Movimentacao (
+    id_movimentacao INTEGER IDENTITY PRIMARY KEY,
+    tipo_movimentacao VARCHAR(20),
+    data_movimentacao DATE,
+    fk_Usuario_id_usuario INTEGER
+);
+
+CREATE TABLE Lote (
+    quantidade_lote INTEGER,
+    id_lote INTEGER  IDENTITY PRIMARY KEY,
+    cod_lote VARCHAR(50),
+    data_validade DATE,
+    data_fabricacao DATE,
+    fk_Produto_id_produto INTEGER
+);
+
+CREATE TABLE Item_Movimentacao (
+    fk_Produto_id_produto INTEGER,
+    fk_Movimentacao_id_movimentacao INTEGER,
+    quantidade DECIMAL(10,2)
+);
+ 
+ALTER TABLE Movimentacao ADD CONSTRAINT FK_Movimentacao_2
+    FOREIGN KEY (fk_Usuario_id_usuario)
+    REFERENCES Usuario (id_usuario)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE Lote ADD CONSTRAINT FK_Lote_2
+    FOREIGN KEY (fk_Produto_id_produto)
+    REFERENCES Produto (id_produto)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE Item_Movimentacao ADD CONSTRAINT FK_Item_Movimentacao_1
+    FOREIGN KEY (fk_Produto_id_produto)
+    REFERENCES Produto (id_produto)
+    ON DELETE NO ACTION;
+ 
+ALTER TABLE Item_Movimentacao ADD CONSTRAINT FK_Item_Movimentacao_2
+    FOREIGN KEY (fk_Movimentacao_id_movimentacao)
+    REFERENCES Movimentacao (id_movimentacao)
+    ON DELETE NO ACTION;
