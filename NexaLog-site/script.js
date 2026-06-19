@@ -1,48 +1,35 @@
 const API_URL = "https://localhost:7071/api";
-let produtos = 
-JSON.parse(localStorage.getItem("produtos")) || [];
+let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
 
-// Login
-function showCadastro() {trocarTela("cadastroPage");}
-function voltarLogin() {trocarTela("loginPage");}
-async function login(){
+// ============================================================
+//                         AUTENTICAÇÃO 
+// ============================================================
+
+function showCadastro() { trocarTela("cadastroPage"); }
+function voltarLogin() { trocarTela("loginPage"); }
+function voltarCadastro() { trocarTela("cadastroPage"); }
+
+async function login() {
   const email = document.getElementById("loginEmail").value.trim();
   const senha = document.getElementById("loginSenha").value;
 
-  if (!email || !email.includes("@")) {
-    alert("Digite um e-mail válido");
-    return;
-  }
-
-  if (!senha) {
-    alert("Digite sua senha");
-    return;
-  }
+  if (!email || !email.includes("@")) { alert("Digite um e-mail válido"); return; }
+  if (!senha) { alert("Digite sua senha"); return; }
 
   try {
     const resposta = await fetch(`${API_URL}/Usuario/login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({
-        email: email,
-        senha: senha
-      })
+      body: JSON.stringify({ email, senha })
     });
 
-    if (!resposta.ok) {
-      alert("Email ou senha inválidos");
-      return;
-    }
+    if (!resposta.ok) { alert("Email ou senha inválidos"); return; }
 
     const usuario = await resposta.json();
-
     localStorage.setItem("nomeUsuario", usuario.nome);
     localStorage.setItem("cargoUsuario", usuario.tipoUsuario);
     localStorage.setItem("loginEmail", email);
-
     entrarSistema();
 
   } catch (erro) {
@@ -51,153 +38,191 @@ async function login(){
   }
 }
 
+async function verificarSessao() {
+  try {
+    const resposta = await fetch(`${API_URL}/Usuario/sessao`, {
+      method: "GET",
+      credentials: "include"
+    });
 
-// Passa de um espaço numérico para outro na verificação
+    if (!resposta.ok) return;
 
-document.querySelectorAll("#verificacaoPage .codigo input")
-.forEach((input, index, arr) => {
+    const usuario = await resposta.json();
+    localStorage.setItem("nomeUsuario", usuario.nomeUsuario);
+    localStorage.setItem("cargoUsuario", usuario.tipoUsuario);
+    console.log("Sessão encontrada:", usuario);
+    entrarSistema();
 
-  input.addEventListener("input", () => {
-    if (input.value.length === 1 && index < arr.length - 1) {
-      arr[index + 1].focus();
+  } catch (erro) {
+    console.log("Nenhuma sessão ativa.");
+  }
+}
+
+function verificacao() {
+  const email = document.getElementById("cadastroEmail").value.trim();
+  const senha = document.getElementById("cadastroSenha").value;
+  const confirmar = document.getElementById("cadastroConfirmarSenha").value;
+
+  if (!email || !email.includes("@")) { alert("Digite um e‑mail válido"); return; }
+  if (!senha || senha.length < 8) { alert("A senha deve ter no mínimo 8 caracteres"); return; }
+  if (senha !== confirmar) { alert("As senhas não coincidem"); return; }
+
+  // Vai direto para o cadastro, sem verificação por email
+  confirmarVerificacao();
+}
+
+async function confirmarVerificacao() {
+  const nome = document.getElementById("cadastroNome").value;
+  const email = document.getElementById("cadastroEmail").value;
+  const senha = document.getElementById("cadastroSenha").value;
+
+  try {
+    const resposta = await fetch(`${API_URL}/Usuario/cadastro`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ nome, email, senha, tipoUsuario: "Operador" })
+    });
+
+    if (!resposta.ok) { alert(await resposta.text()); return; }
+
+    alert("Cadastro realizado com sucesso!");
+
+    const respostaLogin = await fetch(`${API_URL}/Usuario/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, senha })
+    });
+
+    if (!respostaLogin.ok) {
+      alert("Usuário cadastrado, mas não foi possível fazer o login automático.");
+      trocarTela("loginPage");
+      return;
     }
-  });
 
-});
+    const usuario = await respostaLogin.json();
+    localStorage.setItem("nomeUsuario", usuario.nome);
+    localStorage.setItem("cargoUsuario", usuario.tipoUsuario);
+    localStorage.setItem("loginEmail", email);
+    entrarSistema();
 
-// Botão voltar verificação 
-
-function voltarCadastro(){
-  trocarTela("cadastroPage"); 
+  } catch (erro) {
+    console.error(erro);
+    alert("Erro ao conectar com o servidor.");
+  }
 }
 
-function verificacao(){
+// ============================================================
+//                         AUTENTICAÇÃO 
+// ============================================================
 
-  const email = document.getElementById("cadEmail").value.trim();
-  const senha = document.getElementById("cadSenha").value;
+function showCadastro() { trocarTela("cadastroPage"); }
+function voltarLogin() { trocarTela("loginPage"); }
+function voltarCadastro() { trocarTela("cadastroPage"); }
 
-  const confirmar = document.querySelector(
-    "#cadastroPage input[placeholder='Confirmar senha']"
-  ).value;
-
-  // Validação de email
-  if(!email || !email.includes("@")){
-    alert("Digite um e‑mail válido");
-    return;
+// ADICIONA ESSA FUNÇÃO QUE ESTÁ FALTANDO
+async function logout() {
+  try {
+    await fetch(`${API_URL}/Usuario/logout`, { method: "POST", credentials: "include" });
+  } catch (erro) {
+    console.error("Erro ao realizar logout:", erro);
   }
 
-  // Validação de senha
-  if(!senha || senha.length < 8){
-    alert("A senha deve ter no mínimo 8 caracteres");
-    return;
-  }
-
-  // Confirmação de senha
-  if(senha !== confirmar){
-    alert("As senhas não coincidem");
-    return;
-  }
-
-  trocarTela("verificacaoPage");
-}
-function confirmarVerificacao() {
-
-  const inputs = document.querySelectorAll("#verificacaoPage .codigo input");
-
-  let codigo = "";
-
-  inputs.forEach(input => {
-    codigo += input.value.trim();
-  });
-
-  // Verifica se digitou os 6 dígitos
-  if (codigo.length !== 6 || !/^\d{6}$/.test(codigo)) {
-    alert("Digite o código completo de 6 dígitos");
-    return;
-  }
-
-  // Código válido (simulação)
-  entrarSistema();
+  localStorage.clear();
+  document.getElementById("appPage").style.display = "none";
+  trocarTela("loginPage");
 }
 
-function entrarSistema(){
-  trocarTela("loadingPage");
+// ============================================================
+//                         USUÁRIO 
+// ============================================================
 
-  setTimeout(()=>{
-
-    document.getElementById("loadingPage").style.display="none";
-    document.getElementById("appPage").style.display="flex";
-
-    atualizarUsuario();
-
-    atualizarTudo();
-
-  },1500);
-}
-
-function atualizarUsuario(){
-
+function atualizarUsuario() {
   const cargo = localStorage.getItem("cargoUsuario");
   const userDiv = document.getElementById("userCargo");
-
-  if(!userDiv) return;
-
-  if(cargo){
-    userDiv.textContent = cargo;
-  } else {
-    userDiv.textContent = "Admin";
-  }
+  if (!userDiv) return;
+  userDiv.textContent = cargo || "Admin";
 }
-function trocarTela(id){
+
+function trocarTela(id) {
   document.querySelectorAll("section.auth-page, section.loading-page")
-   .forEach(s=>s.style.display="none");
-  
+    .forEach(s => s.style.display = "none");
   const tela = document.getElementById(id);
-  if(tela) tela.style.display="flex";
+  if (tela) tela.style.display = "flex";
 }
 
-// Menu
-function navigate(id, btn){
+function entrarSistema() {
+  document.querySelectorAll("section.auth-page, section.loading-page")
+    .forEach(s => s.style.display = "none");
 
-  document.querySelectorAll(".page").forEach(p=>{
-    p.classList.remove("active");
-  });
+  const app = document.getElementById("appPage");
+  if (app) app.style.display = "flex";
 
+  atualizarUsuario();
+  atualizarTudo();
+}
+
+function irParaConta() {
+  const email = localStorage.getItem("loginEmail");
+  const cargo = localStorage.getItem("cargoUsuario");
+  document.getElementById("infoEmail").textContent = email;
+  document.getElementById("infoCargo").textContent = cargo;
+  navigate("conta");
+}
+
+// ============================================================
+//                         NAVEGAÇÃO 
+// ============================================================
+
+function navigate(id, btn) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   const pagina = document.getElementById(id);
-  if(pagina) pagina.classList.add("active");
+  if (pagina) pagina.classList.add("active");
 
-  document.querySelectorAll(".nav-item").forEach(b=>{
-    b.classList.remove("active-nav");
-  });
+  document.querySelectorAll(".nav-item").forEach(b => b.classList.remove("active-nav"));
+  if (btn) btn.classList.add("active-nav");
 
-  if(btn) btn.classList.add("active-nav");
-
-  if(window.innerWidth <= 900){
+  if (window.innerWidth <= 900) {
     document.getElementById("sidebar").classList.remove("active");
   }
 }
 
-function toggleMenu(){
+function toggleMenu() {
   document.getElementById("sidebar").classList.toggle("active");
 }
 
-// Produtos
+// ============================================================
+//                         VERIFICAÇÃO 
+// ============================================================
 
-function adicionarProduto(){
+document.querySelectorAll("#verificacaoPage .codigo input")
+  .forEach((input, index, arr) => {
+    input.addEventListener("input", () => {
+      if (input.value.length === 1 && index < arr.length - 1) {
+        arr[index + 1].focus();
+      }
+    });
 
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && input.value === "" && index > 0) {
+        arr[index - 1].focus();
+      }
+    });
+  });
+
+// ============================================================
+//                         PRODUTOS 
+// ============================================================
+
+function adicionarProduto() {
   const nome = document.getElementById("nomeProduto").value.trim();
   const quantidade = document.getElementById("quantidadeProduto").value;
   const validade = document.getElementById("validadeProduto").value;
   let descricao = document.getElementById("descricaoProduto").value.trim();
 
-  if(!descricao){
-  descricao = gerarDescricaoAutomatica(nome);
-}
-
-  if(!nome || !quantidade || !validade){
-    showToast("Preencha todos os campos obrigatórios");
-    return;
-  }
+  if (!descricao) descricao = gerarDescricaoAutomatica(nome);
+  if (!nome || !quantidade || !validade) { showToast("Preencha todos os campos obrigatórios"); return; }
 
   const produto = {
     id: Date.now(),
@@ -212,58 +237,51 @@ function adicionarProduto(){
   salvar();
   atualizarTudo();
 
-  document.getElementById("nomeProduto").value="";
-  document.getElementById("quantidadeProduto").value="";
-  document.getElementById("validadeProduto").value="";
-  document.getElementById("descricaoProduto").value="";
+  document.getElementById("nomeProduto").value = "";
+  document.getElementById("quantidadeProduto").value = "";
+  document.getElementById("validadeProduto").value = "";
+  document.getElementById("descricaoProduto").value = "";
 
   showToast("Produto cadastrado com sucesso.");
 }
 
-
-function removerProduto(id){
-  produtos = produtos.filter(p=>p.id!==id);
+function removerProduto(id) {
+  produtos = produtos.filter(p => p.id !== id);
   salvar();
   atualizarTudo();
   showToast("Produto removido");
 }
 
-function salvar(){
-  localStorage.setItem("produtos",JSON.stringify(produtos));
+function salvar() {
+  localStorage.setItem("produtos", JSON.stringify(produtos));
 }
 
-function aumentar(id, estoqueMax){
+// ============================================================
+//                         ESTOQUE 
+// ============================================================
+
+function aumentar(id, estoqueMax) {
   const span = document.getElementById(`qtd-${id}`);
   let valor = Number(span.textContent);
-
-  if(valor < estoqueMax){
-    span.textContent = valor + 1;
-  }
+  if (valor < estoqueMax) span.textContent = valor + 1;
 }
 
-function diminuir(id){
+function diminuir(id) {
   const span = document.getElementById(`qtd-${id}`);
   let valor = Number(span.textContent);
-
-  if(valor > 0){
-    span.textContent = valor - 1;
-  }
+  if (valor > 0) span.textContent = valor - 1;
 }
 
-function removerQuantidade(id){
-
+function removerQuantidade(id) {
   const produto = produtos.find(p => p.id === id);
   const span = document.getElementById(`qtd-${id}`);
   const quantidadeRemover = Number(span.textContent);
 
-  if(quantidadeRemover <= 0){
-    showToast("Selecione uma quantidade para remover");
-    return;
-  }
+  if (quantidadeRemover <= 0) { showToast("Selecione uma quantidade para remover"); return; }
 
   produto.quantidade -= quantidadeRemover;
 
-  if(produto.quantidade <= 0){
+  if (produto.quantidade <= 0) {
     produtos = produtos.filter(p => p.id !== id);
     showToast("Produto removido completamente");
   } else {
@@ -274,79 +292,59 @@ function removerQuantidade(id){
   atualizarTudo();
 }
 
-// Atualizações
+// ============================================================
+//                     ATUALIZAÇÃO DE TELAS 
+// ============================================================
 
-function atualizarTudo(){
+function atualizarTudo() {
   atualizarEstoque();
   atualizarDashboard();
   atualizarRelatorios();
 }
 
-function atualizarEstoque(){
+function atualizarEstoque() {
   const lista = document.getElementById("estoqueLista");
-  if(!lista) return;
+  if (!lista) return;
 
-  lista.innerHTML = produtos.map(p=>{
+  lista.innerHTML = produtos.map(p => {
     const vencendo = diasRestantes(p.validade) <= 7;
-
     return `
-      <div class="product-card ${vencendo?'warning':''}">
+      <div class="product-card ${vencendo ? 'warning' : ''}">
         <h3>${p.nome}</h3>
         <p>Qtd em estoque: ${p.quantidade}</p>
         <p>Validade: ${p.validade}</p>
-
         <div class="controle-quantidade">
           <button onclick="diminuir(${p.id})">-</button>
           <span id="qtd-${p.id}">0</span>
           <button onclick="aumentar(${p.id}, ${p.quantidade})">+</button>
         </div>
-
-        <button onclick="removerQuantidade(${p.id})" class="btn-danger">
-          Remover
-        </button>
+        <button onclick="removerQuantidade(${p.id})" class="btn-danger">Remover</button>
       </div>
     `;
   }).join("");
 }
 
-function atualizarDashboard(){
-
+function atualizarDashboard() {
   const total = document.getElementById("totalProdutos");
   const venc = document.getElementById("produtosVencendo");
   const hist = document.getElementById("historicoLista");
 
-  if(total) total.textContent = produtos.length;
-
-  if(venc){
-    venc.textContent = produtos.filter(p=>diasRestantes(p.validade)<=7).length;
-  }
-
-  if(hist){
-    hist.innerHTML = produtos
-      .map(p=>`<li>${p.data} - ${p.nome} (${p.quantidade})</li>`)
-      .join("");
-  }
+  if (total) total.textContent = produtos.length;
+  if (venc) venc.textContent = produtos.filter(p => diasRestantes(p.validade) <= 7).length;
+  if (hist) hist.innerHTML = produtos.map(p => `<li>${p.data} - ${p.nome} (${p.quantidade})</li>`).join("");
 }
 
-function atualizarRelatorios(){
-
+function atualizarRelatorios() {
   const cad = document.getElementById("relTotalCad");
   const est = document.getElementById("relTotalEstoque");
   const container = document.getElementById("relatorioCards");
 
-  if(cad) cad.textContent = produtos.length;
+  if (cad) cad.textContent = produtos.length;
+  if (est) est.textContent = produtos.reduce((s, p) => s + p.quantidade, 0);
+  if (!container) return;
 
-  if(est){
-    est.textContent = produtos.reduce((s,p)=>s+p.quantidade,0);
-  }
-
-  if(!container) return;
-
-  container.innerHTML = produtos.map(p=>{
-
-    const dias = diasRestantes(p.validade);
-    const vencido = dias < 0;
-
+  container.innerHTML = produtos.map(p => {
+    const vencido = diasRestantes(p.validade) < 0;
     return `
       <div class="rel-card ${vencido ? 'vencido' : ''}">
         <h3>${p.nome}</h3>
@@ -356,116 +354,93 @@ function atualizarRelatorios(){
         <p><strong>Descrição:</strong> ${p.descricao || "Sem descrição"}</p>
       </div>
     `;
-
   }).join("");
 }
 
-function diasRestantes(data){
+function diasRestantes(data) {
   const hoje = new Date();
   const v = new Date(data);
-  return Math.ceil((v-hoje)/(1000*60*60*24));
+  return Math.ceil((v - hoje) / (1000 * 60 * 60 * 24));
 }
 
-// Toast
+// ============================================================
+//                       ASSISTENTE DE IA 
+// ============================================================
 
-function showToast(msg){
-  const toast = document.getElementById("toast");
-  toast.textContent = msg;
-  toast.classList.add("show");
-  setTimeout(()=>toast.classList.remove("show"),3000);
-}
-// Assistente Inteligente SIMULADA
-
-function responderIA(){
-
+function responderIA() {
   const input = document.getElementById("perguntaIA");
   const perguntaOriginal = input.value.trim();
   const pergunta = perguntaOriginal.toLowerCase();
 
-  if(!pergunta) return;
+  if (!pergunta) return;
 
   adicionarMensagem(perguntaOriginal, "user-msg");
-
-  let resposta = gerarRespostaIA(pergunta);
-
-  adicionarMensagem(resposta, "ia-msg");
-
+  adicionarMensagem(gerarRespostaIA(pergunta), "ia-msg");
   input.value = "";
 }
 
-function gerarRespostaIA(pergunta){
+function gerarRespostaIA(pergunta) {
+  if (produtos.length === 0) return "Ainda não há produtos cadastrados.";
 
-  if(produtos.length === 0){
-    return "Ainda não há produtos cadastrados.";
-  }
-
-  if(pergunta.includes("quantidade") || pergunta.includes("total") || pergunta.includes("quantos")){
+  if (pergunta.includes("quantidade") || pergunta.includes("total") || pergunta.includes("quantos")) {
     return `Existem atualmente ${produtos.length} produtos cadastrados.`;
   }
 
-  if(pergunta.includes("vencido") || pergunta.includes("vencendo") || pergunta.includes("vencidos")){
+  if (pergunta.includes("vencido") || pergunta.includes("vencendo") || pergunta.includes("vencidos")) {
     const vencidos = produtos.filter(p => diasRestantes(p.validade) < 0);
-    if(vencidos.length === 0){
-      return "Nenhum produto está vencido.";
-    }
-    return "Produtos vencidos: " + vencidos.map(p => p.nome).join(", ");
+    return vencidos.length === 0
+      ? "Nenhum produto está vencido."
+      : "Produtos vencidos: " + vencidos.map(p => p.nome).join(", ");
   }
 
-  if(pergunta.includes("baixo") || pergunta.includes("acabando") || pergunta.includes("abaixo")){
+  if (pergunta.includes("baixo") || pergunta.includes("acabando") || pergunta.includes("abaixo")) {
     const baixos = produtos.filter(p => p.quantidade <= 5);
-    if(baixos.length === 0){
-      return "Nenhum produto está com estoque baixo.";
-    }
-    return "Estoque baixo: " + baixos.map(p => p.nome + " (" + p.quantidade + ")").join(", ");
+    return baixos.length === 0
+      ? "Nenhum produto está com estoque baixo."
+      : "Estoque baixo: " + baixos.map(p => `${p.nome} (${p.quantidade})`).join(", ");
   }
 
   return "Posso informar sobre total de produtos, estoque baixo ou vencimentos.";
 }
 
-function adicionarMensagem(texto, classe){
-
+function adicionarMensagem(texto, classe) {
   const chat = document.getElementById("chatBox");
-
   const div = document.createElement("div");
   div.className = `msg ${classe}`;
   div.textContent = texto;
-
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
 
-//Assistente Inteligente gerando descrições dos produtos castrados, SIMULAÇÂO
+// ============================================================
+//                       DESCRIÇÃO AUTOMÁTICA 
+// ============================================================
 
-function gerarDescricaoAutomatica(nome){
-
+function gerarDescricaoAutomatica(nome) {
   nome = nome.toLowerCase();
-
-  // Produtos alimentícios
-  if(nome.includes("farinha") || nome.includes("açúcar") || nome.includes("sal") || nome.includes("fermento") || nome.includes("leite") || nome.includes("ovos")){
+  const alimenticios = ["farinha", "açúcar", "sal", "fermento", "leite", "ovos"];
+  if (alimenticios.some(item => nome.includes(item))) {
     return "Produto alimentício utilizado no preparo de refeições. Conservar em local seco e arejado.";
   }
-  // Mensagem padronizada
   return `${nome}, produto destinado ao uso comercial. Verifique validade e condições de armazenamento.`;
 }
-// Init
 
-window.onload = atualizarTudo;
+// ============================================================
+//                         NOTIFICAÇÕES 
+// ============================================================
 
-//Página da conta
-function irParaConta(){
-
-  const email = document.getElementById("loginEmail").value;
-  const cargo = localStorage.getItem("cargoUsuario");
-  document.getElementById("infoEmail").textContent = email;
-  document.getElementById("infoCargo").textContent = cargo;
-
-  navigate("conta");
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
 }
 
-function logout(){
-  localStorage.removeItem("cargoUsuario");
+// ============================================================
+//                         INICIALIZAÇÃO 
+// ============================================================
 
-  document.getElementById("appPage").style.display = "none";
-  document.getElementById("loginPage").style.display = "flex";
-
-}
+window.onload = () => {
+  atualizarTudo();
+  verificarSessao();
+};

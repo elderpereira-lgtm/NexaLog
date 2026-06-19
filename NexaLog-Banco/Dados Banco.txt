@@ -5,11 +5,10 @@ GO
 
 INSERT INTO Usuario (email, nome, senha, tipo_usuario)
 VALUES
-('admin@nexalog.com', 'Carlos Silva', '123456', 'Administrador'),
-('estoque@nexalog.com', 'Mariana Souza', '123456', 'Operador'),
-('logistica@nexalog.com', 'João Pereira', '123456', 'Operador'),
-('gerente@nexalog.com', 'Fernanda Costa', '123456', 'Gerente'),
-('analista@nexalog.com', 'Lucas Oliveira', '123456', 'Analista');
+('admin@nexalog.com', 'Carlos Silva', '12345678', 'Administrador'),
+('estoque@nexalog.com', 'Mariana Souza', '12345678', 'Operador'),
+('logistica@nexalog.com', 'João Pereira', '12345678', 'Operador'),
+('gestor@nexalog.com', 'Fernando Costa', '12345678', 'Gestor');
 
 
 
@@ -36,7 +35,7 @@ VALUES
 ('Saída', '2026-02-03', 3),
 ('Entrada', '2026-02-05', 2),
 ('Saída', '2026-02-06', 4),
-('Entrada', '2026-02-08', 5),
+('Entrada', '2026-02-08', 4),
 ('Saída', '2026-02-10', 3),
 ('Entrada', '2026-02-12', 2),
 ('Saída', '2026-02-15', 4);

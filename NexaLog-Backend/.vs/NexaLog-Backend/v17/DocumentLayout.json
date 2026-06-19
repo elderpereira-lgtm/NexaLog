@@ -78,8 +78,7 @@
               "RelativeToolTip": "NexaLog-Backend\\Models\\ItemMovimentacao.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T16:45:06.11Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-17T16:45:06.11Z"
             },
             {
               "$type": "Document",
@@ -113,7 +112,7 @@
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\UsuarioController.cs",
               "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\UsuarioController.cs",
               "RelativeToolTip": "NexaLog-Backend\\Controllers\\UsuarioController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAowCMAAAAeAAAA",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAuwFcAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-10T17:48:10.834Z",
               "EditorCaption": ""
@@ -140,8 +139,7 @@
               "RelativeToolTip": "NexaLog-Backend\\Controllers\\ItemMovimenta\u00E7\u00E3o.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAA1wBUAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T18:08:50.139Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-11T18:08:50.139Z"
             },
             {
               "$type": "Document",
@@ -153,8 +151,7 @@
               "RelativeToolTip": "NexaLog-Backend\\Controllers\\LoteController.cs",
               "ViewState": "AQIAADQAAAAAAAAAAAAcwEIAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T17:12:46.378Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-10T17:12:46.378Z"
             },
             {
               "$type": "Document",
@@ -166,8 +163,7 @@
               "RelativeToolTip": "NexaLog-Backend\\Controllers\\MovimentacaoController.cs",
               "ViewState": "AQIAAEAAAAAAAAAAAAAcwBwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-09T17:38:25.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-09T17:38:25.348Z"
             },
             {
               "$type": "Document",
@@ -191,8 +187,7 @@
               "RelativeToolTip": "NexaLog-Backend\\Data\\NexaLogContext.cs",
               "ViewState": "AQIAAAcAAAAAAAAAAAA1wBAAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T16:47:03.363Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T16:47:03.363Z"
             },
             {
               "$type": "Document",
@@ -216,8 +211,7 @@
               "RelativeToolTip": "NexaLog-Backend\\Models\\Lote.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T17:07:55.257Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-02T17:07:55.257Z"
             },
             {
               "$type": "Document",
@@ -229,8 +223,7 @@
               "RelativeToolTip": "NexaLog-Backend\\Controllers\\ProdutoController.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-01T18:29:18.452Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-01T18:29:18.452Z"
             },
             {
               "$type": "Document",
@@ -242,8 +235,7 @@
               "RelativeToolTip": "NexaLog-Backend\\Properties\\launchSettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-06-17T16:50:27.412Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-17T16:50:27.412Z"
             }
           ]
         }
