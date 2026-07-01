@@ -113,15 +113,10 @@ async function confirmarVerificacao() {
   }
 }
 
-// ============================================================
-//                         AUTENTICAÇÃO 
-// ============================================================
-
 function showCadastro() { trocarTela("cadastroPage"); }
 function voltarLogin() { trocarTela("loginPage"); }
 function voltarCadastro() { trocarTela("cadastroPage"); }
 
-// ADICIONA ESSA FUNÇÃO QUE ESTÁ FALTANDO
 async function logout() {
   try {
     await fetch(`${API_URL}/Usuario/logout`, { method: "POST", credentials: "include" });
@@ -132,6 +127,26 @@ async function logout() {
   localStorage.clear();
   document.getElementById("appPage").style.display = "none";
   trocarTela("loginPage");
+}
+
+// ============================================================
+//                         PERMISSÕES
+// ============================================================
+
+// Ajuste os cargos conforme as regras reais do seu backend
+const PERMISSOES_PAGINA = {
+  dashboard:   ["Administrador", "Gerente", "Operador"],
+  estoque:     ["Administrador", "Gerente", "Operador"],
+  relatorios:  ["Administrador", "Gerente"],
+  cadastro:    ["Administrador", "Gerente"],
+  assistente:  ["Administrador", "Gerente", "Operador"],
+};
+
+function cargoTemAcesso(paginaId) {
+  const cargo = localStorage.getItem("cargoUsuario");
+  const permitidos = PERMISSOES_PAGINA[paginaId];
+  if (!permitidos) return true; // página sem restrição cadastrada
+  return permitidos.includes(cargo);
 }
 
 // ============================================================

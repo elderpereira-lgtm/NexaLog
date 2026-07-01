@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NexaLog_Backend.Data;
+using NexaLog_Backend.Filters;
 using NexaLog_Backend.Models;
 
 namespace NexaLog_Backend.Controllers
@@ -10,26 +11,25 @@ namespace NexaLog_Backend.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly NexaLogContext _context;
-
         public UsuarioController(NexaLogContext context)
         {
             _context = context;
         }
 
         [HttpGet]
+        [CargoAuthorize("Administrador")]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {
             return await _context.Usuarios.ToListAsync();
         }
 
         [HttpGet("{id}")]
+        [CargoAuthorize("Administrador")]
         public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
-
             if (usuario == null)
                 return NotFound();
-
             return usuario;
         }
 
@@ -38,13 +38,10 @@ namespace NexaLog_Backend.Controllers
         {
             var emailExiste = await _context.Usuarios
                 .AnyAsync(u => u.Email == usuario.Email);
-
             if (emailExiste)
                 return BadRequest("Este e-mail já está cadastrado.");
-
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
-
             return Ok("Usuário cadastrado com sucesso.");
         }
 
@@ -55,14 +52,11 @@ namespace NexaLog_Backend.Controllers
                 .FirstOrDefaultAsync(u =>
                     u.Email == login.Email &&
                     u.Senha == login.Senha);
-
             if (usuario == null)
                 return Unauthorized("E-mail ou senha inválidos.");
-
             HttpContext.Session.SetInt32("IdUsuario", usuario.IdUsuario);
             HttpContext.Session.SetString("NomeUsuario", usuario.Nome);
             HttpContext.Session.SetString("TipoUsuario", usuario.TipoUsuario);
-
             return Ok(new
             {
                 mensagem = "Login realizado com sucesso.",
@@ -78,10 +72,8 @@ namespace NexaLog_Backend.Controllers
             var idUsuario = HttpContext.Session.GetInt32("IdUsuario");
             var nomeUsuario = HttpContext.Session.GetString("NomeUsuario");
             var tipoUsuario = HttpContext.Session.GetString("TipoUsuario");
-
             if (idUsuario == null)
                 return Unauthorized("Nenhum usuário logado.");
-
             return Ok(new
             {
                 idUsuario,

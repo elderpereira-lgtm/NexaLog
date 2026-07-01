@@ -10,6 +10,31 @@
 
 <body>
 
+
+
+
+<!-- PRA AMANHÃ
+
+function aplicarPermissoes() {
+  document.querySelectorAll(".nav-item[data-page]").forEach(btn => {
+    const pagina = btn.dataset.page;
+    if (cargoTemAcesso(pagina)) {
+      btn.style.display = "";
+    } else {
+      btn.style.display = "none";
+    }
+  });
+
+  // Se a página ativa no momento não é mais permitida, manda pro dashboard
+  const paginaAtiva = document.querySelector(".page.active");
+  if (paginaAtiva && !cargoTemAcesso(paginaAtiva.id)) {
+    const btnDashboard = document.querySelector('.nav-item[data-page="dashboard"]');
+    navigate("dashboard", btnDashboard);
+  }
+}
+
+-->
+
   <!-- ==== Login ==== -->
   <!-- teste -->
   <section id="loginPage" class="auth-page active">
@@ -85,11 +110,11 @@
       </div>
 
       <nav>
-        <button onclick="navigate('dashboard',this)" class="nav-item active-nav">Dashboard</button>
-        <button onclick="navigate('estoque',this)" class="nav-item">Estoque</button>
-        <button onclick="navigate('relatorios',this)" class="nav-item">Relatórios</button>
-        <button onclick="navigate('cadastro',this)" class="nav-item">Cadastro</button>
-        <button onclick="navigate('assistente',this)" class="nav-item">Assistente IA</button>
+        <button data-page="dashboard" onclick="navigate('dashboard',this)" class="nav-item active-nav">Dashboard</button>
+        <button data-page="estoque" onclick="navigate('estoque',this)" class="nav-item">Estoque</button>
+        <button data-page="relatorios" onclick="navigate('relatorios',this)" class="nav-item">Relatórios</button>
+        <button data-page="cadastro" onclick="navigate('cadastro',this)" class="nav-item">Cadastro</button>
+        <button data-page="assistente" onclick="navigate('assistente',this)" class="nav-item">Assistente IA</button>
       </nav>
     </aside>
 
