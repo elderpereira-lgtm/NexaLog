@@ -17,14 +17,12 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpGet]
-        [CargoAuthorize("Administrador")]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {
             return await _context.Usuarios.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        [CargoAuthorize("Administrador")]
         public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
             var usuario = await _context.Usuarios.FindAsync(id);
@@ -34,6 +32,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPost("cadastro")]
+        [AllowAnonimo]
         public async Task<ActionResult> Cadastro(Usuario usuario)
         {
             var emailExiste = await _context.Usuarios
@@ -46,6 +45,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonimo]
         public async Task<ActionResult> Login(LoginRequest login)
         {
             var usuario = await _context.Usuarios
@@ -67,6 +67,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpGet("sessao")]
+        [AllowAnonimo]
         public ActionResult VerificarSessao()
         {
             var idUsuario = HttpContext.Session.GetInt32("IdUsuario");
@@ -90,9 +91,4 @@ namespace NexaLog_Backend.Controllers
         }
     }
 
-    public class LoginRequest
-    {
-        public string Email { get; set; } = string.Empty;
-        public string Senha { get; set; } = string.Empty;
-    }
 }

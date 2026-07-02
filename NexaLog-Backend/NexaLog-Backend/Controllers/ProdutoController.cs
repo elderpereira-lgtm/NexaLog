@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NexaLog_Backend.Data;
+using NexaLog_Backend.Filters;
 using NexaLog_Backend.Models;
 
 namespace NexaLog_Backend.Controllers
@@ -10,46 +11,30 @@ namespace NexaLog_Backend.Controllers
     public class ProdutoController : ControllerBase
     {
         private readonly NexaLogContext _context;
-
         public ProdutoController(NexaLogContext context)
         {
             _context = context;
         }
 
-        private bool UsuarioLogado()
-        {
-            return HttpContext.Session.GetInt32("IdUsuario") != null;
-        }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
-            if (!UsuarioLogado())
-                return Unauthorized("Usuário não está logado.");
-
             return await _context.Produtos.ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Produto>> GetProduto(int id)
         {
-            if (!UsuarioLogado())
-                return Unauthorized("Usuário não está logado.");
-
             var produto = await _context.Produtos.FindAsync(id);
-
             if (produto == null)
                 return NotFound();
-
             return produto;
         }
 
         [HttpPost]
+        [CargoAuthorize("Administrador", "Gestor")]
         public async Task<ActionResult<Produto>> PostProduto(Produto produto)
         {
-            if (!UsuarioLogado())
-                return Unauthorized("Usuário não está logado.");
-
             _context.Produtos.Add(produto);
             await _context.SaveChangesAsync();
 
@@ -57,33 +42,48 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPut("{id}")]
+        [CargoAuthorize("Administrador", "Gestor")]
         public async Task<IActionResult> PutProduto(int id, Produto produto)
         {
-            if (!UsuarioLogado())
-                return Unauthorized("Usuário não está logado.");
-
             if (id != produto.IdProduto)
                 return BadRequest();
-
             _context.Entry(produto).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Produtos.Any(e => e.IdProduto == id))
+                    return NotFound();
+
+                throw;
+            }
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
+        [CargoAuthorize("Administrador")]
         public async Task<IActionResult> DeleteProduto(int id)
         {
-            if (!UsuarioLogado())
-                return Unauthorized("Usuário não está logado.");
-
             var produto = await _context.Produtos.FindAsync(id);
-
             if (produto == null)
                 return NotFound();
-
             _context.Produtos.Remove(produto);
-            await _context.SaveChangesAsync();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Produtos.Any(e => e.IdProduto == id))
+                    return NotFound();
+
+                throw;
+            }
 
             return NoContent();
         }

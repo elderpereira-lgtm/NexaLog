@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NexaLog_Backend.Data;
+using NexaLog_Backend.Filters;
+using static NexaLog_Backend.Filters.CargoAuthorizeAttribute;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,20 +22,21 @@ builder.Services.AddSession(options =>
 });
 
 // Add services to the container.
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExigirLoginAttribute>();
+});
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<NexaLogContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirTudo", policy =>
     {
         policy.WithOrigins("http://127.0.0.1:5500", "http://localhost:5500")
-              .AllowAnyHeader()  // Permite qualquer cabeçalho
+              .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
     });
@@ -48,13 +51,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("PermitirTudo");
-
 app.UseSession();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

@@ -1,5 +1,5 @@
 const API_URL = "https://localhost:7071/api";
-let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+let produtos = [];
 
 // ============================================================
 //                         AUTENTICAÇÃO 
@@ -133,13 +133,12 @@ async function logout() {
 //                         PERMISSÕES
 // ============================================================
 
-// Ajuste os cargos conforme as regras reais do seu backend
 const PERMISSOES_PAGINA = {
-  dashboard:   ["Administrador", "Gerente", "Operador"],
-  estoque:     ["Administrador", "Gerente", "Operador"],
-  relatorios:  ["Administrador", "Gerente"],
-  cadastro:    ["Administrador", "Gerente"],
-  assistente:  ["Administrador", "Gerente", "Operador"],
+  dashboard:   ["Administrador", "Gestor", "Operador"],
+  estoque:     ["Administrador", "Gestor", "Operador"],
+  relatorios:  ["Administrador", "Gestor"],
+  cadastro:    ["Administrador", "Gestor"],
+  assistente:  ["Administrador", "Gestor", "Operador"],
 };
 
 function cargoTemAcesso(paginaId) {
@@ -147,6 +146,24 @@ function cargoTemAcesso(paginaId) {
   const permitidos = PERMISSOES_PAGINA[paginaId];
   if (!permitidos) return true; // página sem restrição cadastrada
   return permitidos.includes(cargo);
+}
+
+function aplicarPermissoes() {
+  document.querySelectorAll(".nav-item[data-page]").forEach(btn => {
+    const pagina = btn.dataset.page;
+    if (cargoTemAcesso(pagina)) {
+      btn.style.display = "";
+    } else {
+      btn.style.display = "none";
+    }
+  });
+
+  // Se a página ativa no momento não é mais permitida, manda pro dashboard
+  const paginaAtiva = document.querySelector(".page.active");
+  if (paginaAtiva && !cargoTemAcesso(paginaAtiva.id)) {
+    const btnDashboard = document.querySelector('.nav-item[data-page="dashboard"]');
+    navigate("dashboard", btnDashboard);
+  }
 }
 
 // ============================================================
@@ -175,6 +192,7 @@ function entrarSistema() {
   if (app) app.style.display = "flex";
 
   atualizarUsuario();
+  aplicarPermissoes();
   atualizarTudo();
 }
 
@@ -191,6 +209,11 @@ function irParaConta() {
 // ============================================================
 
 function navigate(id, btn) {
+  if (!cargoTemAcesso(id)) {
+    showToast("Você não tem permissão para acessar essa área");
+    return;
+  }
+
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   const pagina = document.getElementById(id);
   if (pagina) pagina.classList.add("active");
@@ -230,45 +253,71 @@ document.querySelectorAll("#verificacaoPage .codigo input")
 //                         PRODUTOS 
 // ============================================================
 
-function adicionarProduto() {
+async function carregarProdutos() {
+  const resposta = await fetch(`${API_URL}/Produto`, {
+    credentials: "include"
+  });
+
+  if (!resposta.ok) {
+    showToast("Erro ao carregar produtos.");
+    return;
+  }
+
+  produtos = await resposta.json();
+  atualizarTudo();
+}
+
+async function adicionarProduto() {
   const nome = document.getElementById("nomeProduto").value.trim();
   const quantidade = document.getElementById("quantidadeProduto").value;
   const validade = document.getElementById("validadeProduto").value;
   let descricao = document.getElementById("descricaoProduto").value.trim();
 
-  if (!descricao) descricao = gerarDescricaoAutomatica(nome);
-  if (!nome || !quantidade || !validade) { showToast("Preencha todos os campos obrigatórios"); return; }
+  if (!descricao) {
+      descricao = gerarDescricaoAutomatica(nome);
+  }
 
-  const produto = {
-    id: Date.now(),
-    nome,
-    quantidade: Number(quantidade),
-    validade,
-    descricao: descricao || "Sem descrição",
-    data: new Date().toLocaleDateString()
-  };
+  if (!nome || !quantidade || !validade) {
+      showToast("Preencha todos os campos obrigatórios");
+      return;
+  }
 
-  produtos.push(produto);
-  salvar();
-  atualizarTudo();
+  try {
+      const resposta = await fetch(`${API_URL}/Produto`, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              nome,
+              quantidade: Number(quantidade),
+              validade,
+              descricao
+          })
+      });
 
-  document.getElementById("nomeProduto").value = "";
-  document.getElementById("quantidadeProduto").value = "";
-  document.getElementById("validadeProduto").value = "";
-  document.getElementById("descricaoProduto").value = "";
+      if (!resposta.ok) {
+          const erro = await resposta.text();
+          showToast(erro || "Erro ao cadastrar produto.");
+          return;
+      }
 
-  showToast("Produto cadastrado com sucesso.");
-}
+      // Limpar os campos
+      document.getElementById("nomeProduto").value = "";
+      document.getElementById("quantidadeProduto").value = "";
+      document.getElementById("validadeProduto").value = "";
+      document.getElementById("descricaoProduto").value = "";
 
-function removerProduto(id) {
-  produtos = produtos.filter(p => p.id !== id);
-  salvar();
-  atualizarTudo();
-  showToast("Produto removido");
-}
+      // Atualizar a lista de produtos
+      await carregarProdutos();
 
-function salvar() {
-  localStorage.setItem("produtos", JSON.stringify(produtos));
+      showToast("Produto cadastrado com sucesso.");
+
+  } catch (erro) {
+      console.error(erro);
+      showToast("Erro ao conectar com o servidor.");
+  }
 }
 
 // ============================================================
@@ -277,34 +326,87 @@ function salvar() {
 
 function aumentar(id, estoqueMax) {
   const span = document.getElementById(`qtd-${id}`);
+
+  if (!span) return;
+
   let valor = Number(span.textContent);
-  if (valor < estoqueMax) span.textContent = valor + 1;
+
+  if (valor < estoqueMax) {
+      span.textContent = valor + 1;
+  }
 }
 
 function diminuir(id) {
   const span = document.getElementById(`qtd-${id}`);
+
+  if (!span) return;
+
   let valor = Number(span.textContent);
-  if (valor > 0) span.textContent = valor - 1;
+
+  if (valor > 0) {
+      span.textContent = valor - 1;
+  }
 }
 
-function removerQuantidade(id) {
-  const produto = produtos.find(p => p.id === id);
+async function removerQuantidade(id) {
+  const produto = produtos.find(p => p.idProduto === id);
+
+  if (!produto) {
+      showToast("Produto não encontrado.");
+      return;
+  }
+
   const span = document.getElementById(`qtd-${id}`);
   const quantidadeRemover = Number(span.textContent);
 
-  if (quantidadeRemover <= 0) { showToast("Selecione uma quantidade para remover"); return; }
+  if (quantidadeRemover <= 0) {
+      showToast("Selecione uma quantidade para remover");
+      return;
+  }
 
   produto.quantidade -= quantidadeRemover;
 
-  if (produto.quantidade <= 0) {
-    produtos = produtos.filter(p => p.id !== id);
-    showToast("Produto removido completamente");
-  } else {
-    showToast("Quantidade removida com sucesso");
-  }
+  try {
 
-  salvar();
-  atualizarTudo();
+      if (produto.quantidade <= 0) {
+
+          const resposta = await fetch(`${API_URL}/Produto/${id}`, {
+              method: "DELETE",
+              credentials: "include"
+          });
+
+          if (!resposta.ok) {
+              showToast("Erro ao remover produto.");
+              return;
+          }
+
+          showToast("Produto removido completamente");
+
+      } else {
+
+          const resposta = await fetch(`${API_URL}/Produto/${id}`, {
+              method: "PUT",
+              credentials: "include",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(produto)
+          });
+
+          if (!resposta.ok) {
+              showToast("Erro ao atualizar produto.");
+              return;
+          }
+
+          showToast("Quantidade removida com sucesso");
+      }
+
+      await carregarProdutos();
+
+  } catch (erro) {
+      console.error(erro);
+      showToast("Erro ao conectar com o servidor.");
+  }
 }
 
 // ============================================================
@@ -320,22 +422,24 @@ function atualizarTudo() {
 function atualizarEstoque() {
   const lista = document.getElementById("estoqueLista");
   if (!lista) return;
-
   lista.innerHTML = produtos.map(p => {
     const vencendo = diasRestantes(p.validade) <= 7;
     return `
-      <div class="product-card ${vencendo ? 'warning' : ''}">
-        <h3>${p.nome}</h3>
-        <p>Qtd em estoque: ${p.quantidade}</p>
-        <p>Validade: ${p.validade}</p>
-        <div class="controle-quantidade">
-          <button onclick="diminuir(${p.id})">-</button>
-          <span id="qtd-${p.id}">0</span>
-          <button onclick="aumentar(${p.id}, ${p.quantidade})">+</button>
-        </div>
-        <button onclick="removerQuantidade(${p.id})" class="btn-danger">Remover</button>
-      </div>
-    `;
+  <div class="product-card ${vencendo ? 'warning' : ''}">
+    <h3>${p.nome}</h3>
+    <p>Qtd em estoque: ${p.quantidade}</p>
+    <p>Validade: ${p.validade}</p>
+    <div class="controle-quantidade">
+      <button onclick="diminuir(${p.idProduto})">-</button>
+      <span id="qtd-${p.idProduto}">0</span>
+      <button onclick="aumentar(${p.idProduto}, ${p.quantidade})">+</button>
+    </div>
+    <button onclick="removerQuantidade(${p.idProduto})"
+            class="btn-danger">
+      Remover
+    </button>
+  </div>
+`;
   }).join("");
 }
 
@@ -346,7 +450,7 @@ function atualizarDashboard() {
 
   if (total) total.textContent = produtos.length;
   if (venc) venc.textContent = produtos.filter(p => diasRestantes(p.validade) <= 7).length;
-  if (hist) hist.innerHTML = produtos.map(p => `<li>${p.data} - ${p.nome} (${p.quantidade})</li>`).join("");
+  if (hist) hist.innerHTML = produtos.map(p => `<li>${p.dataCadastro} - ${p.nome} (${p.quantidade})</li>`).join("");
 }
 
 function atualizarRelatorios() {
@@ -365,7 +469,7 @@ function atualizarRelatorios() {
         <h3>${p.nome}</h3>
         <p><strong>Quantidade:</strong> ${p.quantidade}</p>
         <p><strong>Validade:</strong> ${p.validade}</p>
-        <p><strong>Entrada:</strong> ${p.data}</p>
+        <p><strong>Entrada:</strong> ${p.dataCadastro}</p>
         <p><strong>Descrição:</strong> ${p.descricao || "Sem descrição"}</p>
       </div>
     `;
@@ -455,7 +559,7 @@ function showToast(msg) {
 //                         INICIALIZAÇÃO 
 // ============================================================
 
-window.onload = () => {
-  atualizarTudo();
-  verificarSessao();
+window.onload = async () => {
+  await verificarSessao();
+  await carregarProdutos();
 };
