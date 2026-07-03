@@ -15,7 +15,6 @@ CREATE TABLE Produto (
     id_produto INTEGER IDENTITY PRIMARY KEY,
     nome VARCHAR(100),
     data_cadastro DATE,
-    data_validade DATE,
     quantidade INTEGER,
     descricao VARCHAR(255)
 );

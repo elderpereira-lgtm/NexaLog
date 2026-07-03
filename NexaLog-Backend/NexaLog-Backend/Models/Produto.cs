@@ -4,8 +4,9 @@ namespace NexaLog_Backend.Models
 	{
 		public int IdProduto { get; set; }
 		public string Nome { get; set; } = string.Empty;
-		public DateTime DataCadastro { get; set; }
-		public int Quantidade { get; set; }
+		public DateOnly DataCadastro { get; set; }
+        public DateOnly DataValidade { get; set; }
+        public int Quantidade { get; set; }
 		public string Descricao { get; set; } = string.Empty;
 	}
 }

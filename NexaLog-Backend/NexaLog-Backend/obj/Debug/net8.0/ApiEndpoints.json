@@ -522,7 +522,7 @@
     "Parameters": [
       {
         "Name": "login",
-        "Type": "NexaLog_Backend.Controllers.LoginRequest",
+        "Type": "NexaLog_Backend.Models.LoginRequest",
         "IsRequired": true
       }
     ],

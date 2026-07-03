@@ -270,6 +270,7 @@ async function carregarProdutos() {
 async function adicionarProduto() {
   const nome = document.getElementById("nomeProduto").value.trim();
   const quantidade = document.getElementById("quantidadeProduto").value;
+  const dataCadastro = new Date().toISOString().split("T")[0];
   const validade = document.getElementById("validadeProduto").value;
   let descricao = document.getElementById("descricaoProduto").value.trim();
 
@@ -291,6 +292,8 @@ async function adicionarProduto() {
           },
           body: JSON.stringify({
               nome,
+              dataCadastro,
+              dataValidade: validade,
               quantidade: Number(quantidade),
               validade,
               descricao
@@ -423,12 +426,12 @@ function atualizarEstoque() {
   const lista = document.getElementById("estoqueLista");
   if (!lista) return;
   lista.innerHTML = produtos.map(p => {
-    const vencendo = diasRestantes(p.validade) <= 7;
+    const vencendo = diasRestantes(p.dataValidade) <= 7;
     return `
   <div class="product-card ${vencendo ? 'warning' : ''}">
     <h3>${p.nome}</h3>
     <p>Qtd em estoque: ${p.quantidade}</p>
-    <p>Validade: ${p.validade}</p>
+    <p>Validade: ${p.dataValidade}</p>
     <div class="controle-quantidade">
       <button onclick="diminuir(${p.idProduto})">-</button>
       <span id="qtd-${p.idProduto}">0</span>
@@ -449,7 +452,7 @@ function atualizarDashboard() {
   const hist = document.getElementById("historicoLista");
 
   if (total) total.textContent = produtos.length;
-  if (venc) venc.textContent = produtos.filter(p => diasRestantes(p.validade) <= 7).length;
+  if (venc) venc.textContent = produtos.filter(p => diasRestantes(p.dataValidade) <= 7).length;
   if (hist) hist.innerHTML = produtos.map(p => `<li>${p.dataCadastro} - ${p.nome} (${p.quantidade})</li>`).join("");
 }
 
@@ -463,12 +466,12 @@ function atualizarRelatorios() {
   if (!container) return;
 
   container.innerHTML = produtos.map(p => {
-    const vencido = diasRestantes(p.validade) < 0;
+    const vencido = diasRestantes(p.dataValidade) < 0;
     return `
       <div class="rel-card ${vencido ? 'vencido' : ''}">
         <h3>${p.nome}</h3>
         <p><strong>Quantidade:</strong> ${p.quantidade}</p>
-        <p><strong>Validade:</strong> ${p.validade}</p>
+        <p><strong>Validade:</strong> ${p.dataValidade}</p>
         <p><strong>Entrada:</strong> ${p.dataCadastro}</p>
         <p><strong>Descrição:</strong> ${p.descricao || "Sem descrição"}</p>
       </div>
@@ -506,7 +509,7 @@ function gerarRespostaIA(pergunta) {
   }
 
   if (pergunta.includes("vencido") || pergunta.includes("vencendo") || pergunta.includes("vencidos")) {
-    const vencidos = produtos.filter(p => diasRestantes(p.validade) < 0);
+    const vencidos = produtos.filter(p => diasRestantes(p.dataValidade) < 0);
     return vencidos.length === 0
       ? "Nenhum produto está vencido."
       : "Produtos vencidos: " + vencidos.map(p => p.nome).join(", ");
