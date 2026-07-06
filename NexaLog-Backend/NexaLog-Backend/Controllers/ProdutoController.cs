@@ -19,13 +19,18 @@ namespace NexaLog_Backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
         {
-            return await _context.Produtos.ToListAsync();
+            return await _context.Produtos
+                .Include(p => p.Lotes)
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Produto>> GetProduto(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            var produto = await _context.Produtos
+            .Include(p => p.Lotes)
+            .FirstOrDefaultAsync(p => p.IdProduto == id);
+
             if (produto == null)
                 return NotFound();
             return produto;

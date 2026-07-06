@@ -5,10 +5,6 @@ let produtos = [];
 //                         AUTENTICAÇÃO 
 // ============================================================
 
-function showCadastro() { trocarTela("cadastroPage"); }
-function voltarLogin() { trocarTela("loginPage"); }
-function voltarCadastro() { trocarTela("cadastroPage"); }
-
 async function login() {
   const email = document.getElementById("loginEmail").value.trim();
   const senha = document.getElementById("loginSenha").value;
@@ -193,6 +189,7 @@ function entrarSistema() {
 
   atualizarUsuario();
   aplicarPermissoes();
+  carregarProdutos();
   atualizarTudo();
 }
 
@@ -564,5 +561,4 @@ function showToast(msg) {
 
 window.onload = async () => {
   await verificarSessao();
-  await carregarProdutos();
 };
