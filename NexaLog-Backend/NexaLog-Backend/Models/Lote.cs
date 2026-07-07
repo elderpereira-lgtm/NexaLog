@@ -8,6 +8,6 @@ namespace NexaLog_Backend.Models
         public DateOnly DataValidade { get; set; }
         public DateOnly DataFabricacao { get; set; }
         public int FkProdutoIdProduto { get; set; }
-        public Produto? Produto { get; set; }
+        public Produto Produto { get; set; }
     }
 }

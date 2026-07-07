@@ -1,89 +1,80 @@
 USE NexaLog;
 GO
 
-/* ===================== USUÁRIOS ===================== */
-
-INSERT INTO Usuario (email, nome, senha, tipo_usuario)
+-- ==========================================
+-- USUÁRIOS
+-- ==========================================
+INSERT INTO Usuario (email, nome, senha, tipousuario)
 VALUES
-('admin@nexalog.com', 'Carlos Silva', '12345678', 'Administrador'),
-('estoque@nexalog.com', 'Mariana Souza', '12345678', 'Operador'),
-('logistica@nexalog.com', 'João Pereira', '12345678', 'Operador'),
-('gestor@nexalog.com', 'Fernando Costa', '12345678', 'Gestor');
+('admin@nexalog.com', 'Carlos Eduardo', '123456', 'Administrador'),
+('ana.silva@nexalog.com', 'Ana Silva', '123456', 'Operador'),
+('joao.santos@nexalog.com', 'João Santos', '123456', 'Operador'),
+('mariana.lima@nexalog.com', 'Mariana Lima', '123456', 'Gerente'),
+('pedro.alves@nexalog.com', 'Pedro Alves', '123456', 'Operador');
 
-
-
-/* ===================== PRODUTOS ===================== */
-
-INSERT INTO Produto (nome, data_cadastro, quantidade, descricao)
+-- ==========================================
+-- PRODUTOS
+-- ==========================================
+INSERT INTO Produto (nome, dataCadastro, quantidade, descricao)
 VALUES
-('Notebook Dell Inspiron', '2026-01-10', 50, 'Notebook para uso corporativo'),
-('Mouse Logitech M90', '2026-01-12', 200, 'Mouse USB óptico'),
-('Teclado Mecânico Redragon', '2026-01-15', 80, 'Teclado mecânico gamer'),
-('Monitor LG 24 Polegadas', '2026-01-18', 40, 'Monitor Full HD'),
-('Headset HyperX Cloud', '2026-01-20', 60, 'Headset para escritório'),
-('SSD Kingston 480GB', '2026-01-22', 120, 'Unidade de armazenamento SSD'),
-('Cadeira Ergonômica', '2026-01-25', 25, 'Cadeira para escritório'),
-('Webcam Logitech C270', '2026-01-28', 70, 'Webcam HD para videoconferências');
+('Notebook Dell Inspiron', '2026-01-10', 20, 'Notebook corporativo'),
+('Mouse Logitech M170', '2026-01-12', 150, 'Mouse sem fio'),
+('Teclado Mecânico Redragon', '2026-01-15', 80, 'Teclado mecânico ABNT2'),
+('Monitor LG 24"', '2026-01-18', 35, 'Monitor Full HD'),
+('SSD Kingston 480GB', '2026-01-20', 60, 'SSD SATA'),
+('Headset HyperX Cloud', '2026-01-22', 40, 'Headset gamer'),
+('Webcam Logitech C920', '2026-01-25', 30, 'Webcam Full HD'),
+('Cadeira Ergonômica', '2026-01-28', 15, 'Cadeira para escritório');
 
-
-
-/* ===================== MOVIMENTAÇÕES ===================== */
-
-INSERT INTO Movimentacao (tipo_movimentacao, data_movimentacao, fk_Usuario_id_usuario)
+-- ==========================================
+-- MOVIMENTAÇÕES
+-- ==========================================
+INSERT INTO Movimentacao (tipo_movimentacao, data_movimentacao, fk_Usuario_idusuario)
 VALUES
 ('Entrada', '2026-02-01', 2),
 ('Saída', '2026-02-03', 3),
-('Entrada', '2026-02-05', 2),
-('Saída', '2026-02-06', 4),
-('Entrada', '2026-02-08', 4),
-('Saída', '2026-02-10', 3),
-('Entrada', '2026-02-12', 2),
-('Saída', '2026-02-15', 4);
+('Entrada', '2026-02-05', 4),
+('Saída', '2026-02-08', 2),
+('Entrada', '2026-02-10', 5),
+('Saída', '2026-02-12', 3);
 
-
-
-/* ===================== LOTES ===================== */
-
+-- ==========================================
+-- LOTES
+-- ==========================================
 INSERT INTO Lote
-(quantidade_lote, cod_lote, data_validade, data_fabricacao, fk_Produto_id_produto)
+(quantidade_lote, cod_lote, dataValidade, dataFabricacao, fk_Produto_idproduto)
 VALUES
-(20, 'LOT2026001', '2028-01-01', '2026-01-01', 1),
-(100, 'LOT2026002', '2028-01-10', '2026-01-05', 2),
-(40, 'LOT2026003', '2028-01-15', '2026-01-10', 3),
-(20, 'LOT2026004', '2028-01-20', '2026-01-12', 4),
-(30, 'LOT2026005', '2028-01-25', '2026-01-15', 5),
-(60, 'LOT2026006', '2028-02-01', '2026-01-20', 6),
-(10, 'LOT2026007', '2028-02-05', '2026-01-22', 7),
-(35, 'LOT2026008', '2028-02-10', '2026-01-25', 8);
+(20, 'LOT001', '2029-01-10', '2026-01-05', 1),
+(150, 'LOT002', '2030-01-12', '2026-01-08', 2),
+(80, 'LOT003', '2030-01-15', '2026-01-10', 3),
+(35, 'LOT004', '2029-01-18', '2026-01-12', 4),
+(60, 'LOT005', '2031-01-20', '2026-01-15', 5),
+(40, 'LOT006', '2030-01-22', '2026-01-18', 6),
+(30, 'LOT007', '2030-01-25', '2026-01-20', 7),
+(15, 'LOT008', '2032-01-28', '2026-01-22', 8);
 
-
-
-/* ===================== ITENS MOVIMENTAÇÃO ===================== */
-
+-- ==========================================
+-- ITENS DAS MOVIMENTAÇÕES
+-- ==========================================
 INSERT INTO Item_Movimentacao
-(fk_Produto_id_produto, fk_Movimentacao_id_movimentacao, quantidade)
+(fk_Produto_idproduto, fk_Movimentacao_id_movimentacao, quantidade)
 VALUES
 (1, 1, 20),
 (2, 1, 100),
 
-(1, 2, 5),
+(2, 2, 15),
 (3, 2, 10),
 
-(4, 3, 15),
-(5, 3, 20),
+(4, 3, 35),
+(5, 3, 40),
 
-(2, 4, 30),
-(6, 4, 15),
+(6, 4, 5),
+(7, 4, 8),
 
-(7, 5, 10),
-(8, 5, 25),
+(8, 5, 15),
+(3, 5, 20),
 
-(5, 6, 5),
-(4, 6, 3),
+(1, 6, 2),
+(5, 6, 10);
 
-(3, 7, 20),
-(6, 7, 30),
-
-(8, 8, 10),
-(2, 8, 15);
 GO
