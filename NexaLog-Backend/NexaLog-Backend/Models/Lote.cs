@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace NexaLog_Backend.Models
 {
     public class Lote
@@ -8,6 +10,7 @@ namespace NexaLog_Backend.Models
         public DateOnly DataValidade { get; set; }
         public DateOnly DataFabricacao { get; set; }
         public int FkProdutoIdProduto { get; set; }
+        [JsonIgnore]
         public Produto Produto { get; set; }
     }
 }
