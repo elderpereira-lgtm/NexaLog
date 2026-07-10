@@ -130,11 +130,11 @@ async function logout() {
 // ============================================================
 
 const PERMISSOES_PAGINA = {
-  dashboard:   ["Administrador", "Gestor", "Operador"],
-  estoque:     ["Administrador", "Gestor", "Operador"],
-  relatorios:  ["Administrador", "Gestor"],
-  cadastro:    ["Administrador", "Gestor"],
-  assistente:  ["Administrador", "Gestor", "Operador"],
+  dashboard: ["Administrador", "Gestor", "Operador"],
+  estoque: ["Administrador", "Gestor", "Operador"],
+  relatorios: ["Administrador", "Gestor"],
+  cadastro: ["Administrador", "Gestor"],
+  assistente: ["Administrador", "Gestor", "Operador"],
 };
 
 function cargoTemAcesso(paginaId) {
@@ -272,51 +272,51 @@ async function adicionarProduto() {
   let descricao = document.getElementById("descricaoProduto").value.trim();
 
   if (!descricao) {
-      descricao = gerarDescricaoAutomatica(nome);
+    descricao = gerarDescricaoAutomatica(nome);
   }
 
   if (!nome || !quantidade || !validade) {
-      showToast("Preencha todos os campos obrigatórios");
-      return;
+    showToast("Preencha todos os campos obrigatórios");
+    return;
   }
 
   try {
-      const resposta = await fetch(`${API_URL}/Produto`, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-              nome,
-              dataCadastro,
-              dataValidade: validade,
-              quantidade: Number(quantidade),
-              validade,
-              descricao
-          })
-      });
+    const resposta = await fetch(`${API_URL}/Produto`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nome,
+        dataCadastro,
+        dataValidade: validade,
+        quantidade: Number(quantidade),
+        validade,
+        descricao
+      })
+    });
 
-      if (!resposta.ok) {
-          const erro = await resposta.text();
-          showToast(erro || "Erro ao cadastrar produto.");
-          return;
-      }
+    if (!resposta.ok) {
+      const erro = await resposta.text();
+      showToast(erro || "Erro ao cadastrar produto.");
+      return;
+    }
 
-      // Limpar os campos
-      document.getElementById("nomeProduto").value = "";
-      document.getElementById("quantidadeProduto").value = "";
-      document.getElementById("validadeProduto").value = "";
-      document.getElementById("descricaoProduto").value = "";
+    // Limpar os campos
+    document.getElementById("nomeProduto").value = "";
+    document.getElementById("quantidadeProduto").value = "";
+    document.getElementById("validadeProduto").value = "";
+    document.getElementById("descricaoProduto").value = "";
 
-      // Atualizar a lista de produtos
-      await carregarProdutos();
+    // Atualizar a lista de produtos
+    await carregarProdutos();
 
-      showToast("Produto cadastrado com sucesso.");
+    showToast("Produto cadastrado com sucesso.");
 
   } catch (erro) {
-      console.error(erro);
-      showToast("Erro ao conectar com o servidor.");
+    console.error(erro);
+    showToast("Erro ao conectar com o servidor.");
   }
 }
 
@@ -332,7 +332,7 @@ function aumentar(id, estoqueMax) {
   let valor = Number(span.textContent);
 
   if (valor < estoqueMax) {
-      span.textContent = valor + 1;
+    span.textContent = valor + 1;
   }
 }
 
@@ -344,7 +344,7 @@ function diminuir(id) {
   let valor = Number(span.textContent);
 
   if (valor > 0) {
-      span.textContent = valor - 1;
+    span.textContent = valor - 1;
   }
 }
 
@@ -352,60 +352,65 @@ async function removerQuantidade(id) {
   const produto = produtos.find(p => p.idProduto === id);
 
   if (!produto) {
-      showToast("Produto não encontrado.");
-      return;
+    showToast("Produto não encontrado.");
+    return;
   }
 
   const span = document.getElementById(`qtd-${id}`);
   const quantidadeRemover = Number(span.textContent);
 
   if (quantidadeRemover <= 0) {
-      showToast("Selecione uma quantidade para remover");
-      return;
+    showToast("Selecione uma quantidade para remover");
+    return;
   }
 
   produto.quantidade -= quantidadeRemover;
 
   try {
 
-      if (produto.quantidade <= 0) {
+    if (produto.quantidade <= 0) {
 
-          const resposta = await fetch(`${API_URL}/Produto/${id}`, {
-              method: "DELETE",
-              credentials: "include"
-          });
+      console.log("ID da URL:", id);
+      console.log("Produto:", produto);
 
-          if (!resposta.ok) {
-              showToast("Erro ao remover produto.");
-              return;
-          }
+      const resposta = await fetch(`${API_URL}/Produto/${id}`, {
+        method: "DELETE",
+        credentials: "include"
+      });
 
-          showToast("Produto removido completamente");
-
-      } else {
-
-          const resposta = await fetch(`${API_URL}/Produto/${id}`, {
-              method: "PUT",
-              credentials: "include",
-              headers: {
-                  "Content-Type": "application/json"
-              },
-              body: JSON.stringify(produto)
-          });
-
-          if (!resposta.ok) {
-              showToast("Erro ao atualizar produto.");
-              return;
-          }
-
-          showToast("Quantidade removida com sucesso");
+      if (!resposta.ok) {
+        console.log(await resposta.text());
+        showToast("Erro ao remover produto.");
+        return;
       }
 
-      await carregarProdutos();
+      showToast("Produto removido completamente");
+
+    } else {
+
+      const resposta = await fetch(`${API_URL}/Produto/${id}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(produto)
+      });
+
+      if (!resposta.ok) {
+        console.log(await resposta.text());
+        showToast("Erro ao atualizar produto.");
+        return;
+      }
+
+      showToast("Quantidade removida com sucesso");
+    }
+
+    await carregarProdutos();
 
   } catch (erro) {
-      console.error(erro);
-      showToast("Erro ao conectar com o servidor.");
+    console.error(erro);
+    showToast("Erro ao conectar com o servidor.");
   }
 }
 

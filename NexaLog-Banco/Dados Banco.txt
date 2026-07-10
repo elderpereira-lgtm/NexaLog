@@ -8,7 +8,7 @@ INSERT INTO Usuario (email, nome, senha, tipousuario) VALUES
 ('admin@nexalog.com', 'Administrador', '123456', 'Administrador'),
 ('joao@nexalog.com', 'João Silva', '123456', 'Operador'),
 ('maria@nexalog.com', 'Maria Oliveira', '123456', 'Operador'),
-('carlos@nexalog.com', 'Carlos Souza', '123456', 'Gerente'),
+('carlos@nexalog.com', 'Carlos Souza', '123456', 'Gestor'),
 ('ana@nexalog.com', 'Ana Lima', '123456', 'Operador');
 
 -- ==========================

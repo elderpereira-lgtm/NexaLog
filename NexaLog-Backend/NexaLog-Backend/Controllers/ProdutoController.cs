@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NexaLog_Backend.Data;
+using NexaLog_Backend.Dtos;
 using NexaLog_Backend.Filters;
 using NexaLog_Backend.Models;
 
@@ -28,11 +29,12 @@ namespace NexaLog_Backend.Controllers
         public async Task<ActionResult<Produto>> GetProduto(int id)
         {
             var produto = await _context.Produtos
-            .Include(p => p.Lotes)
-            .FirstOrDefaultAsync(p => p.IdProduto == id);
+                .Include(p => p.Lotes)
+                .FirstOrDefaultAsync(p => p.IdProduto == id);
 
             if (produto == null)
                 return NotFound();
+
             return produto;
         }
 
@@ -48,11 +50,20 @@ namespace NexaLog_Backend.Controllers
 
         [HttpPut("{id}")]
         [CargoAuthorize("Administrador", "Gestor")]
-        public async Task<IActionResult> PutProduto(int id, Produto produto)
+        public async Task<IActionResult> PutProduto(int id, ProdutoUpdateDto dto)
         {
-            if (id != produto.IdProduto)
+            if (id != dto.IdProduto)
                 return BadRequest();
-            _context.Entry(produto).State = EntityState.Modified;
+
+            var produto = await _context.Produtos.FindAsync(id);
+            if (produto == null)
+                return NotFound();
+
+            produto.Nome = dto.Nome;
+            produto.DataCadastro = dto.DataCadastro;
+            produto.DataValidade = dto.DataValidade;
+            produto.Quantidade = dto.Quantidade;
+            produto.Descricao = dto.Descricao;
 
             try
             {
@@ -76,18 +87,16 @@ namespace NexaLog_Backend.Controllers
             var produto = await _context.Produtos.FindAsync(id);
             if (produto == null)
                 return NotFound();
+
             _context.Produtos.Remove(produto);
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateException)
             {
-                if (!_context.Produtos.Any(e => e.IdProduto == id))
-                    return NotFound();
-
-                throw;
+                return BadRequest("Não é possível excluir este produto pois existem lotes ou movimentações associadas a ele.");
             }
 
             return NoContent();
