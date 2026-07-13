@@ -50,7 +50,7 @@ ALTER TABLE Movimentacao ADD CONSTRAINT FK_Movimentacao_2
 ALTER TABLE Lote ADD CONSTRAINT FK_Lote_2
     FOREIGN KEY (fk_Produto_idproduto)
     REFERENCES Produto (idproduto)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
  
 ALTER TABLE Item_Movimentacao ADD CONSTRAINT FK_Item_Movimentacao_1
     FOREIGN KEY (fk_Produto_idproduto)
@@ -60,4 +60,4 @@ ALTER TABLE Item_Movimentacao ADD CONSTRAINT FK_Item_Movimentacao_1
 ALTER TABLE Item_Movimentacao ADD CONSTRAINT FK_Item_Movimentacao_2
     FOREIGN KEY (fk_Movimentacao_id_movimentacao)
     REFERENCES Movimentacao (id_movimentacao)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;

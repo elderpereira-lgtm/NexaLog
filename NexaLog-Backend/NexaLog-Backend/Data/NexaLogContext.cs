@@ -29,6 +29,12 @@ namespace NexaLog_Backend.Data
             modelBuilder.Entity<Usuario>().Property(u => u.TipoUsuario).HasColumnName("tipousuario");
 
             // ===================== PRODUTO =====================
+            modelBuilder.Entity<Lote>()
+            .HasOne(l => l.Produto)
+            .WithMany(p => p.Lotes)
+            .HasForeignKey(l => l.FkProdutoIdProduto)
+            .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Produto>().ToTable("Produto");
             modelBuilder.Entity<Produto>().HasKey(p => p.IdProduto);
 

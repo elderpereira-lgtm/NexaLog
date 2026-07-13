@@ -9,6 +9,7 @@ namespace NexaLog_Backend.Models
         public DateOnly DataCadastro { get; set; }
         public DateOnly DataValidade { get; set; }
         public int Quantidade { get; set; }
+        public int CodProduto { get; set; }
         public string Descricao { get; set; } = string.Empty;
         [JsonIgnore]
         public ICollection<Lote> Lotes { get; set; } = new List<Lote>();

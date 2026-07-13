@@ -267,6 +267,8 @@ async function carregarProdutos() {
 async function adicionarProduto() {
   const nome = document.getElementById("nomeProduto").value.trim();
   const quantidade = document.getElementById("quantidadeProduto").value;
+  const codigoProduto = document.getElementById("codProduto").value;
+  const codigoLote = document.getElementById("codLote").value;
   const dataCadastro = new Date().toISOString().split("T")[0];
   const validade = document.getElementById("validadeProduto").value;
   let descricao = document.getElementById("descricaoProduto").value.trim();
@@ -275,7 +277,7 @@ async function adicionarProduto() {
     descricao = gerarDescricaoAutomatica(nome);
   }
 
-  if (!nome || !quantidade || !validade) {
+  if (!nome || !quantidade || !validade || !codigoLote || !codigoProduto) {
     showToast("Preencha todos os campos obrigatórios");
     return;
   }
@@ -292,7 +294,8 @@ async function adicionarProduto() {
         dataCadastro,
         dataValidade: validade,
         quantidade: Number(quantidade),
-        validade,
+        codProduto: codigoProduto,
+        codLote: codigoLote,
         descricao
       })
     });
@@ -306,6 +309,8 @@ async function adicionarProduto() {
     // Limpar os campos
     document.getElementById("nomeProduto").value = "";
     document.getElementById("quantidadeProduto").value = "";
+    document.getElementById("codProduto").value = "";
+    document.getElementById("codLote").value = "";
     document.getElementById("validadeProduto").value = "";
     document.getElementById("descricaoProduto").value = "";
 
@@ -472,8 +477,10 @@ function atualizarRelatorios() {
     return `
       <div class="rel-card ${vencido ? 'vencido' : ''}">
         <h3>${p.nome}</h3>
-        <p><strong>Quantidade:</strong> ${p.quantidade}</p>
-        <p><strong>Validade:</strong> ${p.dataValidade}</p>
+        <p>Cód. Produto: ${p.codProduto}</p>
+        <p>Cód. Lote: ${p.codLote}</p>
+        <p>Qtd em estoque: ${p.quantidade}</p>
+        <p>Validade: ${p.dataValidade}</p>
         <p><strong>Entrada:</strong> ${p.dataCadastro}</p>
         <p><strong>Descrição:</strong> ${p.descricao || "Sem descrição"}</p>
       </div>
