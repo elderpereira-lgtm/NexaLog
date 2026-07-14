@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NexaLog_Backend.Data;
-using NexaLog_Backend.Dtos;
 using NexaLog_Backend.Filters;
 using NexaLog_Backend.Models;
 
@@ -50,32 +49,23 @@ namespace NexaLog_Backend.Controllers
 
         [HttpPut("{id}")]
         [CargoAuthorize("Administrador", "Gestor")]
-        public async Task<IActionResult> PutProduto(int id, ProdutoUpdateDto dto)
+        public async Task<IActionResult> PutProduto(int id, Produto produtoAtualizado)
         {
-            if (id != dto.IdProduto)
+            if (id != produtoAtualizado.IdProduto)
                 return BadRequest();
 
             var produto = await _context.Produtos.FindAsync(id);
             if (produto == null)
                 return NotFound();
 
-            produto.Nome = dto.Nome;
-            produto.DataCadastro = dto.DataCadastro;
-            produto.DataValidade = dto.DataValidade;
-            produto.Quantidade = dto.Quantidade;
-            produto.Descricao = dto.Descricao;
+            produto.Nome = produtoAtualizado.Nome;
+            produto.DataCadastro = produtoAtualizado.DataCadastro;
+            produto.DataValidade = produtoAtualizado.DataValidade;
+            produto.Quantidade = produtoAtualizado.Quantidade;
+            produto.CodProduto = produtoAtualizado.CodProduto;
+            produto.Descricao = produtoAtualizado.Descricao;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Produtos.Any(e => e.IdProduto == id))
-                    return NotFound();
-
-                throw;
-            }
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }

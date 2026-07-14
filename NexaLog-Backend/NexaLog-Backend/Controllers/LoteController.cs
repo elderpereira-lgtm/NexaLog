@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NexaLog_Backend.Data;
-using NexaLog_Backend.Dtos;
 using NexaLog_Backend.Filters;
 using NexaLog_Backend.Models;
 
@@ -18,34 +17,19 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LoteComProdutoDto>>> GetLotes()
+        public async Task<ActionResult<IEnumerable<Lote>>> GetLotes()
         {
             return await _context.Lotes
-                .Include(l => l.Produto)
-                .Select(l => new LoteComProdutoDto
-                {
-                    IdLote = l.IdLote,
-                    CodLote = l.CodLote,
-                    QuantidadeLote = l.QuantidadeLote,
-                    NomeProduto = l.Produto!.Nome
-                })
-                .ToListAsync();
+               .Include(l => l.Produto)
+               .ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<LoteComProdutoDto>> GetLote(int id)
+        public async Task<ActionResult<Lote>> GetLote(int id)
         {
             var lote = await _context.Lotes
                 .Include(l => l.Produto)
-                .Where(l => l.IdLote == id)
-                .Select(l => new LoteComProdutoDto
-                {
-                    IdLote = l.IdLote,
-                    CodLote = l.CodLote,
-                    QuantidadeLote = l.QuantidadeLote,
-                    NomeProduto = l.Produto!.Nome
-                })
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(l => l.IdLote == id);
 
             if (lote == null)
                 return NotFound();

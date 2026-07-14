@@ -283,6 +283,7 @@ async function adicionarProduto() {
   }
 
   try {
+
     const resposta = await fetch(`${API_URL}/Produto`, {
       method: "POST",
       credentials: "include",
@@ -294,15 +295,37 @@ async function adicionarProduto() {
         dataCadastro,
         dataValidade: validade,
         quantidade: Number(quantidade),
-        codProduto: codigoProduto,
-        codLote: codigoLote,
+        codProduto: Number(codigoProduto),
         descricao
       })
     });
-
+    
     if (!resposta.ok) {
       const erro = await resposta.text();
       showToast(erro || "Erro ao cadastrar produto.");
+      return;
+    }
+
+    const produto = await resposta.json();
+
+    const respostaLote = await fetch(`${API_URL}/Lote`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        quantidadeLote: Number(quantidade),
+        codLote: codigoLote,
+        dataValidade: validade,
+        dataFabricacao: dataCadastro,
+        fkProdutoIdProduto: produto.idProduto
+      })
+    });
+    
+    if (!respostaLote.ok) {
+      const erro = await respostaLote.text();
+      showToast(erro || "Erro ao cadastrar lote.");
       return;
     }
 
@@ -478,7 +501,7 @@ function atualizarRelatorios() {
       <div class="rel-card ${vencido ? 'vencido' : ''}">
         <h3>${p.nome}</h3>
         <p>Cód. Produto: ${p.codProduto}</p>
-        <p>Cód. Lote: ${p.codLote}</p>
+        <p>Cód. Lote: ${p.lotes?.[0]?.codLote ?? "-"}</p>
         <p>Qtd em estoque: ${p.quantidade}</p>
         <p>Validade: ${p.dataValidade}</p>
         <p><strong>Entrada:</strong> ${p.dataCadastro}</p>

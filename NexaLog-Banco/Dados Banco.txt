@@ -14,15 +14,15 @@ INSERT INTO Usuario (email, nome, senha, tipousuario) VALUES
 -- ==========================
 -- PRODUTOS
 -- ==========================
-INSERT INTO Produto (nome, dataCadastro, dataValidade, quantidade, descricao) VALUES
-('Notebook Dell Inspiron', '2026-01-10', '2028-01-10', 20, 'Notebook para escritório'),
-('Mouse Logitech M170', '2026-02-05', '2030-02-05', 150, 'Mouse sem fio'),
-('Teclado Mecânico Redragon', '2026-03-12', '2031-03-12', 75, 'Teclado RGB'),
-('Monitor LG 24"', '2026-04-18', '2032-04-18', 35, 'Monitor Full HD'),
-('Headset HyperX Cloud', '2026-05-02', '2031-05-02', 50, 'Headset gamer'),
-('SSD Kingston 1TB', '2026-05-15', '2033-05-15', 60, 'SSD SATA'),
-('Memória RAM 16GB', '2026-06-01', '2034-06-01', 80, 'DDR4 3200MHz'),
-('Webcam Logitech C920', '2026-06-08', '2032-06-08', 25, 'Webcam Full HD');
+INSERT INTO Produto (codProduto, nome, dataCadastro, dataValidade, quantidade, descricao) VALUES
+(1001, 'Notebook Dell Inspiron', '2026-01-10', '2028-01-10', 20, 'Notebook para escritório'),
+(1002, 'Mouse Logitech M170', '2026-02-05', '2030-02-05', 150, 'Mouse sem fio'),
+(1003, 'Teclado Mecânico Redragon', '2026-03-12', '2031-03-12', 75, 'Teclado RGB'),
+(1004, 'Monitor LG 24"', '2026-04-18', '2032-04-18', 35, 'Monitor Full HD'),
+(1005, 'Headset HyperX Cloud', '2026-05-02', '2031-05-02', 50, 'Headset gamer'),
+(1006, 'SSD Kingston 1TB', '2026-05-15', '2033-05-15', 60, 'SSD SATA'),
+(1007, 'Memória RAM 16GB', '2026-06-01', '2034-06-01', 80, 'DDR4 3200MHz'),
+(1008, 'Webcam Logitech C920', '2026-06-08', '2032-06-08', 25, 'Webcam Full HD');
 
 -- ==========================
 -- MOVIMENTAÇÕES
