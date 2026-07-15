@@ -516,6 +516,22 @@ h1{
   background:#e5e7eb;
 }
 
+/* Notificação */
+
+.toast {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+
+  background: #1f2f7a;
+
+}
+
+.toast.show {
+  color: #ffffff
+  
+}
+
 /* Responsividade */
 
 @media(max-width: 900px){

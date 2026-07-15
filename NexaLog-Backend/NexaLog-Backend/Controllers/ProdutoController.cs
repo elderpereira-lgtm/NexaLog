@@ -74,7 +74,7 @@ namespace NexaLog_Backend.Controllers
         [CargoAuthorize("Administrador")]
         public async Task<IActionResult> DeleteProduto(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            var produto = await _context.Produtos.FindAsync(id);0
             if (produto == null)
                 return NotFound();
 
