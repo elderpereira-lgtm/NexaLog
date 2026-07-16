@@ -299,7 +299,7 @@ async function adicionarProduto() {
         descricao
       })
     });
-    
+
     if (!resposta.ok) {
       const erro = await resposta.text();
       showToast(erro || "Erro ao cadastrar produto.");
@@ -322,7 +322,7 @@ async function adicionarProduto() {
         fkProdutoIdProduto: produto.idProduto
       })
     });
-    
+
     if (!respostaLote.ok) {
       const erro = await respostaLote.text();
       showToast(erro || "Erro ao cadastrar lote.");
@@ -458,21 +458,31 @@ function atualizarEstoque() {
   lista.innerHTML = produtos.map(p => {
     const vencendo = diasRestantes(p.dataValidade) <= 7;
     return `
-  <div class="product-card ${vencendo ? 'warning' : ''}">
-    <h3>${p.nome}</h3>
-    <p>Qtd em estoque: ${p.quantidade}</p>
-    <p>Validade: ${p.dataValidade}</p>
-    <div class="controle-quantidade">
-      <button onclick="diminuir(${p.idProduto})">-</button>
-      <span id="qtd-${p.idProduto}">0</span>
-      <button onclick="aumentar(${p.idProduto}, ${p.quantidade})">+</button>
-    </div>
-    <button onclick="removerQuantidade(${p.idProduto})"
-            class="btn-danger">
-      Remover
-    </button>
-  </div>
-`;
+      <div class="product-card ${vencendo ? 'warning' : ''}">
+        <h3>${p.nome}</h3>
+        <p>Qtd em estoque: <strong>${p.quantidade} Kg</strong></p>
+        <p>Validade: <strong>${p.dataValidade}</strong></p>
+        
+        <!-- CONTÊINER DE AÇÕES LADO A LADO -->
+        <div class="acoes-container">
+          <div class="controle-quantidade">
+            <button onclick="diminuir(${p.idProduto})">-</button>
+            <span id="qtd-${p.idProduto}">0</span>
+            <button onclick="aumentar(${p.idProduto}, ${p.quantidade})">+</button>
+          </div>
+          
+          <!-- Botão Atualizar ao lado -->
+          <button class="btn-atualizar" onclick="removerQuantidade(${p.idProduto})">
+            Atualizar
+          </button>
+        </div>
+        
+        <!-- Botão Remover embaixo -->
+        <button onclick="excluirProdutoTotalmente(${p.idProduto})" class="btn-danger">
+          Remover
+        </button>
+      </div>
+    `;
   }).join("");
 }
 
