@@ -442,6 +442,106 @@ async function removerQuantidade(id) {
   }
 }
 
+// Atualizar produto
+
+let produtoEditandoId = null;
+
+function abrirModalEdicao(id) {
+  const produto = produtos.find(p => p.idProduto === id);
+  if (!produto) {
+    showToast("Produto não encontrado.");
+    return;
+  }
+
+  produtoEditandoId = id;
+
+  document.getElementById("editNome").value = produto.nome;
+  document.getElementById("editCodProduto").value = produto.codProduto;
+  document.getElementById("editCodLote").value = produto.lotes?.[0]?.codLote ?? "";
+  document.getElementById("editQuantidade").value = produto.quantidade;
+  document.getElementById("editDescricao").value = produto.descricao ?? "";
+
+  document.getElementById("modalEditar").classList.add("show");
+}
+
+function fecharModalEdicao() {
+  document.getElementById("modalEditar").classList.remove("show");
+  produtoEditandoId = null;
+}
+
+async function salvarEdicaoProduto() {
+  if (!produtoEditandoId) return;
+
+  const produto = produtos.find(p => p.idProduto === produtoEditandoId);
+  if (!produto) {
+    showToast("Produto não encontrado.");
+    return;
+  }
+
+  const nome = document.getElementById("editNome").value.trim();
+  const codProduto = document.getElementById("editCodProduto").value;
+  const codLote = document.getElementById("editCodLote").value.trim();
+  const quantidade = Number(document.getElementById("editQuantidade").value);
+  const descricao = document.getElementById("editDescricao").value.trim();
+
+  if (!nome || !codProduto || quantidade < 0) {
+    showToast("Preencha os campos corretamente.");
+    return;
+  }
+
+  const produtoAtualizado = {
+    ...produto,
+    nome,
+    codProduto: Number(codProduto),
+    quantidade,
+    descricao
+  };
+
+  try {
+    const resposta = await fetch(`${API_URL}/Produto/${produtoEditandoId}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(produtoAtualizado)
+    });
+
+    if (!resposta.ok) {
+      console.log(await resposta.text());
+      showToast("Erro ao atualizar produto.");
+      return;
+    }
+
+    // Atualiza o lote, se o produto tiver um
+    const lote = produto.lotes?.[0];
+    if (lote) {
+      const loteAtualizado = { ...lote, codLote, quantidadeLote: quantidade };
+
+      const respostaLote = await fetch(`${API_URL}/Lote/${lote.idLote}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loteAtualizado)
+      });
+
+      if (!respostaLote.ok) {
+        console.log(await respostaLote.text());
+        showToast("Produto atualizado, mas houve erro ao atualizar o lote.");
+        fecharModalEdicao();
+        await carregarProdutos();
+        return;
+      }
+    }
+
+    showToast("Produto atualizado com sucesso.");
+    fecharModalEdicao();
+    await carregarProdutos();
+
+  } catch (erro) {
+    console.error(erro);
+    showToast("Erro ao conectar com o servidor.");
+  }
+}
+
 // ============================================================
 //                     ATUALIZAÇÃO DE TELAS 
 // ============================================================
@@ -464,24 +564,24 @@ function atualizarEstoque() {
         <p>Validade: <strong>${p.dataValidade}</strong></p>
         
         <!-- CONTÊINER DE AÇÕES LADO A LADO -->
-        <div class="acoes-container">
-          <div class="controle-quantidade">
-            <button onclick="diminuir(${p.idProduto})">-</button>
+      <div class="acoes-container">
+        <div class="controle-quantidade">
+          <button onclick="diminuir(${p.idProduto})">-</button>
             <span id="qtd-${p.idProduto}">0</span>
-            <button onclick="aumentar(${p.idProduto}, ${p.quantidade})">+</button>
-          </div>
-          
-          <!-- Botão Atualizar ao lado -->
-          <button class="btn-atualizar" onclick="removerQuantidade(${p.idProduto})">
-            Atualizar
-          </button>
+          <button onclick="aumentar(${p.idProduto}, ${p.quantidade})">+</button>
         </div>
-        
-        <!-- Botão Remover embaixo -->
-        <button onclick="excluirProdutoTotalmente(${p.idProduto})" class="btn-danger">
-          Remover
+
+        <button class="btn-atualizar"
+          onclick="abrirModalEdicao(${p.idProduto})">
+            Atualizar
+        </button>
+
+          <button class="btn-danger"
+             onclick="excluirProdutoTotalmente(${p.idProduto})">
+         Remover
         </button>
       </div>
+    </div>
     `;
   }).join("");
 }

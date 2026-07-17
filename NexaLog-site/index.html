@@ -178,6 +178,24 @@
 
   <div id="toast" class="toast"></div>
 
+<!-- ==== Atualizar Produto ==== -->
+
+  <div id="modalEditar" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Editar Produto</h2>
+      <input type="text" id="editNome" placeholder="Nome do Produto">
+      <input type="number" id="editCodProduto" placeholder="Código do produto">
+      <input type="text" id="editCodLote" placeholder="Código do Lote">
+      <input type="number" id="editQuantidade" placeholder="Quantidade em estoque">
+      <textarea id="editDescricao" placeholder="Descrição do Produto"></textarea>
+  
+      <div class="modal-botoes">
+        <button class="btn-primary" onclick="salvarEdicaoProduto()">Salvar</button>
+        <button class="btn-secondary" onclick="fecharModalEdicao()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 
