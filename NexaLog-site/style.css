@@ -548,17 +548,61 @@ h1 {
 
 /* BOTÃO REMOVER */
 .btn-danger {
-  
-  padding: 8px;
+  flex: 1;
+  height: 40px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background: #c62828;
   color: white;
+  font-weight: 600;
+  font-size: 13px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.1s;
 }
 
 .btn-danger:hover {
   background: #8e0000;
+}
+
+.btn-danger:active {
+  transform: scale(0.97);
+}
+
+.linha-dupla {
+  display: flex;
+  gap: 12px;
+}
+
+.linha-dupla input {
+  flex: 2;
+}
+
+.linha-dupla select,
+.linha-dupla input#unidadeProduto {
+  flex: 1;
+}
+
+.form-card input,
+.form-card textarea,
+.form-card select {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  transition: 0.2s;
+  background: #f9fafc;
+}
+
+.form-card input:focus,
+.form-card textarea:focus,
+.form-card select:focus {
+  outline: none;
+  border-color: #1f2f7a;
+  box-shadow: 0 0 0 3px rgba(31, 47, 122, 0.15);
+  background: white;
 }
 
 .controle-quantidade {

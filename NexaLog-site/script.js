@@ -352,81 +352,74 @@ async function adicionarProduto() {
 //                         ESTOQUE 
 // ============================================================
 
-function aumentar(id, estoqueMax) {
-  const span = document.getElementById(`qtd-${id}`);
+let produtoRemovendoId = null;
 
-  if (!span) return;
-
-  let valor = Number(span.textContent);
-
-  if (valor < estoqueMax) {
-    span.textContent = valor + 1;
-  }
-}
-
-function diminuir(id) {
-  const span = document.getElementById(`qtd-${id}`);
-
-  if (!span) return;
-
-  let valor = Number(span.textContent);
-
-  if (valor > 0) {
-    span.textContent = valor - 1;
-  }
-}
-
-async function removerQuantidade(id) {
+function abrirModalRemover(id) {
   const produto = produtos.find(p => p.idProduto === id);
-
   if (!produto) {
     showToast("Produto não encontrado.");
     return;
   }
 
-  const span = document.getElementById(`qtd-${id}`);
-  const quantidadeRemover = Number(span.textContent);
+  produtoRemovendoId = id;
 
-  if (quantidadeRemover <= 0) {
-    showToast("Selecione uma quantidade para remover");
+  document.getElementById("removerNomeProduto").textContent = produto.nome;
+  document.getElementById("removerEstoqueAtual").textContent = produto.quantidade;
+  document.getElementById("removerQuantidadeInput").value = "";
+
+  document.getElementById("modalRemover").classList.add("show");
+}
+
+function fecharModalRemover() {
+  document.getElementById("modalRemover").classList.remove("show");
+  produtoRemovendoId = null;
+}
+
+async function confirmarRemocao() {
+  if (!produtoRemovendoId) return;
+
+  const produto = produtos.find(p => p.idProduto === produtoRemovendoId);
+  if (!produto) {
+    showToast("Produto não encontrado.");
     return;
   }
 
-  produto.quantidade -= quantidadeRemover;
+  const quantidadeRemover = Number(document.getElementById("removerQuantidadeInput").value);
+
+  if (!quantidadeRemover || quantidadeRemover <= 0) {
+    showToast("Digite uma quantidade válida.");
+    return;
+  }
+
+  if (quantidadeRemover > produto.quantidade) {
+    showToast("Quantidade maior que o estoque disponível.");
+    return;
+  }
+
+  const novaQuantidade = produto.quantidade - quantidadeRemover;
 
   try {
-
-    if (produto.quantidade <= 0) {
-
-      console.log("ID da URL:", id);
-      console.log("Produto:", produto);
-
-      const resposta = await fetch(`${API_URL}/Produto/${id}`, {
+    if (novaQuantidade <= 0) {
+      const resposta = await fetch(`${API_URL}/Produto/${produto.idProduto}`, {
         method: "DELETE",
         credentials: "include"
       });
 
       if (!resposta.ok) {
-        console.log(await resposta.text());
         showToast("Erro ao remover produto.");
         return;
       }
 
       showToast("Produto removido completamente");
-
     } else {
-
-      const resposta = await fetch(`${API_URL}/Produto/${id}`, {
+      const resposta = await fetch(`${API_URL}/Produto/${produto.idProduto}`, {
         method: "PUT",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(produto)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...produto, quantidade: novaQuantidade })
       });
 
       if (!resposta.ok) {
-        console.log(await resposta.text());
         showToast("Erro ao atualizar produto.");
         return;
       }
@@ -434,6 +427,7 @@ async function removerQuantidade(id) {
       showToast("Quantidade removida com sucesso");
     }
 
+    fecharModalRemover();
     await carregarProdutos();
 
   } catch (erro) {
@@ -564,22 +558,14 @@ function atualizarEstoque() {
         <p>Validade: <strong>${p.dataValidade}</strong></p>
         
         <!-- CONTÊINER DE AÇÕES LADO A LADO -->
-      <div class="acoes-container">
-        <div class="controle-quantidade">
-          <button onclick="diminuir(${p.idProduto})">-</button>
-            <span id="qtd-${p.idProduto}">0</span>
-          <button onclick="aumentar(${p.idProduto}, ${p.quantidade})">+</button>
-        </div>
-
-        <button class="btn-atualizar"
-          onclick="abrirModalEdicao(${p.idProduto})">
+      <div class="acoes-container">        
+          <button class="btn-atualizar" onclick="abrirModalEdicao(${p.idProduto})">
             Atualizar
-        </button>
+          </button>
 
-          <button class="btn-danger"
-             onclick="excluirProdutoTotalmente(${p.idProduto})">
-         Remover
-        </button>
+          <button class="btn-danger" onclick="abrirModalRemover(${p.idProduto})">
+            Remover
+          </button>
       </div>
     </div>
     `;

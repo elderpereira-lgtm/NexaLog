@@ -85,7 +85,8 @@
       </div>
 
       <nav>
-        <button onclick="navigate('dashboard',this)" data-page="dashboard" class="nav-item active-nav">Dashboard</button>
+        <button onclick="navigate('dashboard',this)" data-page="dashboard"
+          class="nav-item active-nav">Dashboard</button>
         <button onclick="navigate('estoque',this)" data-page="estoque" class="nav-item">Estoque</button>
         <button onclick="navigate('relatorios',this)" data-page="relatorios" class="nav-item">Relatórios</button>
         <button onclick="navigate('cadastro',this)" data-page="cadastro" class="nav-item">Cadastro</button>
@@ -95,7 +96,7 @@
 
     <main class="main">
       <header class="topbar">
-        
+
         <input type="text" placeholder="Pesquisar...">
         <div class="user" id="userCargo" onclick="irParaConta()" style="cursor:pointer;">Admin</div>
       </header>
@@ -150,7 +151,17 @@
         <h1>Cadastro de Produto</h1>
         <div class="card form-card">
           <input type="text" id="nomeProduto" placeholder="Nome do Produto">
-          <input type="number" id="quantidadeProduto" placeholder="Quantidade em Kg">
+
+          <div class="linha-dupla">
+            <input type="number" id="quantidadeProduto" placeholder="Quantidade em Kg">
+
+            <select id="unidadeProduto">
+              <option value="Kg">Kg</option>
+              <option value="Un">Un</option>
+              <option value="L">L</option>
+              <option value="G">G</option>
+            </select>
+          </div>
 
           <input type="number" id="codProduto" placeholder="Código do produto">
           <input type="number" id="codLote" placeholder="Código do Lote">
@@ -178,7 +189,7 @@
 
   <div id="toast" class="toast"></div>
 
-<!-- ==== Atualizar Produto ==== -->
+  <!-- ==== Atualizar Produto ==== -->
 
   <div id="modalEditar" class="modal-overlay">
     <div class="modal-card">
@@ -188,10 +199,27 @@
       <input type="text" id="editCodLote" placeholder="Código do Lote">
       <input type="number" id="editQuantidade" placeholder="Quantidade em estoque">
       <textarea id="editDescricao" placeholder="Descrição do Produto"></textarea>
-  
+
       <div class="modal-botoes">
         <button class="btn-primary" onclick="salvarEdicaoProduto()">Salvar</button>
         <button class="btn-secondary" onclick="fecharModalEdicao()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==== Remover Quantidade ==== -->
+
+  <div id="modalRemover" class="modal-overlay">
+    <div class="modal-card">
+      <h2>Remover Quantidade</h2>
+      <p id="removerNomeProduto" style="font-weight:600;"></p>
+      <p>Estoque atual: <strong id="removerEstoqueAtual"></strong> Kg</p>
+
+      <input type="number" id="removerQuantidadeInput" placeholder="Quantidade a remover" min="1">
+
+      <div class="modal-botoes">
+        <button class="btn-primary" onclick="confirmarRemocao()">Confirmar</button>
+        <button class="btn-secondary" onclick="fecharModalRemover()">Cancelar</button>
       </div>
     </div>
   </div>
