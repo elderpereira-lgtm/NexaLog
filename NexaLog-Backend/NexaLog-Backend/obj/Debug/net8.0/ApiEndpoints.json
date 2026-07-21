@@ -95,7 +95,7 @@
         "IsRequired": true
       },
       {
-        "Name": "item",
+        "Name": "itemAtualizado",
         "Type": "NexaLog_Backend.Models.ItemMovimentacao",
         "IsRequired": true
       }

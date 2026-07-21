@@ -153,7 +153,7 @@
           <input type="text" id="nomeProduto" placeholder="Nome do Produto">
 
           <div class="linha-dupla">
-            <input type="number" id="quantidadeProduto" placeholder="Quantidade em Kg">
+            <input type="number" id="quantidadeProduto" placeholder="Quantidade">
 
             <select id="unidadeProduto">
               <option value="Kg">Kg</option>
@@ -198,6 +198,12 @@
       <input type="number" id="editCodProduto" placeholder="Código do produto">
       <input type="text" id="editCodLote" placeholder="Código do Lote">
       <input type="number" id="editQuantidade" placeholder="Quantidade em estoque">
+      <select id="editUnidade">
+        <option value="Kg">Kg</option>
+        <option value="Un">Un</option>
+        <option value="L">L</option>
+        <option value="G">G</option>
+      </select>
       <textarea id="editDescricao" placeholder="Descrição do Produto"></textarea>
 
       <div class="modal-botoes">
@@ -213,10 +219,8 @@
     <div class="modal-card">
       <h2>Remover Quantidade</h2>
       <p id="removerNomeProduto" style="font-weight:600;"></p>
-      <p>Estoque atual: <strong id="removerEstoqueAtual"></strong> Kg</p>
-
+      <p>Estoque atual: <strong id="removerEstoqueAtual"></strong></p>
       <input type="number" id="removerQuantidadeInput" placeholder="Quantidade a remover" min="1">
-
       <div class="modal-botoes">
         <button class="btn-primary" onclick="confirmarRemocao()">Confirmar</button>
         <button class="btn-secondary" onclick="fecharModalRemover()">Cancelar</button>

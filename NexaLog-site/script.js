@@ -1,5 +1,7 @@
 const API_URL = "https://localhost:7071/api";
 let produtos = [];
+const MAPA_UNIDADE = { Kg: 0, Un: 1, L: 2, G: 3 };
+const MAPA_UNIDADE_REVERSO = { 0: "Kg", 1: "Un", 2: "L", 3: "G" };
 
 // ============================================================
 //                         AUTENTICAÇÃO 
@@ -267,6 +269,7 @@ async function carregarProdutos() {
 async function adicionarProduto() {
   const nome = document.getElementById("nomeProduto").value.trim();
   const quantidade = document.getElementById("quantidadeProduto").value;
+  const unidade = document.getElementById("unidadeProduto").value;
   const codigoProduto = document.getElementById("codProduto").value;
   const codigoLote = document.getElementById("codLote").value;
   const dataCadastro = new Date().toISOString().split("T")[0];
@@ -295,6 +298,7 @@ async function adicionarProduto() {
         dataCadastro,
         dataValidade: validade,
         quantidade: Number(quantidade),
+        unidade: MAPA_UNIDADE[unidade],
         codProduto: Number(codigoProduto),
         descricao
       })
@@ -364,7 +368,8 @@ function abrirModalRemover(id) {
   produtoRemovendoId = id;
 
   document.getElementById("removerNomeProduto").textContent = produto.nome;
-  document.getElementById("removerEstoqueAtual").textContent = produto.quantidade;
+  document.getElementById("removerEstoqueAtual").textContent = 
+  `${produto.quantidade} ${MAPA_UNIDADE_REVERSO[produto.unidade]}`;
   document.getElementById("removerQuantidadeInput").value = "";
 
   document.getElementById("modalRemover").classList.add("show");
@@ -453,6 +458,7 @@ function abrirModalEdicao(id) {
   document.getElementById("editCodProduto").value = produto.codProduto;
   document.getElementById("editCodLote").value = produto.lotes?.[0]?.codLote ?? "";
   document.getElementById("editQuantidade").value = produto.quantidade;
+  document.getElementById("editUnidade").value = MAPA_UNIDADE_REVERSO[produto.unidade];
   document.getElementById("editDescricao").value = produto.descricao ?? "";
 
   document.getElementById("modalEditar").classList.add("show");
@@ -488,6 +494,7 @@ async function salvarEdicaoProduto() {
     nome,
     codProduto: Number(codProduto),
     quantidade,
+    unidade: MAPA_UNIDADE[document.getElementById("editUnidade").value],
     descricao
   };
 
@@ -554,7 +561,7 @@ function atualizarEstoque() {
     return `
       <div class="product-card ${vencendo ? 'warning' : ''}">
         <h3>${p.nome}</h3>
-        <p>Qtd em estoque: <strong>${p.quantidade} Kg</strong></p>
+        <p>Qtd em estoque: <strong>${p.quantidade} ${MAPA_UNIDADE_REVERSO[p.unidade]}</strong></p>
         <p>Validade: <strong>${p.dataValidade}</strong></p>
         
         <!-- CONTÊINER DE AÇÕES LADO A LADO -->
@@ -579,7 +586,8 @@ function atualizarDashboard() {
 
   if (total) total.textContent = produtos.length;
   if (venc) venc.textContent = produtos.filter(p => diasRestantes(p.dataValidade) <= 7).length;
-  if (hist) hist.innerHTML = produtos.map(p => `<li>${p.dataCadastro} - ${p.nome} (${p.quantidade})</li>`).join("");
+  if (hist) hist.innerHTML = produtos.map(p =>
+    `<li>${p.dataCadastro} - ${p.nome} (${p.quantidade} ${MAPA_UNIDADE_REVERSO[p.unidade]})</li>`).join("");
 }
 
 function atualizarRelatorios() {
@@ -598,7 +606,7 @@ function atualizarRelatorios() {
         <h3>${p.nome}</h3>
         <p>Cód. Produto: ${p.codProduto}</p>
         <p>Cód. Lote: ${p.lotes?.[0]?.codLote ?? "-"}</p>
-        <p>Qtd em estoque: ${p.quantidade}</p>
+        <p>Qtd em estoque: ${p.quantidade} ${MAPA_UNIDADE_REVERSO[p.unidade]}</p>
         <p>Validade: ${p.dataValidade}</p>
         <p><strong>Entrada:</strong> ${p.dataCadastro}</p>
         <p><strong>Descrição:</strong> ${p.descricao || "Sem descrição"}</p>

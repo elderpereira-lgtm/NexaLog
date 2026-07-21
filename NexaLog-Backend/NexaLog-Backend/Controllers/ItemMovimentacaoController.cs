@@ -58,17 +58,19 @@ namespace NexaLog_Backend.Controllers
 
         [HttpPut("{idProduto}/{idMovimentacao}")]
         [CargoAuthorize("Administrador", "Gestor")]
-        public async Task<IActionResult> PutItemMovimentacao(
-            int idProduto,
-            int idMovimentacao,
-            ItemMovimentacao item)
+        public async Task<IActionResult> PutItemMovimentacao( int idProduto, int idMovimentacao, ItemMovimentacao itemAtualizado)
         {
-            if (idProduto != item.FkProdutoIdProduto ||
-                idMovimentacao != item.FkMovimentacaoIdMovimentacao)
+            if (idProduto != itemAtualizado.FkProdutoIdProduto ||
+                idMovimentacao != itemAtualizado.FkMovimentacaoIdMovimentacao)
             {
                 return BadRequest();
             }
-            _context.Entry(item).State = EntityState.Modified;
+
+            var item = await _context.ItensMovimentacao.FindAsync(idProduto, idMovimentacao);
+            if (item == null)
+                return NotFound();
+
+            item.Quantidade = itemAtualizado.Quantidade;
             await _context.SaveChangesAsync();
             return NoContent();
         }

@@ -1,72 +1,51 @@
 USE NexaLog;
 GO
 
--- ==========================
--- USUÁRIOS
--- ==========================
+-- ===================== USUARIO =====================
 INSERT INTO Usuario (email, nome, senha, tipousuario) VALUES
-('admin@nexalog.com', 'Administrador', '123456', 'Administrador'),
-('joao@nexalog.com', 'João Silva', '123456', 'Operador'),
-('maria@nexalog.com', 'Maria Oliveira', '123456', 'Operador'),
-('carlos@nexalog.com', 'Carlos Souza', '123456', 'Gestor'),
-('ana@nexalog.com', 'Ana Lima', '123456', 'Operador');
+('admin@nexalog.com', 'José Almeida', '123456', 'Administrador'),
+('encarregado@nexalog.com', 'Juliana Prado', '123456', 'Encarregado'),
+('operador@nexalog.com', 'Marcos Silva', '123456', 'Operador');
+('operador@nexalog.com', 'João dos Santos', '123456', 'Operador');
+('operador@nexalog.com', 'Pedro Alves', '123456', 'Operador');
 
--- ==========================
--- PRODUTOS
--- ==========================
-INSERT INTO Produto (codProduto, nome, dataCadastro, dataValidade, quantidade, descricao) VALUES
-(1001, 'Notebook Dell Inspiron', '2026-01-10', '2028-01-10', 20, 'Notebook para escritório'),
-(1002, 'Mouse Logitech M170', '2026-02-05', '2030-02-05', 150, 'Mouse sem fio'),
-(1003, 'Teclado Mecânico Redragon', '2026-03-12', '2031-03-12', 75, 'Teclado RGB'),
-(1004, 'Monitor LG 24"', '2026-04-18', '2032-04-18', 35, 'Monitor Full HD'),
-(1005, 'Headset HyperX Cloud', '2026-05-02', '2031-05-02', 50, 'Headset gamer'),
-(1006, 'SSD Kingston 1TB', '2026-05-15', '2033-05-15', 60, 'SSD SATA'),
-(1007, 'Memória RAM 16GB', '2026-06-01', '2034-06-01', 80, 'DDR4 3200MHz'),
-(1008, 'Webcam Logitech C920', '2026-06-08', '2032-06-08', 25, 'Webcam Full HD');
+-- ===================== PRODUTO =====================
+-- Unidade: 0=Kg, 1=Un, 2=L, 3=G
+INSERT INTO Produto (codProduto, nome, dataCadastro, dataValidade, quantidade, Unidade, descricao) VALUES
+(1001, 'Farinha de Trigo', '2026-01-10', '2026-12-10', 150.00, 0, 'Farinha de trigo tipo 1, saco de 25kg'),
+(1002, 'Óleo de Soja', '2026-02-05', '2026-11-20', 80.50, 2, 'Óleo de soja refinado, garrafa 900ml'),
+(1003, 'Ovos', '2026-03-01', '2026-08-15', 320.00, 1, 'Ovos brancos, bandeja com 30 unidades'),
+(1004, 'Açúcar Refinado', '2026-01-20', '2027-01-20', 200.00, 0, 'Açúcar cristal refinado, saco de 50kg'),
+(1005, 'Fermento Biológico', '2026-04-01', '2026-07-30', 5000.00, 3, 'Fermento biológico seco instantâneo'),
+(1006, 'Leite Integral', '2026-03-15', '2026-09-10', 60.00, 2, 'Leite integral UHT, caixa de 1L'),
+(1007, 'Sal Refinado', '2026-01-05', '2027-06-01', 100.00, 0, 'Sal refinado iodado, pacote 1kg');
 
--- ==========================
--- MOVIMENTAÇÕES
--- ==========================
+-- ===================== MOVIMENTACAO =====================
 INSERT INTO Movimentacao (tipo_movimentacao, data_movimentacao, fk_Usuario_idusuario) VALUES
-('Entrada', '2026-06-10', 2),
-('Saida', '2026-06-11', 3),
-('Entrada', '2026-06-12', 4),
-('Saida', '2026-06-13', 2),
-('Entrada', '2026-06-14', 5),
-('Saida', '2026-06-15', 3);
+('Entrada', '2026-01-12', 1),
+('Saida', '2026-02-08', 2),
+('Entrada', '2026-03-03', 3),
+('Saida', '2026-04-05', 2),
+('Entrada', '2026-05-01', 1);
 
--- ==========================
--- LOTES
--- ==========================
+-- ===================== LOTE =====================
 INSERT INTO Lote (quantidade_lote, cod_lote, dataValidade, dataFabricacao, fk_Produto_idproduto) VALUES
-(20, 'LOT001', '2028-01-10', '2026-01-10', 1),
-(150, 'LOT002', '2030-02-05', '2026-02-05', 2),
-(75, 'LOT003', '2031-03-12', '2026-03-12', 3),
-(35, 'LOT004', '2032-04-18', '2026-04-18', 4),
-(50, 'LOT005', '2031-05-02', '2026-05-02', 5),
-(60, 'LOT006', '2033-05-15', '2026-05-15', 6),
-(80, 'LOT007', '2034-06-01', '2026-06-01', 7),
-(25, 'LOT008', '2032-06-08', '2026-06-08', 8);
+(50.00, 'LOTE-FAR-001', '2026-12-10', '2026-01-08', 1),
+(100.00, 'LOTE-FAR-002', '2027-01-15', '2026-02-01', 1),
+(40.25, 'LOTE-OLEO-001', '2026-11-20', '2026-02-03', 2),
+(160.00, 'LOTE-OVOS-001', '2026-08-15', '2026-02-28', 3),
+(200.00, 'LOTE-ACU-001', '2027-01-20', '2026-01-18', 4),
+(2500.00, 'LOTE-FERM-001', '2026-07-30', '2026-03-30', 5),
+(30.00, 'LOTE-LEITE-001', '2026-09-10', '2026-03-13', 6),
+(100.00, 'LOTE-SAL-001', '2027-06-01', '2026-01-03', 7);
 
--- ==========================
--- ITENS DAS MOVIMENTAÇÕES
--- ==========================
+-- ===================== ITEM_MOVIMENTACAO =====================
 INSERT INTO Item_Movimentacao (fk_Produto_idproduto, fk_Movimentacao_id_movimentacao, quantidade) VALUES
-(1, 1, 20),
-(2, 1, 100),
-
-(3, 2, 10),
-(4, 2, 5),
-
-(5, 3, 30),
-(6, 3, 40),
-
-(7, 4, 15),
-(8, 4, 5),
-
-(2, 5, 50),
-(6, 5, 20),
-
-(1, 6, 2),
-(5, 6, 8);
+(1, 1, 50.00),
+(2, 2, 10.50),
+(3, 3, 60.00),
+(4, 4, 25.00),
+(5, 5, 500.00),
+(1, 2, 15.00),
+(6, 3, 12.00);
 GO

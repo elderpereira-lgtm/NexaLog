@@ -42,7 +42,7 @@ namespace NexaLog_Backend.Data
             modelBuilder.Entity<Produto>().Property(p => p.Nome).HasColumnName("nome");
             modelBuilder.Entity<Produto>().Property(p => p.DataCadastro).HasColumnName("dataCadastro");
             modelBuilder.Entity<Produto>().Property(p => p.DataValidade).HasColumnName("dataValidade");
-            modelBuilder.Entity<Produto>().Property(p => p.Quantidade).HasColumnName("quantidade");
+            modelBuilder.Entity<Produto>().Property(p => p.Quantidade).HasColumnName("quantidade").HasPrecision(10, 2);
             modelBuilder.Entity<Produto>().Property(p => p.Unidade).HasColumnName("Unidade");
             modelBuilder.Entity<Produto>().Property(p => p.Descricao).HasColumnName("descricao");
 
@@ -65,7 +65,7 @@ namespace NexaLog_Backend.Data
             modelBuilder.Entity<Lote>().HasKey(l => l.IdLote);
 
             modelBuilder.Entity<Lote>().Property(l => l.IdLote).HasColumnName("id_lote");
-            modelBuilder.Entity<Lote>().Property(l => l.QuantidadeLote).HasColumnName("quantidade_lote");
+            modelBuilder.Entity<Lote>().Property(l => l.QuantidadeLote).HasColumnName("quantidade_lote").HasPrecision(10, 2);
             modelBuilder.Entity<Lote>().Property(l => l.CodLote).HasColumnName("cod_lote");
             modelBuilder.Entity<Lote>().Property(l => l.DataValidade).HasColumnName("dataValidade");
             modelBuilder.Entity<Lote>().Property(l => l.DataFabricacao).HasColumnName("dataFabricacao");

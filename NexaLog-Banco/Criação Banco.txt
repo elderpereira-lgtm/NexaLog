@@ -18,7 +18,7 @@ CREATE TABLE Produto (
     dataCadastro DATE,
     dataValidade DATE,
     quantidade DECIMAL(10,2),
-    unidadeMedida VARCHAR(5) NOT NULL DEFAULT 'Kg',
+    Unidade INT NOT NULL DEFAULT 0,
     descricao VARCHAR(255)
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE Movimentacao (
 );
 
 CREATE TABLE Lote (
-    quantidade_lote DECIMAL(10,2),,
+    quantidade_lote DECIMAL(10,2),
     id_lote INTEGER  IDENTITY PRIMARY KEY,
     cod_lote VARCHAR(50),
     dataValidade DATE,
