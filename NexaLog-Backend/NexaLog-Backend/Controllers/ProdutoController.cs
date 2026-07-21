@@ -63,6 +63,7 @@ namespace NexaLog_Backend.Controllers
             produto.DataValidade = produtoAtualizado.DataValidade;
             produto.Quantidade = produtoAtualizado.Quantidade;
             produto.CodProduto = produtoAtualizado.CodProduto;
+            produto.Unidade = produtoAtualizado.Unidade;
             produto.Descricao = produtoAtualizado.Descricao;
 
             await _context.SaveChangesAsync();
@@ -74,7 +75,7 @@ namespace NexaLog_Backend.Controllers
         [CargoAuthorize("Administrador")]
         public async Task<IActionResult> DeleteProduto(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);0
+            var produto = await _context.Produtos.FindAsync(id);
             if (produto == null)
                 return NotFound();
 

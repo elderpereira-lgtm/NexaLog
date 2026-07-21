@@ -43,6 +43,7 @@ namespace NexaLog_Backend.Data
             modelBuilder.Entity<Produto>().Property(p => p.DataCadastro).HasColumnName("dataCadastro");
             modelBuilder.Entity<Produto>().Property(p => p.DataValidade).HasColumnName("dataValidade");
             modelBuilder.Entity<Produto>().Property(p => p.Quantidade).HasColumnName("quantidade");
+            modelBuilder.Entity<Produto>().Property(p => p.Unidade).HasColumnName("Unidade");
             modelBuilder.Entity<Produto>().Property(p => p.Descricao).HasColumnName("descricao");
 
             modelBuilder.Entity<Produto>()

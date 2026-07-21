@@ -8,7 +8,8 @@ namespace NexaLog_Backend.Models
         public string Nome { get; set; } = string.Empty;
         public DateOnly DataCadastro { get; set; }
         public DateOnly DataValidade { get; set; }
-        public int Quantidade { get; set; }
+        public decimal Quantidade { get; set; }
+        public UnidadeMedida Unidade { get; set; }
         public int CodProduto { get; set; }
         public string Descricao { get; set; } = string.Empty;
         [JsonIgnore]
