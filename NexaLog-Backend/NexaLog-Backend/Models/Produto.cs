@@ -12,7 +12,6 @@ namespace NexaLog_Backend.Models
         public UnidadeMedida Unidade { get; set; }
         public int CodProduto { get; set; }
         public string Descricao { get; set; } = string.Empty;
-        [JsonIgnore]
         public ICollection<Lote> Lotes { get; set; } = new List<Lote>();
     }
 }

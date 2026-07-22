@@ -62,7 +62,7 @@ function verificacao() {
   const confirmar = document.getElementById("cadastroConfirmarSenha").value;
 
   if (!email || !email.includes("@")) { alert("Digite um e‑mail válido"); return; }
-  if (!senha || senha.length < 8) { alert("A senha deve ter no mínimo 8 caracteres"); return; }
+  if (!senha || senha.length < 6) { alert("A senha deve ter no mínimo 6 caracteres"); return; }
   if (senha !== confirmar) { alert("As senhas não coincidem"); return; }
 
   // Vai direto para o cadastro, sem verificação por email

@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\models\\lote.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\models\\lote.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\models\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\models\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\models\\movimentacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\models\\movimentacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\models\\lote.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\models\\lote.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\models\\movimentacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\models\\movimentacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\models\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,16 +47,8 @@
       "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\controllers\\movimentacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|solutionrelative:nexalog-backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2AA33B9E-4B6A-477C-8758-41DB5F6A9D0E}|NexaLog-Backend\\NexaLog-Backend.csproj|c:\\users\\tarde.cetafaju\\documents\\github\\nexalog\\nexalog-backend\\nexalog-backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -90,29 +90,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ItemMovimentacao.cs",
-              "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\ItemMovimentacao.cs",
-              "RelativeDocumentMoniker": "NexaLog-Backend\\Models\\ItemMovimentacao.cs",
-              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\ItemMovimentacao.cs",
-              "RelativeToolTip": "NexaLog-Backend\\Models\\ItemMovimentacao.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T16:45:06.11Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "ItemMovimentacaoController.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\ItemMovimentacaoController.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\ItemMovimentacaoController.cs",
-              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\ItemMovimentacaoController.cs*",
-              "RelativeToolTip": "NexaLog-Backend\\Controllers\\ItemMovimentacaoController.cs*",
+              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\ItemMovimentacaoController.cs",
+              "RelativeToolTip": "NexaLog-Backend\\Controllers\\ItemMovimentacaoController.cs",
               "ViewState": "AQIAACcAAAAAAAAAAAAqwDsAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-11T18:08:50.139Z",
@@ -120,12 +107,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "MovimentacaoController.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\MovimentacaoController.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\MovimentacaoController.cs",
-              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\MovimentacaoController.cs*",
-              "RelativeToolTip": "NexaLog-Backend\\Controllers\\MovimentacaoController.cs*",
+              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\MovimentacaoController.cs",
+              "RelativeToolTip": "NexaLog-Backend\\Controllers\\MovimentacaoController.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAAUwC8AAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-09T17:38:25.348Z",
@@ -133,20 +120,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
               "Title": "ProdutoController.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\ProdutoController.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\ProdutoController.cs",
-              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\ProdutoController.cs*",
-              "RelativeToolTip": "NexaLog-Backend\\Controllers\\ProdutoController.cs*",
-              "ViewState": "AQIAABoAAAAAAAAAAAAUwDIAAAA1AAAA",
+              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\ProdutoController.cs",
+              "RelativeToolTip": "NexaLog-Backend\\Controllers\\ProdutoController.cs",
+              "ViewState": "AQIAADoAAAAAAAAAAAAswF8AAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-01T18:29:18.452Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "UsuarioController.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\UsuarioController.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\UsuarioController.cs",
@@ -159,12 +146,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "LoteController.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\LoteController.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Controllers\\LoteController.cs",
-              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\LoteController.cs*",
-              "RelativeToolTip": "NexaLog-Backend\\Controllers\\LoteController.cs*",
+              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Controllers\\LoteController.cs",
+              "RelativeToolTip": "NexaLog-Backend\\Controllers\\LoteController.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAiwDUAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-10T17:12:46.378Z",
@@ -172,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "LoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\LoginRequest.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Models\\LoginRequest.cs",
@@ -185,20 +172,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Lote.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\Lote.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Models\\Lote.cs",
               "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\Lote.cs",
               "RelativeToolTip": "NexaLog-Backend\\Models\\Lote.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAApAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-02T17:07:55.257Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Movimentacao.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\Movimentacao.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Models\\Movimentacao.cs",
@@ -211,7 +198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Produto.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\Produto.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Models\\Produto.cs",
@@ -224,7 +211,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 6,
+              "Title": "ItemMovimentacao.cs",
+              "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\ItemMovimentacao.cs",
+              "RelativeDocumentMoniker": "NexaLog-Backend\\Models\\ItemMovimentacao.cs",
+              "ToolTip": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Models\\ItemMovimentacao.cs",
+              "RelativeToolTip": "NexaLog-Backend\\Models\\ItemMovimentacao.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T16:45:06.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Properties\\launchSettings.json",
@@ -237,7 +237,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\Program.cs",
               "RelativeDocumentMoniker": "NexaLog-Backend\\Program.cs",

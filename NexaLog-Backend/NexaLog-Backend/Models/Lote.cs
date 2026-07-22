@@ -1,4 +1,5 @@
 using NexaLog_Backend.Models;
+using System.Text.Json.Serialization;
 public class Lote
 {
     public int IdLote { get; set; }
@@ -7,5 +8,6 @@ public class Lote
     public DateOnly DataValidade { get; set; }
     public DateOnly DataFabricacao { get; set; }
     public int FkProdutoIdProduto { get; set; }
+    [JsonIgnore]
     public Produto? Produto { get; set; }
 }
