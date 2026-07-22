@@ -38,7 +38,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPost]
-        [CargoAuthorize("Administrador", "Gestor")]
+        [CargoAuthorize("Administrador", "Encarregado")]
         public async Task<ActionResult<Lote>> PostLote(Lote lote)
         {
             _context.Lotes.Add(lote);
@@ -51,7 +51,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        [CargoAuthorize("Administrador", "Gestor")]
+        [CargoAuthorize("Administrador", "Encarregado")]
         public async Task<IActionResult> PutLote(int id, Lote lote)
         {
             if (id != lote.IdLote)

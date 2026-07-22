@@ -38,7 +38,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPost]
-        [CargoAuthorize("Administrador", "Gestor")]
+        [CargoAuthorize("Administrador", "Encarregado")]
         public async Task<ActionResult<Produto>> PostProduto(Produto produto)
         {
             _context.Produtos.Add(produto);
@@ -48,7 +48,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        [CargoAuthorize("Administrador", "Gestor")]
+        [CargoAuthorize("Administrador", "Encarregado")]
         public async Task<IActionResult> PutProduto(int id, Produto produtoAtualizado)
         {
             if (id != produtoAtualizado.IdProduto)

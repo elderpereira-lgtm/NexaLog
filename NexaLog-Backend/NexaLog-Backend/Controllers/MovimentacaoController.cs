@@ -32,7 +32,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPost]
-        [CargoAuthorize("Administrador", "Gestor")]
+        [CargoAuthorize("Administrador", "Encarregado")]
         public async Task<ActionResult<Movimentacao>> PostMovimentacao(Movimentacao movimentacao)
         {
             _context.Movimentacoes.Add(movimentacao);
@@ -45,7 +45,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        [CargoAuthorize("Administrador", "Gestor")]
+        [CargoAuthorize("Administrador", "Encarregado")]
         public async Task<IActionResult> PutMovimentacao(int id, Movimentacao movimentacao)
         {
             if (id != movimentacao.IdMovimentacao)
