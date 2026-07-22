@@ -32,7 +32,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPost]
-        [CargoAuthorize("Administrador", "Gestor")]
+        [CargoAuthorize("Administrador", "Encarregado")]
         public async Task<ActionResult<ItemMovimentacao>> PostItemMovimentacao(ItemMovimentacao item)
         {
             var produtoExiste = await _context.Produtos
@@ -57,7 +57,7 @@ namespace NexaLog_Backend.Controllers
         }
 
         [HttpPut("{idProduto}/{idMovimentacao}")]
-        [CargoAuthorize("Administrador", "Gestor")]
+        [CargoAuthorize("Administrador", "Encarregado")]
         public async Task<IActionResult> PutItemMovimentacao( int idProduto, int idMovimentacao, ItemMovimentacao itemAtualizado)
         {
             if (idProduto != itemAtualizado.FkProdutoIdProduto ||

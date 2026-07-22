@@ -5,9 +5,9 @@ GO
 INSERT INTO Usuario (email, nome, senha, tipousuario) VALUES
 ('admin@nexalog.com', 'José Almeida', '123456', 'Administrador'),
 ('encarregado@nexalog.com', 'Juliana Prado', '123456', 'Encarregado'),
-('operador@nexalog.com', 'Marcos Silva', '123456', 'Operador');
-('operador@nexalog.com', 'João dos Santos', '123456', 'Operador');
-('operador@nexalog.com', 'Pedro Alves', '123456', 'Operador');
+('operadorA@nexalog.com', 'Marcos Silva', '123456', 'Operador'),
+('operadorB@nexalog.com', 'João dos Santos', '123456', 'Operador'),
+('operadorC@nexalog.com', 'Pedro Alves', '123456', 'Operador');
 
 -- ===================== PRODUTO =====================
 -- Unidade: 0=Kg, 1=Un, 2=L, 3=G

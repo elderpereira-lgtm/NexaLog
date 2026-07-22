@@ -123,6 +123,10 @@ async function logout() {
   }
 
   localStorage.clear();
+  produtos = [];
+
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".nav-item").forEach(b => b.classList.remove("active-nav"));
   document.getElementById("appPage").style.display = "none";
   trocarTela("loginPage");
 }
@@ -193,6 +197,9 @@ function entrarSistema() {
   aplicarPermissoes();
   carregarProdutos();
   atualizarTudo();
+
+  const btnDashboard = document.querySelector('.nav-item[data-page="dashboard"]');
+  navigate("dashboard", btnDashboard);
 }
 
 function irParaConta() {
