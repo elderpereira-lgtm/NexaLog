@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\NexaLog-Backend.csproj": {}
+    "C:\\Users\\tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\NexaLog-Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\NexaLog-Backend.csproj": {
+    "C:\\Users\\tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\NexaLog-Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\NexaLog-Backend.csproj",
+        "projectUniqueName": "C:\\Users\\tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\NexaLog-Backend.csproj",
         "projectName": "NexaLog-Backend",
-        "projectPath": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\NexaLog-Backend.csproj",
-        "packagesPath": "C:\\Users\\Tarde.cetafaju\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\obj\\",
+        "projectPath": "C:\\Users\\tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\NexaLog-Backend.csproj",
+        "packagesPath": "C:\\Users\\tarde.cetafaju\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tarde.cetafaju\\Documents\\GitHub\\NexaLog\\NexaLog-Backend\\NexaLog-Backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Tarde.cetafaju\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tarde.cetafaju\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
