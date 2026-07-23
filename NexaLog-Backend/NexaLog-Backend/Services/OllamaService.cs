@@ -1,6 +1,6 @@
 ﻿namespace NexaLog_Backend.Services
 {
-    public class Class
+    public class OllamaService
     {
     }
 }
